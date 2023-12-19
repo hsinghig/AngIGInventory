@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/a6e842ca-6195-48e6-aaf2-d2eeae690f65/resourceGroups/pyInventory-resourcegroup/providers/Microsoft.Web/sites/angIGInventory",
+    "appService.deploySubpath": "dist\\ang-iginventory"
+}
