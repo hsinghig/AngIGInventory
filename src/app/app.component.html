@@ -333,4 +333,24 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <h1>My Changes1</h1>
+<div class="table-responsive">
+  <table class="table mb-0" *ngIf="extruderColorList$ | async as colorList">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Color Name</th>
+        <th>Is Extruder</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let color of colorList">
+        <td>{{color.id}}</td>
+        <td>{{color.name}}</td>
+        <td>{{color.isExtruder}}</td>
+        <td>{{color.comment}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <router-outlet></router-outlet>
