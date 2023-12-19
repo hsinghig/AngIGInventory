@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { colorModel } from "../model/color";
-import { Observable, catchError, tap, throwError } from "rxjs";
+import { IColorModel } from "../model/colorModel";
+import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
@@ -8,13 +8,41 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 })
 export class ExtruderService {
     url = 'https://apiiginventory.azurewebsites.net/api/Colors/extrudercolors';
-    extruderColorList$: Observable<colorModel[]> | undefined = this.http.get<colorModel[]>(this.url)
+    extruderColorList$: Observable<IColorModel[]> | undefined = this.http.get<IColorModel[]>(this.url)
         .pipe(
             tap(data => console.log('Color List: ', JSON.stringify(data))),
             catchError(this.handleError)
         );
 
     constructor(private http: HttpClient){}   
+
+    getExtruderColors(colorModelList: IColorModel[] = []): Observable<any>{
+        return this.http.get<any>(this.url).pipe(
+            tap(x => console.log(x)),
+            map(res => {
+                if (res) {
+                    res = this.getResponse(res.data)
+                }
+                return res;
+            })
+        )
+    }
+
+    getResponse(response:any): IColorModel[]{        
+        const returnModel: IColorModel[] = [];
+        response.forEach((item:any) => {
+            const model:IColorModel = {
+                id: item.id,
+                colorName: item.name,
+                isExtuder: item.isExtuder,
+                isCrossPly: item.isCrossPly,
+                isActive: item.isActive,
+                comment: item.comment
+            };
+            returnModel.push(model);
+        });
+        return returnModel;
+    }
 
     private handleError(err: HttpErrorResponse): Observable<never> {
         // in a real world app, we may send the server to some remote logging infrastructure

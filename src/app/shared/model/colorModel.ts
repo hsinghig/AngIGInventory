@@ -1,7 +1,7 @@
-export interface colorModel{
+export interface IColorModel{
     id: number;
-    name: string;
-    isExtruder: boolean;
+    colorName: string;
+    isExtuder: boolean;
     isCrossPly: boolean;
     isActive: boolean;
     comment: string;

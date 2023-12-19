@@ -1,22 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExtruderService } from './shared/service/extruderService';
-import { EMPTY, catchError } from 'rxjs';
+import { EMPTY, Observable, catchError, map, tap } from 'rxjs';
+import { IColorModel } from './shared/model/colorModel';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  
   title = 'AngIGInventory';
   errorMessage = '';
-  extruderColorList$ = this.extruderService.extruderColorList$?.pipe(
-    catchError(err => {
-      this.errorMessage = err;
-      return EMPTY;
-    })
-  );
+  extruderColorList$: Observable<IColorModel[]> | undefined;
+  // extruderColorList$ = this.extruderService.extruderColorList$?.pipe(
+  //   tap(x => {
+  //     console.log('Hemant Singh'); 
+  //     console.log(x);}),
+  //   map(x => x),
+  //   catchError(err => {
+  //     this.errorMessage = err;
+  //     return EMPTY;
+  //   })
+  // );
   constructor(private extruderService: ExtruderService) {      
+  }
+  ngOnInit(): void {
+    this.extruderColorList$ = this.extruderService.getExtruderColors().pipe(
+      tap(x => {
+        console.log('In component');
+        console.log(x);
+      }),
+      catchError(err => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
+    )
   }
  
 }
