@@ -7,12 +7,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
     providedIn: 'root'
 })
 export class ExtruderService {
-    url = 'https://apiiginventory.azurewebsites.net/api/Colors/extrudercolors';
-    extruderColorList$: Observable<IColorModel[]> | undefined = this.http.get<IColorModel[]>(this.url)
-        .pipe(
-            tap(data => console.log('Color List: ', JSON.stringify(data))),
-            catchError(this.handleError)
-        );
+    url = 'https://apiiginventory.azurewebsites.net/api/Colors/extrudercolors';   
 
     constructor(private http: HttpClient){}   
 

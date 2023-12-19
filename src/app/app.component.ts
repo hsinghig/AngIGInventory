@@ -13,17 +13,7 @@ export class AppComponent implements OnInit{
   title = 'AngIGInventory';
   errorMessage = '';
   extruderColorList$: Observable<IColorModel[]> | undefined;
-  // extruderColorList$ = this.extruderService.extruderColorList$?.pipe(
-  //   tap(x => {
-  //     console.log('Hemant Singh'); 
-  //     console.log(x);}),
-  //   map(x => x),
-  //   catchError(err => {
-  //     this.errorMessage = err;
-  //     return EMPTY;
-  //   })
-  // );
-  constructor(private extruderService: ExtruderService) {      
+  constructor(private extruderService: ExtruderService) {   
   }
   ngOnInit(): void {
     this.extruderColorList$ = this.extruderService.getExtruderColors().pipe(
