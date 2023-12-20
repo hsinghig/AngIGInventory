@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExtruderService } from './shared/service/extruderService';
-import { EMPTY, Observable, catchError, map, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, tap } from 'rxjs';
 import { IColorModel } from './shared/model/colorModel';
 
 @Component({
