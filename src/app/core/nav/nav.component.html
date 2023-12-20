@@ -1,15 +1,29 @@
 <mat-toolbar color="primary">
-    <span>{{applicationTitle}}</span>
-    <span class="example-spacer"></span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu">Dashboard</button>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item>Reports</button>
-        <button mat-menu-item>Main Dashboard</button>
+    <span  (click)="OnMenuClick($event, 'home', '')">{{applicationTitle}}</span>
+    <span class="example-spacer"></span>   
+    <button mat-button [matMenuTriggerFor]="dashboardMenu">Dashboard</button>
+    <mat-menu #dashboardMenu="matMenu" xPosition="before">
+        <button (click)="OnMenuClick($event, 'dashboard', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'dashboard', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>    
+        <button (click)="OnMenuClick($event, 'dashboard', 'summary')"  mat-menu-item><mat-icon>space_dashboard</mat-icon>Summary</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="extruderMenu">Extruder</button>
+    <mat-menu #extruderMenu="matMenu" xPosition="before">
+        <button (click)="OnMenuClick($event, 'extruder', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'extruder', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
+        <button (click)="OnMenuClick($event, 'extruder', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="crossPlyMenu">Crossply</button>
     <mat-menu #crossPlyMenu="matMenu" xPosition="before">
-        <button (click)="OnClick($event)" mat-menu-item><mat-icon>add_circle</mat-icon>Add Crossply</button>
-        <button mat-menu-item><mat-icon>favorite</mat-icon>Reports</button>
+        <button (click)="OnMenuClick($event, 'crossply', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'crossply', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
+        <button (click)="OnMenuClick($event, 'crossply', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="laminationMenu">Lamination</button>
+    <mat-menu #laminationMenu="matMenu" xPosition="before">
+        <button (click)="OnMenuClick($event, 'lamination', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'lamination', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
+        <button (click)="OnMenuClick($event, 'lamination', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
     </mat-menu>
     <button mat-icon-button class="example-icon" aria-label="Example button share"><mat-icon>share</mat-icon></button>
 </mat-toolbar>

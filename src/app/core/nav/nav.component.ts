@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NAVIGATION_CONSTANTS } from 'src/app/shared/model/navigationConstants';
 
 @Component({
   selector: 'app-nav', 
@@ -8,11 +9,23 @@ import { Router } from '@angular/router';
 })
 export class NavComponent {
   applicationTitle: string = 'IG Inventory System';
+  ADD = NAVIGATION_CONSTANTS.ADD;
+
 
   constructor(private router:Router) {       
   }
 
-  OnClick($event: MouseEvent){
-    this.router.navigateByUrl('/dashboard/13')
+  public OnMenuClick($event: MouseEvent, root:string, value: string){   
+    var urlToGo = '';
+    if (root == ''){
+        this.router.navigateByUrl(urlToGo);
+    } else {      
+      if (value == ''){
+          urlToGo = '/' + root ;
+      } else {
+        urlToGo = '/' + root + '/' + value;
+      }     
+      this.router.navigateByUrl(urlToGo);
+    }
   }
 }
