@@ -7,6 +7,7 @@ import { AppRoutingModule } from "./app-routing.module";
 
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { RouterOutlet } from '@angular/router';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        CoreModule
     ], 
     providers: [
         provideHttpClient()
