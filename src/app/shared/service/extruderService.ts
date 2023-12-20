@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IColorModel } from "../model/colorModel";
-import { Observable, catchError, map, tap, throwError } from "rxjs";
+import { Observable, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ExtruderService {
 
     constructor(private http: HttpClient){}   
 
-    getExtruderColors(colorModelList: IColorModel[] = []): Observable<any>{
+    getExtruderColors(): Observable<IColorModel[]>{
         return this.http.get<any>(this.url).pipe(
             tap(x => console.log(x)),
             map(res => {

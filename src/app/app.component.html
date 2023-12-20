@@ -354,4 +354,12 @@
   </table>
 </div>
 <h1>On Branch Development</h1>
+<mat-grid-list cols="4" rowHeight="100px">
+  @for (tile of tiles; track tile) {
+    <mat-grid-tile
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">{{tile.text}}</mat-grid-tile>
+  }
+</mat-grid-list>
 <router-outlet></router-outlet>
