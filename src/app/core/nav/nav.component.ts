@@ -16,7 +16,7 @@ export class NavComponent {
   }
 
   public OnMenuClick($event: MouseEvent, root:string, value: string){   
-    var urlToGo = '';
+    let urlToGo = '';
     if (root == ''){
         this.router.navigateByUrl(urlToGo);
     } else {      

@@ -1,1 +1,1 @@
-/*# sourceMappingURL=start.component.css.map */
+.card-container{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-items:center;justify-content:space-around;margin-bottom:2%}img.myImage{height:300px}.example-card{max-width:600px;box-shadow:#26394d 0px 20px 30px -10px;margin-bottom:2%}.example-header-image{background-image:url("https://material.angular.io/assets/img/examples/shiba1.jpg");background-size:cover}.mat-mdc-card-content{background-color:orange}
