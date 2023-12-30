@@ -11,3 +11,5 @@ npm install -g @angular/cli
 npm install -g npm@10.2.5
 npm i ng-gallery 
 npm i hammerjs
+
+https://www.youtube.com/watch?v=1pN09qm5g4w

@@ -60,7 +60,7 @@ export class AddExtruderComponent implements OnInit {
   }
 
   onSubmit() {     
-      var item: ExtruderInsertModel ={
+      const item: ExtruderInsertModel ={
         locationId: this.addExtruderFormGroup.value.locationId, 
         name: this.locationList.filter(item => item.id== this.addExtruderFormGroup.value.locationId)[0].locationName,
         colorId: this.addExtruderFormGroup.value.colorId,

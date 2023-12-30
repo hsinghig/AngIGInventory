@@ -1,1 +1,13 @@
-<p>home start works!</p>
+<div class="card-container">
+    @for (item of cardList; track item) {
+        <mat-card class="example-card">
+            <img class="myImage" mat-card-image src="{{item.imageURL}}" alt="{{item.imageAlt}}">
+            <mat-card-content>
+                <h2>{{item.displayTextTitle}}</h2>
+                <p>
+                    {{item.displayText}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    }
+</div>

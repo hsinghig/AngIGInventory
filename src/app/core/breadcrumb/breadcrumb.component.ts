@@ -15,13 +15,13 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit(): void {   
     this.sharedNavService.messageSubject$.subscribe(data => {
       this.navLinkModelList = [];   
-      var index = 0;
-      var values = data.split('/');
-      var baseValue = '';    
-      var result:INavLinkModel= {
+      let index = 0;
+      const values = data.split('/');
+      let baseValue = '';    
+      let result:INavLinkModel= {
         linkText: 'Home', URL:'/'
       }
-      for(let value in values){  
+      for(const value in values){  
         if (index == 1){
           result = {
             linkText: this.capitalizeFirstLetter(values[1]), URL: '/' + values[1]
