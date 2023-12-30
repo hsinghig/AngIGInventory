@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExtruderService } from './shared/service/extruderService';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
-import { IColorModel } from './shared/model/colorModel';
+import { ColorModel } from './shared/model/colorModel';
 import { SharedNavService } from './shared/service/sharedNavService';
 
 @Component({
@@ -11,7 +11,7 @@ import { SharedNavService } from './shared/service/sharedNavService';
 })
 export class AppComponent implements OnInit{ 
   errorMessage = '';
-  extruderColorList$: Observable<IColorModel[]> | undefined;
+  extruderColorList$: Observable<ColorModel[]> | undefined;
   constructor(private sharedNavService: SharedNavService, private extruderService: ExtruderService) {   
     
   }

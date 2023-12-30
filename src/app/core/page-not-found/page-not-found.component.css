@@ -1,1 +1,10 @@
-.imagecover{background-image:url("../../../assets/img/404_page.jpg");height:100%;background-position:center;background-repeat:no-repeat;background-size:cover}
+.imagecover {
+  /* The image used */
+  background-image: url("../../../assets/img/404_page.jpg");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}/*# sourceMappingURL=page-not-found.component.css.map */

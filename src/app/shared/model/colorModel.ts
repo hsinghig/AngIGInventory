@@ -1,4 +1,4 @@
-export interface IColorModel{
+export interface ColorModel{
     id: number;
     colorName: string;
     isExtuder: boolean;

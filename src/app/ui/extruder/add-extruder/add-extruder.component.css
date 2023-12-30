@@ -1,0 +1,39 @@
+.add-extruder {
+  min-width: 150px;
+  max-width: 500px;
+  width: 600px;
+  display: flex;
+}
+
+.extruder-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 400px;
+}
+
+.parent-card {
+  margin-left: 200px;
+}
+
+.mat-mdc-form-field {
+  display: block;
+}
+
+::ng-deep .mat-form-field {
+  display: block;
+}
+::ng-deep .mat-form-field .mat-input-element {
+  color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+  background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+  background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+  color: slategray;
+}/*# sourceMappingURL=add-extruder.component.css.map */

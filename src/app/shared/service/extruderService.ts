@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IColorModel } from "../model/colorModel";
+import { ColorModel } from "../model/colorModel";
 import { Observable, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
@@ -11,7 +11,7 @@ export class ExtruderService {
 
     constructor(private http: HttpClient){}   
 
-    getExtruderColors(): Observable<IColorModel[]>{
+    getExtruderColors(): Observable<ColorModel[]>{
         return this.http.get<any>(this.url).pipe(
             tap(x => console.log(x)),
             map(res => {
@@ -23,10 +23,10 @@ export class ExtruderService {
         )
     }
 
-    getResponse(response:any): IColorModel[]{        
-        const returnModel: IColorModel[] = [];
+    getResponse(response:any): ColorModel[]{        
+        const returnModel: ColorModel[] = [];
         response.forEach((item:any) => {
-            const model:IColorModel = {
+            const model:ColorModel = {
                 id: item.id,
                 colorName: item.name,
                 isExtuder: item.isExtuder,

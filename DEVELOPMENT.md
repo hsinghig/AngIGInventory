@@ -9,3 +9,5 @@ startup command : pm2 serve /home/site/wwwroot/dist/ang-iginventory/browser --no
 ## installing libraries
 npm install -g @angular/cli
 npm install -g npm@10.2.5
+npm i ng-gallery 
+npm i hammerjs
