@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { ExtruderInsertModel } from 'src/app/shared/model/extruderInsertModel';
 import {LocationModel} from 'src/app/shared/model/locationModel';
 import { UserModel } from 'src/app/shared/model/userModel';
 import { WidthModel } from 'src/app/shared/model/widthModel';
+import { ExtruderHomeService } from 'src/app/shared/service/extruderhome.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
 
@@ -22,10 +23,13 @@ export class AddExtruderComponent implements OnInit {
   userList: UserModel[]= [];
   
 
-  constructor(private sharedNavService: SharedNavService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {  
+  constructor(private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, 
+    private extruderHomeService: ExtruderHomeService) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
-      this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
+      this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);     
     });
+
+
     this.addExtruderFormGroup = this.formBuilder.group({
       locationId: 0,
       name: '',
