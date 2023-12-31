@@ -7,12 +7,16 @@ import { AddExtruderComponent } from './add-extruder/add-extruder.component';
 import { ReportsComponent } from './reports/reports.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoMaterialModule } from 'src/app/core/demo-material.module';
+import { ExtruderDetailComponent } from './extruder-detail/extruder-detail.component';
+import { ExtruderSummaryComponent } from './extruder-summary/extruder-summary.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     AddExtruderComponent,
+    ExtruderDetailComponent,
+    ExtruderSummaryComponent,
     ReportsComponent
   ],
   imports: [

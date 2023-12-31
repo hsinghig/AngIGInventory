@@ -8,13 +8,13 @@
                 <mat-form-field>
                     <mat-label>Choose Location</mat-label>
                     <mat-select  formControlName="locationId">
-                      <mat-option  *ngFor="let location of locationList" value={{location.id}}>{{location.locationName}}</mat-option>
+                      <mat-option  *ngFor="let location of locationList" value={{location.id}}>{{location.name}}</mat-option>
                     </mat-select>               
                 </mat-form-field>
                 <mat-form-field >
                     <mat-label>Choose Color</mat-label>
                     <mat-select formControlName="colorId">
-                      <mat-option  *ngFor="let color of colorList" value={{color.id}}>{{color.colorName}}</mat-option>
+                      <mat-option  *ngFor="let color of colorList" value={{color.id}}>{{color.name}}</mat-option>
                     </mat-select>                  
                 </mat-form-field>       
                 <mat-form-field>

@@ -1,6 +1,6 @@
 export interface ColorModel{
     id: number;
-    colorName: string;
+    name: string;
     isExtuder: boolean;
     isCrossPly: boolean;
     isActive: boolean;

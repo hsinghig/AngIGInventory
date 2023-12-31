@@ -6,6 +6,7 @@ import { ExtruderInsertModel } from 'src/app/shared/model/extruderInsertModel';
 import {LocationModel} from 'src/app/shared/model/locationModel';
 import { UserModel } from 'src/app/shared/model/userModel';
 import { WidthModel } from 'src/app/shared/model/widthModel';
+import { ExtruderService } from 'src/app/shared/service/extruderService';
 import { ExtruderHomeService } from 'src/app/shared/service/extruderhome.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
@@ -24,7 +25,7 @@ export class AddExtruderComponent implements OnInit {
   
 
   constructor(private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, 
-    private extruderHomeService: ExtruderHomeService) {  
+    private extruderHomeService: ExtruderHomeService, private extruderService: ExtruderService) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);     
     });
@@ -52,11 +53,24 @@ export class AddExtruderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.locationList = this.getLocationList();   
-    this.colorList = this.getColorList();
-    this.widthList = this.getWidthList();
-    this.userList = this.getUserList();
+    this.extruderService.getExtruderColors().subscribe(response => {      
+       this.colorList = response;
+    });
 
+    this.extruderService.getExtruderLocations().subscribe(response => {
+      console.log('Data coming from locations', response);
+      this.locationList = response;
+    });
+
+    this.extruderService.getWidths().subscribe(response => {
+      this.widthList = response;
+    })
+
+    this.extruderService.getAllUsers().subscribe(response => {
+      this.userList = response; 
+    });
+
+    
   }
 
   clearFormValues(){
@@ -65,23 +79,15 @@ export class AddExtruderComponent implements OnInit {
 
   onSubmit() {     
       const item: ExtruderInsertModel ={
-        locationId: this.addExtruderFormGroup.value.locationId, 
-        name: this.locationList.filter(item => item.id== this.addExtruderFormGroup.value.locationId)[0].locationName,
-        colorId: this.addExtruderFormGroup.value.colorId,
-        colorname: this.colorList.filter(item => item.id == this.addExtruderFormGroup.value.colorId)[0].colorName,
+        locationId: this.addExtruderFormGroup.value.locationId,        
+        colorId: this.addExtruderFormGroup.value.colorId,       
         widthId: this.addExtruderFormGroup.value.widthId,
-        widthname: this.widthList.filter(item => item.id == this.addExtruderFormGroup.value.widthId)[0].widthName,
-        length: this.addExtruderFormGroup.value.length,
-        createdById: this.addExtruderFormGroup.value.createdById,
-        firstname: this.userList.filter(x => x.id == this.addExtruderFormGroup.value.createdById)[0].firstName,
-        lastname:this.userList.filter(x => x.id == this.addExtruderFormGroup.value.createdById)[0].lastName,
-        fullname: this.userList.filter(x => x.id == this.addExtruderFormGroup.value.createdById)[0].firstName,
-        email: this.userList.filter(x => x.id == this.addExtruderFormGroup.value.createdById)[0].email,
-        createdDate: new Date(),
-        modifiedDate: new Date(),
-        rollNumber: this.addExtruderFormGroup.value.rollNumber,
+        userId: this.addExtruderFormGroup.value.createdById,
         weight: this.addExtruderFormGroup.value.weight,
-        comment: this.addExtruderFormGroup.value.comment
+        // widthname: this.widthList.filter(item => item.id == this.addExtruderFormGroup.value.widthId)[0].widthName,
+        length: this.addExtruderFormGroup.value.length,        
+        comment: this.addExtruderFormGroup.value.comment,
+        rollNumber: this.addExtruderFormGroup.value.rollNumber        
       };     
     console.log(item);
   }
@@ -90,45 +96,4 @@ export class AddExtruderComponent implements OnInit {
     console.log(e.target.value);
   }
 
-  getLocationList(): LocationModel[]{
-    return [
-        {
-          'id': 1, 'locationName': 'EXT A'
-        },
-        {
-          'id': 2, 'locationName': 'EXT B'
-        }
-    ];
-  }
-  getColorList(): ColorModel[]{
-    return [
-        {
-          'id': 1, 'colorName': 'Blue', 'isExtuder': true, 'isCrossPly': true, 'isActive': true, 'comment': 'Blue Color'
-        },
-        {
-          'id': 2, 'colorName': 'Black', 'isExtuder': true, 'isCrossPly': true, 'isActive': true, 'comment': 'Blue Color'
-        }
-    ];
-  }
-  getWidthList(): WidthModel[]{
-    return [
-        {
-          'id': 1, 'widthName': '83'
-        },
-        {
-          'id': 2, 'widthName': '89'
-        }
-    ];
-  }
-
-  getUserList(): UserModel[]{
-    return [
-      {
-        'id': 1, 'firstName': 'Hemant', 'lastName': 'Singh', 'displayName': 'Hemant Singh', 'email': 'singh.hemant@gmail.com', 'isActive': true
-      },
-      {
-        'id': 2, 'firstName': 'Hemant2', 'lastName': 'Singh2', 'displayName': 'Hemant2 Singh2', 'email': 'singh2.hemant2@gmail.com', 'isActive': true
-      }
-    ]
-  }
 }

@@ -1,5 +1,14 @@
 <div *ngIf="showTable$">
-  <h1>show table</h1>
+  <div class="parent-container">
+    <div class="demo-button-container">
+      <button mat-raised-button (click)="addData()" class="demo-button">
+        Add data
+      </button>
+      <button mat-raised-button [disabled]="!dataSource.length" (click)="removeData()" class="demo-button">
+        Remove data
+      </button>
+    </div> 
+    <app-extruder-summary [columnsToDisplay]="columnsToDisplay" [columnNames]="columnNames" [dataSource]="dataSource"></app-extruder-summary>   
+    </div>
 </div>
 <router-outlet></router-outlet>
-
