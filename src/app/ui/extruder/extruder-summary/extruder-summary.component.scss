@@ -1,9 +1,7 @@
 .extruder-summary-container {
     width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-    border: solid 1px black;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
 }
 .demo-button-container{
     display: flex;
@@ -12,6 +10,17 @@
     align-items:flex-end;
     justify-items: flex-end;
     justify-content: flex-end;
+}
+
+.summary-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.extruderHeader{
+    padding-top:1rem;
 }
 
 .demo-button-container button {
@@ -27,3 +36,31 @@
     justify-content: space-around;
     justify-items: center;
 }
+.myHeaderStyle{
+    padding-top:1rem;
+}
+
+  tr.example-detail-row {
+    height: 0;
+  }
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;   
+  }
+  
+  
+
+  .example-element-row td {
+    border-bottom-width: 0;   
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+    margin-top:1rem;
+    width: 100%;
+  }
+  
