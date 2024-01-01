@@ -19,16 +19,13 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
   ]
 })
 export class HomeComponent implements OnInit{
+  
+  public headerStyle='pageHeaderextruderStyle';
+  public headerText= 'Extruder Home Page';
+  columnsToDisplay: string[] = ['extruderColorName', 'widthName', 'totalLength', 'totalWeight'];  
   public showTable$ = true;
   public dataSource:any[] = [];
-  displayedColumns: string[] = ['extruderColorName', 'widthName', 'totalLength'];
-  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
-  expandedElement: ExtruderSummary | null | undefined;
-  columnsToDisplay: string[] = ['extruderColorName', 'widthName', 'totalLength', 'totalWeight'];
-  columnNames: string[] = ['Color', 'Width', 'Total Length', 'Total Weight'];
-  // columnsToDisplay: string[] = ['rollnumber', 'name', 'colorname', 'widthname', 
-  // 'length', 'weight', 'email', 'createdDate'];
-
+  
   constructor(private extruderService: ExtruderService, private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute, 
     private extruderHomeService: ExtruderHomeService ) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
@@ -61,10 +58,4 @@ export class HomeComponent implements OnInit{
     });
 
   }
-
-  addData() {}
-
-  removeData(){}
-  
-
 }

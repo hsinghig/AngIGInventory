@@ -3,3 +3,31 @@
     align-items: center;
     justify-content: center;
 }
+
+.pageHeader {
+    border-radius: 4px;
+    height: $x-large;
+    padding-top: $large;
+    &extruderStyle {
+        @extend .pageHeader;
+        background-image: linear-gradient(195deg, $color-0, $color-4);
+      }
+    &laminationStyle {
+        @extend .pageHeader;
+        background-image: linear-gradient(195deg, $color-1, $color-4);   
+    }
+    &crossPlyStyle {
+        @extend .pageHeader;
+        background-image: linear-gradient(195deg, $color-2, $color-4);   
+    }
+    &dashboardStyle{
+        @extend .pageHeader;
+        background-image: linear-gradient(195deg, $color-3, $color-4);  
+    }    
+}
+
+.pageHeaderTextStyle {
+    font-size: $large;
+    padding-left: $default-gutter;
+}
+

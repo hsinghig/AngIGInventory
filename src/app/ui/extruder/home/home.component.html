@@ -1,14 +1,9 @@
-<div *ngIf="showTable$">
   <div class="parent-container">
-    <div class="demo-button-container">
-      <button mat-raised-button (click)="addData()" class="demo-button">
-        Add data
-      </button>
-      <button mat-raised-button [disabled]="!dataSource.length" (click)="removeData()" class="demo-button">
-        Remove data
-      </button>
-    </div> 
-    <app-extruder-summary [columnsToDisplay]="columnsToDisplay" [columnNames]="columnNames" [dataSource]="dataSource"></app-extruder-summary>   
+    <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header> 
+    <div *ngIf="showTable$">
+      <div class="tableDisplay">
+          <app-extruder-summary></app-extruder-summary>
+      </div>
     </div>
-</div>
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </div>

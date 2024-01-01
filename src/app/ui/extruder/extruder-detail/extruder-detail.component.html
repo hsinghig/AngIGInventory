@@ -1,5 +1,5 @@
 
-<table mat-table #extruderDetailTable [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table #extruderDetailTable [dataSource]="dataSource">
     @for (column of columnsToDisplay; track column) {
         <ng-container [matColumnDef]="column">
           <th mat-header-cell *matHeaderCellDef> {{column}} </th>

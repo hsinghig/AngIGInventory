@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoMaterialModule } from 'src/app/core/demo-material.module';
 import { ExtruderDetailComponent } from './extruder-detail/extruder-detail.component';
 import { ExtruderSummaryComponent } from './extruder-summary/extruder-summary.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ExtruderSummaryComponent } from './extruder-summary/extruder-summary.co
     ExtruderRoutingModule,
     ReactiveFormsModule,
     FormsModule, 
-    DemoMaterialModule
+    DemoMaterialModule, 
+    CoreModule
   ]
 })
 export class ExtruderModule { }

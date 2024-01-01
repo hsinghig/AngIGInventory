@@ -21,6 +21,9 @@ import { CoreModule } from "./core/core.module";
         BrowserAnimationsModule,
         CoreModule
     ], 
+    exports: [
+        CoreModule
+    ],
     providers: [
         provideHttpClient()
     ], 
