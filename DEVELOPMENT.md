@@ -19,3 +19,6 @@ go to angular.json change   "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
             ],
+
+color Gradient generator
+  https://mycolor.space/?hex=%233C4A3F&sub=1

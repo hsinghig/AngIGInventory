@@ -13,4 +13,11 @@ export class ExtruderDetailComponent {
   ];
   @Input() dataSource: ExtruderDetail[] = [];
 
+  getTotalWeight(){
+    return this.dataSource.map(t => t.weight).reduce((acc, value) => acc + value, 0);
+  }
+
+  getTotalLength(){
+    return this.dataSource.map(t => t.length).reduce((acc, value) => acc + value, 0);
+  }
 }
