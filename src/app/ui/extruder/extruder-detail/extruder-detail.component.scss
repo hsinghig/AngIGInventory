@@ -1,27 +1,21 @@
-.detail-container{
-    width: 100%;
+.extruder-detail-container{   
     margin-top:1rem;
     margin-bottom: 1rem;
 }
-.headerStyle{
-    padding-top:1rem;
-}
 
-.myHeaderStyle {
-    background-color: orange;
-    background-color: #F9F871;
+.extruder-detail-headerStyle {   
     background-color: #F2FEDC;
-    padding-top:1rem;   
+    padding-top: 1rem;   
     width:fit-content;
     padding-left:1rem;
     font-size: large;
 }
 
-.myHeaderStyle:last-child{
+.extruder-detail-headerStyle:last-child{
     width:600px;
     max-width:600px;
 }
 
-.myRowStyle{
+.extruder-detail-rowStyle{
     padding-top:1rem;
 }

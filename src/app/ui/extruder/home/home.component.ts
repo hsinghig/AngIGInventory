@@ -9,7 +9,6 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 @Component({
   selector: 'app-extruder-home', 
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({height: '0px', minHeight: '0'})),

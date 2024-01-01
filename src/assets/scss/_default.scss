@@ -28,6 +28,83 @@
 
 .pageHeaderTextStyle {
     font-size: $large;
-    padding-left: $default-gutter;
+    padding-left: $default-2;
+}
+// #region "Extruder Home Page"
+.tableDisplay{
+    background-color: $table-container-background;
+    padding-left: $default-1;
+    padding-bottom: $default-1;
 }
 
+.extruder-summary-container {
+    width: 100%;
+    margin-bottom: $medium;
+    margin-left: $medium;
+}
+
+.extruder-summary-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color:$summary-header-background-color;
+}
+
+.extruder-summary-header-text{
+  padding-top:$medium;
+}
+
+.extruder-summary-button-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items:flex-end;
+    justify-items: flex-end;
+    justify-content: flex-end;
+}
+
+.extruder-summary-button-container button {
+    margin-right: $large;
+    margin-bottom: $small;
+}
+
+.extruder-column-color-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    max-width: 80px;
+    justify-content: space-around;
+    justify-items: center;
+}
+
+.extruder-col-headerStyle{
+    padding-top:$medium;
+    font-size: x-large;
+}
+
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: $table-hover-background-color;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: $table-active-background-color; 
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;   
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+    margin-top:$medium;
+  }
+  
+  
+//#endregion "Extruder Home Page"

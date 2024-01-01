@@ -43,19 +43,6 @@ export class ExtruderSummaryComponent implements OnInit {
    
   }
 
-  shuffle() {
-    let currentIndex = this.columnsToDisplay.length;
-    while (0 !== currentIndex) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // Swap
-      let temp = this.columnsToDisplay[currentIndex];
-      this.columnsToDisplay[currentIndex] = this.columnsToDisplay[randomIndex];
-      this.columnsToDisplay[randomIndex] = temp;
-    }
-  }
-
   changeColor(){
     var colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
     this.headerColor = this.colorList[colorRandomIndex];
