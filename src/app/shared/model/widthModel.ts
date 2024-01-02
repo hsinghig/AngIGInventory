@@ -1,4 +1,6 @@
 export interface WidthModel{
-    id: number;
-    widthName: string;
+    id: number;    
+    name: string;
+    isActive: boolean;
+    comment: string;
 }

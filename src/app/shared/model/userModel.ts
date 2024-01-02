@@ -1,8 +1,8 @@
 export interface UserModel{
     id: number;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     displayName: string;
     email: string;
-    isActive: boolean;
+    isactive: boolean;
 }

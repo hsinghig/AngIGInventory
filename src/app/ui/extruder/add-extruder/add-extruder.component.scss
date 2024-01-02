@@ -1,36 +1,37 @@
 .add-extruder{
-    min-width: 150px;
-    max-width: 500px;
-    width: 600px;
-    display: flex;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   align-items: center;  
+   justify-content: center;
 }
-.extruder-form {
-    min-width: 150px;
-    max-width: 500px;
-    width:400px;
-}
-
 .parent-card {
-    margin-left: 200px;
+    width: 800px;    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
-.mat-mdc-form-field {
-    display:block;
+.extruder-form{
+    padding: 1rem;
 }
-::ng-deep .mat-form-field {
-    display: block;
-    .mat-input-element {
-        color: slategray;
-    }
-    .mat-form-field-label {
-        color: slategray;
-    }
-    .mat-form-field-underline {
-        background-color: slategray;
-    }
-    .mat-form-field-ripple {
-        background-color: slategray;
-    }
-    .mat-form-field-required-marker {
-        color: slategray;
-    }
+.example-full-width{    
+    width: 70%;
+    padding: 1rem;
+}
+textarea {
+    width:100%;
+}
+.add-extruder-button-container {    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 200px;
+}
+.extruder-add-header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;  
+    justify-content: center;
+    background-color: #FCFAEA;
 }

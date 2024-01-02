@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ColorModel } from "../model/colorModel";
-import { Observable, map, tap, throwError } from "rxjs";
+import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { ExtruderDetail, ExtruderInsertModel, ExtruderSummary } from "../model/extruderInsertModel";
 import { APP_CONSTANTS } from "src/app/app.contants";
@@ -51,7 +51,9 @@ export class ExtruderService {
 
   getAllUsers(): Observable<any[]>{
     return this.http.get<any>(this.URL_GET_USERS_ALL_USERS).pipe(
-      map(res => res.data)
+      map(res => {        
+        return res.data;
+      })
     );
   }
   //#endregion
@@ -66,7 +68,10 @@ export class ExtruderService {
   }
 
   insertExtruder(extruderInsertModel: ExtruderInsertModel) {
-    return this.http.post<ExtruderInsertModel>(this.URL_EXTRUDER_INSERT, extruderInsertModel, this.getHttpOptions());   
+    return this.http.post<ExtruderInsertModel>(this.URL_EXTRUDER_INSERT, extruderInsertModel, this.getHttpOptions())
+    .pipe(
+      catchError(this.handleError)
+    );    
   }
 
   // #endregion

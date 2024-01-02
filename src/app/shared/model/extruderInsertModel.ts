@@ -5,8 +5,31 @@ export interface ExtruderInsertModel {
     userId: number;
     weight: number;
     length: number;
-    comment: string;
+    comment: string| null;
+    rollNumber: string | null;
+}
+
+export interface ExtruderValidFormModel {
+    isValidForm:boolean;
+    extruderInsertModel: ExtruderInsertModel;
+}
+
+export interface ExtruderAddFormModel{
+    locationId: number;
+    name: string;
+    colorId: number;
+    colorname: string;
+    widthId: number;
+    widthname: string;
+    length: number;
+    weight:number;
+    createdById: number;
+    firstname: string;
+    lastname: string;
+    fullname: string;
+    email: string;  
     rollNumber: string;
+    comment: string;
 }
 
 
@@ -32,6 +55,11 @@ export interface ExtruderDetail{
     modifiedById: number;
 }
 
+export interface ExtruderSummaryDetail {
+    displayDateEST:string;
+    displayDateUTC: string;
+    extruderDetail:ExtruderDetail;
+}
 
 export interface ExtruderSummary {
     extruderColorId: number;

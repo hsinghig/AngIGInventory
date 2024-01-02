@@ -1,56 +1,70 @@
-<div class="add-extruder">
-    <mat-card class="parent-card">
-        <mat-card-header>
-            <mat-card-title>Add Extruder</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form class="extruder-form" [formGroup]="addExtruderFormGroup"  (ngSubmit)="onSubmit()">
-                <mat-form-field>
-                    <mat-label>Choose Location</mat-label>
-                    <mat-select  formControlName="locationId">
-                      <mat-option  *ngFor="let location of locationList" value={{location.id}}>{{location.name}}</mat-option>
-                    </mat-select>               
-                </mat-form-field>
-                <mat-form-field >
-                    <mat-label>Choose Color</mat-label>
-                    <mat-select formControlName="colorId">
-                      <mat-option  *ngFor="let color of colorList" value={{color.id}}>{{color.name}}</mat-option>
-                    </mat-select>                  
-                </mat-form-field>       
-                <mat-form-field>
-                    <mat-label>Choose Width</mat-label>
-                    <mat-select formControlName="widthId">
-                      <mat-option  *ngFor="let width of widthList" value={{width.id}}>{{width.widthName}}</mat-option>
-                    </mat-select>                    
-                </mat-form-field> 
-                <mat-form-field appearance="fill">
-                    <mat-label>Roll Number</mat-label>
-                    <input formControlName="rollNumber" matInput placeholder="Roll Number">                   
-                    <mat-hint>Existing Roll Number present if any</mat-hint>
-                </mat-form-field> 
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter Length</mat-label>
-                    <input formControlName="length" type="number" min="0" max="999999" matInput placeholder="Length">                   
-                    <mat-hint>Length in number ex: 322</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter Weight</mat-label>
-                    <input formControlName="weight" type="number" min="0" max="999999" matInput placeholder="Weight">                  
-                    <mat-hint>Weight in number ex: 200</mat-hint>
-                </mat-form-field>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Leave a comment</mat-label>
-                    <textarea formControlName="comment" matInput placeholder="..."></textarea>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Submitted By</mat-label>
-                    <mat-select formControlName="createdById">
-                      <mat-option *ngFor="let user of userList" value={{user.id}}>{{user.email}}</mat-option>
-                    </mat-select>               
-                </mat-form-field>
-                <button mat-raised-button color="accent" (click)="clearFormValues()">Clear</button>
-                <button mat-raised-button color="warn" type="submit">Submit</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
+<div class="extruder-summary-container">
+    <div class="extruder-add-header">
+        <h1 class="extruder-summary-header-text">Add Extruder</h1>
+    </div>   
+    <div class="add-extruder" *ngIf="showAddExtruder">
+        <mat-card class="parent-card">          
+            <mat-card-content class="extruder-card-content">
+                <form class="extruder-form" [formGroup]="addExtruderFormGroup" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="extruder-form">
+                        <mat-label>Choose Location</mat-label>
+                        <mat-select formControlName="locationId" required>
+                            <mat-option *ngFor="let location of locationList"
+                                value={{location.id}}>{{location.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form">
+                        <mat-label>Choose Color</mat-label>
+                        <mat-select formControlName="colorId" required>
+                            <mat-option *ngFor="let color of colorList" value={{color.id}}>{{color.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form">
+                        <mat-label>Choose Width</mat-label>
+                        <mat-select formControlName="widthId" required>
+                            <mat-option *ngFor="let width of widthList"
+                                value={{width.id}}>{{width.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Roll Number</mat-label>
+                        <input formControlName="rollNumber" matInput placeholder="Roll Number">
+                        <mat-hint>Existing Roll Number</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Enter Length</mat-label>
+                        <input formControlName="length" type="number" min="0" max="999999" matInput
+                            placeholder="Length" required>
+                        <mat-hint>Length in number ex: 322</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Enter Weight</mat-label>
+                        <input formControlName="weight" type="number" min="0" max="999999" matInput
+                            placeholder="Weight" required>
+                        <mat-hint>Weight in number ex: 200</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Submitted By</mat-label>
+                        <mat-select formControlName="createdById" required>
+                            <mat-option *ngFor="let user of userList" value={{user.id}}>{{user.email}} - {{user.firstname}} {{user.lastname}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea rows="5" formControlName="comment" matInput placeholder="..."></textarea>
+                    </mat-form-field>
+                    <div class="error-message-summary" *ngIf="showError">
+                        <p style="color:red;font-weight: bold;">{{errorMessageFirstLine}}</p>
+                        <p>{{errorMessageSecondLine}}</p>
+                    </div>
+                    <div class="add-extruder-button-container">
+                        <button mat-raised-button color="accent" (click)="clearFormValues()">Clear</button>
+                        <button mat-raised-button color="warn"  [disabled]="addExtruderFormGroup.invalid" type="submit">Submit</button>
+                    </div>
+                </form>
+               
+            </mat-card-content>
+        </mat-card>
+    </div>
+
 </div>
