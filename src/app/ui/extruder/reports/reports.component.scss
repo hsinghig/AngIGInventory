@@ -1,3 +1,29 @@
+.extruder-report-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-style {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 500px;
+}
+.extruder-report-button-container{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    border-top: solid 1px gray;
+    padding-top: 10px;
+}
+.card-content{
+    margin-bottom: 10px;
+    background-color: whitesmoke;
+}
+
 .display-card {
     display: flex;
     flex-wrap: nowrap;

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ColorModel } from 'src/app/shared/model/colorModel';
-import { ExtruderAddFormModel, ExtruderInsertModel, ExtruderValidFormModel } from 'src/app/shared/model/extruderInsertModel';
+import { ExtruderInsertModel, ExtruderValidFormModel } from 'src/app/shared/model/extruderInsertModel';
 import { LocationModel } from 'src/app/shared/model/locationModel';
 import { UserModel } from 'src/app/shared/model/userModel';
 import { WidthModel } from 'src/app/shared/model/widthModel';

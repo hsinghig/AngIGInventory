@@ -19,6 +19,8 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 })
 export class HomeComponent implements OnInit{
   
+  public showMenu:boolean = false;
+  public showDetail: boolean = true;
   public headerStyle='pageHeaderextruderStyle';
   public headerText= 'Extruder Home Page';
   columnsToDisplay: string[] = ['extruderColorName', 'widthName', 'totalLength', 'totalWeight'];  
@@ -56,5 +58,18 @@ export class HomeComponent implements OnInit{
       this.dataSource = data;
     });
 
+  }
+
+  changeView(passedValue: string){
+    switch(passedValue){
+      case 'menu':
+        this.showDetail = true; 
+        this.showMenu = false;
+        break;
+      case 'detail':
+        this.showDetail = false; 
+        this.showMenu = true;
+        break;
+    }
   }
 }

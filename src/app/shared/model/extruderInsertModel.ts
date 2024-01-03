@@ -14,7 +14,7 @@ export interface ExtruderValidFormModel {
     extruderInsertModel: ExtruderInsertModel;
 }
 
-export interface ExtruderAddFormModel{
+export interface ExtruderAllDataModel{
     locationId: number;
     name: string;
     colorId: number;

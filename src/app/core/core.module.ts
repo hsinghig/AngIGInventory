@@ -7,10 +7,11 @@ import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FooterComponent } from "./footer/footer.component";
 import { PageHeaderComponent } from "./page-header/page-header.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations: [NavComponent, PageNotFoundComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
-    imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule],
+    imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule, RouterModule],
     exports: [NavComponent, PageHeaderComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
 })
 export class CoreModule{}

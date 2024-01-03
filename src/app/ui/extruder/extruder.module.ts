@@ -10,6 +10,7 @@ import { DemoMaterialModule } from 'src/app/core/demo-material.module';
 import { ExtruderDetailComponent } from './extruder-detail/extruder-detail.component';
 import { ExtruderSummaryComponent } from './extruder-summary/extruder-summary.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { ExtruderAllDataComponent } from './extruder-all-data/extruder-all-data.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CoreModule } from 'src/app/core/core.module';
     AddExtruderComponent,
     ExtruderDetailComponent,
     ExtruderSummaryComponent,
+    ExtruderAllDataComponent,
     ReportsComponent
   ],
   imports: [

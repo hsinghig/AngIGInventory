@@ -2,7 +2,20 @@
     <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header> 
     <div *ngIf="showTable$">
       <div class="tableDisplay">
-          <app-extruder-summary></app-extruder-summary>
+          <div class="button-container">
+            <button mat-mini-fab color="accent" (click)="changeView('menu')" aria-label="Example icon button with a menu icon">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" (click)="changeView('detail')" aria-label="Example icon button with a menu icon">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="showMenu">
+            <app-extruder-summary></app-extruder-summary>
+          </div>
+          <div *ngIf="showDetail">
+            <app-extruder-all-data></app-extruder-all-data>
+          </div>    
       </div>
     </div>
     <router-outlet></router-outlet>
