@@ -43,6 +43,11 @@ export class ExtruderSummaryComponent implements OnInit {
    
   }
 
+  takeMeToAdd(){
+    console.log('in button click of add ');
+    this.router.navigateByUrl('/extruder/add');
+  }
+
   changeColor(){
     var colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
     this.headerColor = this.colorList[colorRandomIndex];

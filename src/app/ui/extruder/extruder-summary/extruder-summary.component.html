@@ -2,7 +2,7 @@
   <div class="extruder-summary-header">
     <h1 class="extruder-summary-header-text">Extruder Data</h1>
     <div class="extruder-summary-button-container">
-      <button mat-mini-fab color="primary" aria-label="Add Extruder">
+      <button mat-mini-fab color="primary" (click)="takeMeToAdd()" aria-label="Add Extruder">
         <mat-icon>add</mat-icon>
       </button>    
       <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">

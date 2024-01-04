@@ -14,24 +14,6 @@ export interface ExtruderValidFormModel {
     extruderInsertModel: ExtruderInsertModel;
 }
 
-export interface ExtruderAllDataModel{
-    locationId: number;
-    name: string;
-    colorId: number;
-    colorname: string;
-    widthId: number;
-    widthname: string;
-    length: number;
-    weight:number;
-    createdById: number;
-    firstname: string;
-    lastname: string;
-    fullname: string;
-    email: string;  
-    rollNumber: string;
-    comment: string;
-}
-
 
 export interface ExtruderDetail{
     id:number;

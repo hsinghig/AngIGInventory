@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ExtruderAllDataModel } from 'src/app/shared/model/extruderInsertModel';
+import { ExtruderModel } from 'src/app/shared/model/extruder.model';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
 
 @Component({
@@ -13,7 +13,7 @@ export class ExtruderAllDataComponent {
   columnsToDisplay: string[] = [
     'rollnumber', 'name', 'colorname', 'widthname','length', 'weight', 'fullname', 'createdDate', 'comment'
   ]; 
-  dataSource: ExtruderAllDataModel[] = [];
+  dataSource: ExtruderModel[] = [];
 
   constructor(private extruderService: ExtruderService ) {     
     this.extruderService.getExtruderData().subscribe(data => {     

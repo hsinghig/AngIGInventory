@@ -18,56 +18,56 @@
             <!-- rollnumber Column -->
             <ng-container matColumnDef="rollnumber">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Roll No. </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.rollnumber}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.rollnumber}} </td>
               <td mat-footer-cell *matFooterCellDef> Total </td>
             </ng-container>
         
             <!-- name Column -->
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Location </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.name}} </td>
             </ng-container>
         
              <!-- colorname Column -->
              <ng-container matColumnDef="colorname">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorname}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.colorname}} </td>
             </ng-container>
         
             <!-- widthname Column -->
             <ng-container matColumnDef="widthname">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Width </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.widthname}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.widthname}} </td>
             </ng-container>
         
              <!-- length Column -->
              <ng-container matColumnDef="length">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Length </th>
-              <td  class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.length}} </td>
+              <td  class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.extruderDetail.length}} </td>
             </ng-container>
         
              <!-- weight Column -->
              <ng-container matColumnDef="weight">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Weight </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.weight}} </td>
             </ng-container>
         
              <!-- fullname Column -->
              <ng-container matColumnDef="fullname">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Created By </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.extruderDetail.fullname}} </td>
             </ng-container>
         
              <!-- createdDate Column -->
              <ng-container matColumnDef="createdDate">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Date Created </th>
-              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+              <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.createdDateDisplayDateEST}} </td>
             </ng-container>
         
             <!-- widthname Column -->
             <ng-container matColumnDef="comment">
               <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Comment </th>
-              <td  class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.comment}} </td>
+              <td  class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.extruderDetail.comment}} </td>
             </ng-container>
             
            
