@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
     <li *ngFor="let navLinkModel of navLinkModelList; index as i; first as isFirst">
-        <a href={{navLinkModel.URL}}>{{navLinkModel.linkText}}</a>
+        <a routerLink={{navLinkModel.URL}}>{{navLinkModel.linkText}}</a>
     </li>
 </ul>

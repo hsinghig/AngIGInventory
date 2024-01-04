@@ -18,6 +18,7 @@ export class NavComponent {
   public OnMenuClick($event: MouseEvent, root:string, value: string){   
     let urlToGo = '';
     if (root == ''){
+        console.log('root null :', urlToGo);
         this.router.navigateByUrl(urlToGo);
     } else {      
       if (value == ''){
@@ -25,6 +26,7 @@ export class NavComponent {
       } else {
         urlToGo = '/' + root + '/' + value;
       }     
+      console.log('root not null', urlToGo);
       this.router.navigateByUrl(urlToGo);
     }
   }

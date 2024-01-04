@@ -44,7 +44,7 @@ export class ExtruderSummaryComponent implements OnInit {
   }
 
   takeMeToAdd(){
-    console.log('in button click of add ');
+    console.log('in button click of add /extruder/add');
     this.router.navigateByUrl('/extruder/add');
   }
 
