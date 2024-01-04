@@ -1,3 +1,5 @@
+
+
 export interface ExtruderReportColorModel{
     colorId: number;
     colorName: string;
@@ -20,3 +22,16 @@ export interface ExtruderReportColorDetailModel {
     totalWeight: number;
     totalLength: number;
 }
+
+export interface ExtruderReportSummary{   
+    colName: string;
+    colorId: number;
+    colorName: string;
+    widthName: string;
+    widthId: number;
+    totalLength: number;
+    totalWeight: number;
+}
+
+
+

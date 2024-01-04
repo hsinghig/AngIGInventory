@@ -11,6 +11,7 @@ import { ExtruderDetailComponent } from './extruder-detail/extruder-detail.compo
 import { ExtruderSummaryComponent } from './extruder-summary/extruder-summary.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { ExtruderAllDataComponent } from './extruder-all-data/extruder-all-data.component';
+import { ExtruderSummaryButtonComponent } from './extruder-summary-button/extruder-summary-button.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ExtruderAllDataComponent } from './extruder-all-data/extruder-all-data.
     ExtruderDetailComponent,
     ExtruderSummaryComponent,
     ExtruderAllDataComponent,
-    ReportsComponent
+    ReportsComponent,
+    ExtruderSummaryButtonComponent, 
   ],
   imports: [
     CommonModule,

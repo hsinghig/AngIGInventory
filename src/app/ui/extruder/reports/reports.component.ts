@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { ActivatedRoute } from '@angular/router';
 import { ExtruderSummary } from 'src/app/shared/model/extruderInsertModel';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
-
 @Component({
   selector: 'app-extruder-reports', 
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.scss'
 })
 export class ReportsComponent {
+  showHeaderColor:boolean = true;
   dataSource: any[] = [];
   dataList: ExtruderSummary[] = [];
   dataListSecond: ExtruderSummary[] = [];
-  chosenHeaderColor: string = 'black';
+  chosenColorName: string = 'black';
   chosenWidthName: string = '87';
   colorList = ['black', 'blue', 'green', 'purple', 'yellow'];
   widthList = ['87', '93', '99', '102', '105', '111', '117'];
@@ -26,18 +27,34 @@ export class ReportsComponent {
     });
     this.extruderService.getExtruderSummary().subscribe(data => {     
       this.dataSource = data;
-      this.dataList = this.dataSource.filter(x => x.extruderColorName == this.chosenHeaderColor);
+      this.dataList = this.dataSource.filter(x => x.extruderColorName == this.chosenColorName);
       this.dataListSecond = this.dataSource.filter(x => x.widthName == this.chosenWidthName);
     });
   }
 
-  buttonClick(colorSelected: string){
-    this.chosenHeaderColor = colorSelected;
-    this.dataList = this.dataSource.filter(x => x.extruderColorName == colorSelected);
-    console.log('color chosen', colorSelected, this.dataList.length, this.dataSource.length, this.dataSource);
+  resetFilterColor(){
+    this.dataList = this.dataSource;
+    this.chosenColorName= '';
+    this.showHeaderColor = false;
   }
-  getDataForWidth(widthname: string) {
-    this.chosenWidthName = widthname;
-    this.dataListSecond = this.dataSource.filter(x => x.widthName == widthname);
+
+  resetFilterWidth(){
+    this.dataListSecond = this.dataSource;
+    this.chosenWidthName = '';
   }
+
+  onToggleGroupChangeColor(data: MatButtonToggleChange) {
+    this.showHeaderColor = true;
+    this.chosenColorName = data.value;
+    this.dataList = this.dataSource.filter(x => x.extruderColorName == data.value);
+    console.log('color chosen', data.value, this.dataList.length, this.dataSource.length, this.dataSource);
+  }
+
+ 
+  onToggleGroupChangeWidth(data: MatButtonToggleChange) {
+    this.chosenWidthName = data.value;
+    this.dataListSecond = this.dataSource.filter(x => x.widthName == data.value);
+  }
+ 
 }
+
