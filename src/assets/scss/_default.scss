@@ -5,9 +5,9 @@
 }
 
 .pageHeader {
-    border-radius: 4px;
-    height: $x-large;
-    padding-top: $large;
+    border-radius: $x-small;
+    height: $large;
+    padding-top:$x-small;
     &extruderStyle {
         @extend .pageHeader;
         background-image: linear-gradient(195deg, $color-0, $color-4);
