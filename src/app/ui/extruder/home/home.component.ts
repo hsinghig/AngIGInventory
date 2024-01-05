@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ExtruderSummary } from 'src/app/shared/model/extruderInsertModel';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
@@ -9,6 +10,7 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 @Component({
   selector: 'app-extruder-home', 
   templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({height: '0px', minHeight: '0'})),
@@ -60,7 +62,8 @@ export class HomeComponent implements OnInit{
 
   }
 
-  changeView(passedValue: string){
+  changeView(data: MatButtonToggleChange){
+    const passedValue = data.value;
     switch(passedValue){
       case 'menu':
         this.showDetail = true; 

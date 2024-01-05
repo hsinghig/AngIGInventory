@@ -51,7 +51,8 @@
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
                         <mat-label>Leave a comment</mat-label>
-                        <textarea rows="5" formControlName="comment" matInput placeholder="..."></textarea>
+                        <textarea #comments rows="4" formControlName="comment" matInput placeholder="..."></textarea>
+                        <mat-hint align="end">{{comments.value.length}}/500</mat-hint>
                     </mat-form-field>
                     <div class="error-message-summary" *ngIf="showError">
                         <p style="color:red;font-weight: bold;">{{errorMessageFirstLine}}</p>
