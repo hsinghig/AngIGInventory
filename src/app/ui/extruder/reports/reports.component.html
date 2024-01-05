@@ -2,7 +2,7 @@
     <div class="color-container">
         <mat-card  class="card-style mat-elevation-z8">
             <mat-card-header  class="card-header">
-                <mat-card-title>Summary Data  {{chosenColorName}}</mat-card-title>
+                <mat-card-title>Summary Data  {{chosenColorName| titlecase}}</mat-card-title>
                 <button mat-mini-fab color="accent" matTooltip="Reset Filter" (click)="resetFilterColor()">
                     <mat-icon>restart_alt</mat-icon>
                 </button>
