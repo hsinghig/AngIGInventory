@@ -39,8 +39,11 @@ export class ExtruderAllDataComponent implements AfterViewInit{
   }
 
   getColumnValue(columnNamePassed: string, row:ExtruderModel){
-    var columnValue = '';
+    var columnValue:any;
     switch(columnNamePassed){
+      case 'rollnumber':
+        columnValue = row.extruderDetail?.rollnumber??'';
+        break;
       case 'colorname':
         columnValue = row.extruderDetail.colorname;
         break;
@@ -49,6 +52,21 @@ export class ExtruderAllDataComponent implements AfterViewInit{
         break;       
       case 'fullname':
         columnValue = row.extruderDetail.fullname;
+        break;
+      case 'createdDate':
+        columnValue = new Date(row.extruderDetail.createdDate);
+        break;
+      case 'widthname':
+        columnValue = +row.extruderDetail.widthname;
+        break;
+      case 'length':
+        columnValue = +row.extruderDetail.length;
+        break;
+      case 'weight':
+        columnValue =+row.extruderDetail.weight;
+        break;
+      case 'comment':
+        columnValue = row.extruderDetail?.comment ?? '';
         break;
     }
     return columnValue;

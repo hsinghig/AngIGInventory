@@ -30,7 +30,8 @@ import { ExtruderSummaryButtonComponent } from './extruder-summary-button/extrud
     ReactiveFormsModule,
     FormsModule, 
     DemoMaterialModule, 
-    CoreModule
+    CoreModule,
+    CommonModule
   ]
 })
 export class ExtruderModule { }
