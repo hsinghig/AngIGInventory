@@ -14,7 +14,7 @@
       </div>
     </div>
     <div>
-        <table mat-table #extruderDetailTable [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table #extruderDetailTable matSort  #extruderTblSortWithObject="matSort" [dataSource]="dataSource" class="mat-elevation-z8">
             <!-- rollnumber Column -->
             <ng-container matColumnDef="rollnumber">
               <th class="extruder-col-headerStyle"  mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Roll No. </th>
@@ -24,13 +24,13 @@
         
             <!-- name Column -->
             <ng-container matColumnDef="name">
-              <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Location </th>
+              <th mat-sort-header class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Location </th>
               <td  mat-cell *matCellDef="let element"> {{element.extruderDetail.name}} </td>
             </ng-container>
         
              <!-- colorname Column -->
              <ng-container matColumnDef="colorname">
-              <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color </th>
+              <th mat-sort-header class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color </th>
               <td  mat-cell *matCellDef="let element"> {{element.extruderDetail.colorname}} </td>
             </ng-container>
         
@@ -54,7 +54,7 @@
         
              <!-- fullname Column -->
              <ng-container matColumnDef="fullname">
-              <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Created By </th>
+              <th mat-sort-header class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Created By </th>
               <td  mat-cell *matCellDef="let element"> {{element.extruderDetail.fullname}} </td>
             </ng-container>
         
@@ -66,7 +66,7 @@
         
             <!-- widthname Column -->
             <ng-container matColumnDef="comment">
-              <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Comment </th>
+              <th mat-sort-header class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Comment </th>
               <td  mat-cell *matCellDef="let element"> {{element.extruderDetail.comment}} </td>
             </ng-container>
             

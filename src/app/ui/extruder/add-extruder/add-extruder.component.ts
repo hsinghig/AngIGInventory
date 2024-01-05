@@ -148,4 +148,8 @@ export class AddExtruderComponent implements OnInit {
       this.userList = response;
     });
   }
+
+  get locationId(){
+    return this.addExtruderFormGroup.controls['locationId'];
+  }
 }

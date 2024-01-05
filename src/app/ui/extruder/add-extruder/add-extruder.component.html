@@ -12,6 +12,9 @@
                             <mat-option *ngFor="let location of locationList"
                                 value={{location.id}}>{{location.name}}</mat-option>
                         </mat-select>
+                        <mat-error *ngIf="locationId.hasError('required')">
+                            Location is required
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field class="extruder-form">
                         <mat-label>Choose Color</mat-label>
