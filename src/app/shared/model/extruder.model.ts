@@ -28,8 +28,8 @@ export interface ExtruderDataModel {
     createdDate: string;
     modifiedDate: string;
     weight: number;
-    rollnumber?: string;
-    comment?: string;
+    rollnumber?: string| null |undefined;
+    comment?: string |null | undefined;
     modifiedById: number;
   }
   

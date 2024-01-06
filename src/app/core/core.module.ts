@@ -8,10 +8,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FooterComponent } from "./footer/footer.component";
 import { PageHeaderComponent } from "./page-header/page-header.component";
 import { RouterModule } from "@angular/router";
+import { DisplayTableComponent } from "./display-table/display-table.component";
 
 @NgModule({
-    declarations: [NavComponent, PageNotFoundComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
+    declarations: [NavComponent, PageNotFoundComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
     imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule, RouterModule],
-    exports: [NavComponent, PageHeaderComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
+    exports: [NavComponent, PageHeaderComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
 })
 export class CoreModule{}
