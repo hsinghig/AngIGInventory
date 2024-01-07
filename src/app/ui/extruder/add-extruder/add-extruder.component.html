@@ -21,6 +21,7 @@
                         <mat-select formControlName="colorId" required>
                             <mat-option *ngFor="let color of colorList" value={{color.id}}>{{color.name}}</mat-option>
                         </mat-select>
+                        
                     </mat-form-field>
                     <mat-form-field class="extruder-form">
                         <mat-label>Choose Width</mat-label>
@@ -65,8 +66,7 @@
                         <button mat-raised-button color="accent" (click)="clearFormValues()">Clear</button>
                         <button mat-raised-button color="warn"  [disabled]="addExtruderFormGroup.invalid" type="submit">Submit</button>
                     </div>
-                </form>
-               
+                </form>               
             </mat-card-content>
         </mat-card>
     </div>

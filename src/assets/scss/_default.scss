@@ -1,7 +1,13 @@
 .footer-container {
+    margin-top:2rem;
+    padding-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color:bisque;
+    left:0;
+    bottom:0;
+    width: 100%;
 }
 
 .pageHeader {
@@ -108,3 +114,118 @@
   
   
 //#endregion "Extruder Home Page"
+
+//#region "Add Crossply"
+.parent-flex-center-child {
+  display: flex;
+  justify-content: center;
+}
+.add-crossply-container {    
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;   
+  max-width: 800px;
+  justify-content: center;  
+  background-color: $add-crossply-container-background-color;
+  box-shadow: $add-crossply-box-shadow; 
+}
+.add-crossply-header {
+  background-color: $summary-header-background-color;
+  text-align: center;
+  padding-top:$small;
+  width: 100%;
+  
+}
+.crossply-container {
+  padding-top:$small;
+  background-color: $add-crossply-container-background-color;
+  width:100%;
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction: row;
+  justify-content: space-around;    
+}
+.crossply-submit-createdBy{ 
+  display: flex;
+  flex-direction: row;    
+  flex-wrap: nowrap;
+  justify-content: space-around; 
+  margin-left:1rem;
+  margin-right:1rem;
+}
+.crossplySubmittedBy{   
+  padding-top:$medium;
+  margin-right: $medium;
+  margin-left:$medium;
+  min-width: 450px;
+  max-height: $xx-large;
+}
+.crossplyComment{   
+  padding-top:1rem;
+  flex-grow:1.3;
+  padding-right:1rem;
+}
+.extruder-container {   
+  display: flex;
+  flex-direction: row;
+  flex-wrap:nowrap;
+  justify-content: space-evenly; 
+  width: 100%;  
+}
+.colorzeroninety-container {
+  background-color:$color-0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $add-crossply-box-shadow;  
+ 
+}
+.colorzeroninety-container:nth-child(1){
+  background-color: $color-3;  
+  border-right: solid 2px gray; 
+}
+.colorzero-color-width{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.crossply-field-small {
+  max-width: 180px;
+}
+.add-crossply-btn{    
+  margin-right:20px;
+  margin-left: 20px;
+}
+.add-crossply-btn:nth-child(2){
+  background-color: #84A98C; 
+}
+.crossply-rollnumber {
+  margin-top:1rem;
+  margin-right:20px;
+  margin-left: 20px;
+}
+.crossply-buttons{
+  min-height: 100px;
+  margin-top: 1rem;
+  width:100%;
+}
+.btn-submit-style {
+  width: 400px;
+  margin-left: 1rem;
+}
+.iconStyle{
+  font-size: 1.2rem;
+  color:red;
+}
+
+.crossply-buttons-container{
+  margin-top:1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  margin-bottom: 1rem;
+  max-width: fit-content;
+  margin-left: 1rem;
+}
+//#endregion "Add Crossply"
