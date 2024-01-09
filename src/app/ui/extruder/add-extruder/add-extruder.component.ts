@@ -9,6 +9,7 @@ import { UserModel } from 'src/app/shared/model/userModel';
 import { WidthModel } from 'src/app/shared/model/widthModel';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
 import { ExtruderHomeService } from 'src/app/shared/service/extruderhome.service';
+import { InventoryCommonService } from 'src/app/shared/service/inventoryCommonService';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
 
@@ -47,7 +48,8 @@ export class AddExtruderComponent implements OnInit {
 
   constructor(private sharedNavService: SharedNavService, private _snackBar: MatSnackBar, private router: Router,
      private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
-    private extruderHomeService: ExtruderHomeService, private extruderService: ExtruderService) {
+    private extruderHomeService: ExtruderHomeService, private inventoryCommonService:
+     InventoryCommonService, private extruderService: ExtruderService) {
     this.activatedRoute.url.subscribe(activeUrl => {
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
@@ -140,11 +142,11 @@ export class AddExtruderComponent implements OnInit {
       this.locationList = response;
     });
 
-    this.extruderService.getWidths().subscribe(response => {
+    this.inventoryCommonService.getWidths().subscribe(response => {
       this.widthList = response;
     })
 
-    this.extruderService.getAllUsers().subscribe(response => {
+    this.inventoryCommonService.getAllUsers().subscribe(response => {
       this.userList = response;
     });
   }

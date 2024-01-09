@@ -3,22 +3,22 @@ import { ColorModel } from "../model/colorModel";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { ExtruderInsertModel } from "../model/extruderInsertModel";
-import { APP_CONSTANTS } from "src/app/app.contants";
 import { AppConstantsService } from "./appConstants.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExtruderService {
-  URL_GET_LOCATIONS_EXTRUDER = this.appConstantsService.getURLForString('URL_GET_LOCATIONS_EXTRUDER');
+
+  URL_GET_EXTRUDER_LOCATIONS = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_LOCATIONS');
   URL_GET_EXTRUDER_COLORS = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_COLORS');
-  URL_GET_WIDTHS = this.appConstantsService.getURLForString('URL_GET_WIDTHS');
+  URL_GET_ALL_WIDTHS = this.appConstantsService.getURLForString('URL_GET_ALL_WIDTHS');
   URL_GET_USERS_ALL_USERS = this.appConstantsService.getURLForString('URL_GET_USERS_ALL_USERS');
 
 
-  URL_EXTRUDER_INSERT = this.appConstantsService.getURLForString('URL_EXTRUDER_INSERT');
-  URL_EXTRUDER_GET_EXTRUDER_DATA = this.appConstantsService.getURLForString('URL_EXTRUDER_GET_EXTRUDER_DATA');
-  URL_EXTRUDER_GET_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_EXTRUDER_GET_SUMMARY_DATA');
+  URL_POST_EXTRUDER_INSERT = this.appConstantsService.getURLForString('URL_POST_EXTRUDER_INSERT');
+  URL_GET_EXTRUDER_ALL_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_ALL_DATA');
+  URL_GET_EXTRUDER_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_SUMMARY_DATA');
 
   constructor(private http: HttpClient, private appConstantsService: AppConstantsService) { }
 
@@ -32,7 +32,7 @@ export class ExtruderService {
   }
  // #region "GET reference table"
   getExtruderLocations(): Observable<any[]>{
-    return this.http.get<any>(this.URL_GET_LOCATIONS_EXTRUDER).pipe(
+    return this.http.get<any>(this.URL_GET_EXTRUDER_LOCATIONS).pipe(
       map(res => res.data)
     );
   }
@@ -43,32 +43,20 @@ export class ExtruderService {
     );
   }
 
-  getWidths(): Observable<any[]>{
-    return this.http.get<any>(this.URL_GET_WIDTHS).pipe(
-      map(res => res.data)
-    );
-  }
-
-  getAllUsers(): Observable<any[]>{
-    return this.http.get<any>(this.URL_GET_USERS_ALL_USERS).pipe(
-      map(res => {        
-        return res.data;
-      })
-    );
-  }
+ 
   //#endregion
 
   // #region "EXTRUDER Methods"
   getExtruderData():Observable<any[]>{
-    return this.http.get<any>(this.URL_EXTRUDER_GET_EXTRUDER_DATA).pipe(tap(x => console.log('data getExtruderData', x)),map(x => x.data));
+    return this.http.get<any>(this.URL_GET_EXTRUDER_ALL_DATA).pipe(tap(x => console.log('data getExtruderData', x)),map(x => x.data));
   }
 
   getExtruderSummary(): Observable<any[]>{
-    return this.http.get<any>(this.URL_EXTRUDER_GET_SUMMARY_DATA).pipe(map(x => x.data));
+    return this.http.get<any>(this.URL_GET_EXTRUDER_SUMMARY_DATA).pipe(map(x => x.data));
   }
 
   insertExtruder(extruderInsertModel: ExtruderInsertModel) {
-    return this.http.post<ExtruderInsertModel>(this.URL_EXTRUDER_INSERT, extruderInsertModel, this.getHttpOptions())
+    return this.http.post<ExtruderInsertModel>(this.URL_POST_EXTRUDER_INSERT, extruderInsertModel, this.getHttpOptions())
     .pipe(
       catchError(this.handleError)
     );    
