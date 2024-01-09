@@ -12,6 +12,7 @@ export class HomeComponent {
   public headerStyle='pageHeadercrossPlyStyle';
   public headerText= 'Crossply Home Page';
   constructor(private sharedNavService: SharedNavService, private activatedRoute: ActivatedRoute) {  
+    console.log('In crossply Home');
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });

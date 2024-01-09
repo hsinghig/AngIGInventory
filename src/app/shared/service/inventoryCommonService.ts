@@ -16,6 +16,7 @@ export class InventoryCommonService{
 
   getAllColors(): Observable<any[]>{
     return this.http.get<any>(this.URL_GET_ALL_COLORS).pipe(
+      tap(x => console.log('inventorycommonservice.getAllColors',x)),
       map(res => res.data)
     );
   }

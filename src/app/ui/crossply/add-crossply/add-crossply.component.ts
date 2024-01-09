@@ -67,13 +67,19 @@ export class AddCrossplyComponent implements OnInit {
     private extruderService: ExtruderService,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute) {  
+      console.log('In crossply add ');
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
   }
   ngOnInit(): void {
-    this.loadDropdowns();
-    this.formValueChangeListeners();
+    try{
+      this.loadDropdowns();
+      this.formValueChangeListeners();
+    }catch(error){
+      console.log('Error happened :', error);
+    }
+   
   }
 
   resetValues(){
@@ -249,6 +255,7 @@ export class AddCrossplyComponent implements OnInit {
   //#endregion "Methods"
 
   loadDropdowns(){
+    
     this.crossplyService.getCrossplyLocations().subscribe( response =>{
       this.crossplyLocationList = response;
     });
@@ -267,8 +274,7 @@ export class AddCrossplyComponent implements OnInit {
 
     this.extruderService.getExtruderColors().subscribe(response => {
       this.extruderColorList = response;
-    })
-
+    });
   
   }
 }
