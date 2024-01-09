@@ -32,14 +32,14 @@ export class DisplayTableComponent implements OnInit, AfterViewInit{
     // }
   }
   getColumnsDisplay() {
-    let itemList:ITableColumnDisplay[] = TABLE_COLUMN_LIST_SMALL;
+    const itemList:ITableColumnDisplay[] = TABLE_COLUMN_LIST_SMALL;
     this.displayedColumns = itemList.map(x => x.columnDisplayName);
     console.log(this.displayedColumns);
   }
 
   getColumnValue(columnNamePassed: string, row:any){
-    var columnValue:any;
-    var item = TABLE_COLUMN_LIST.find( x=>x.columnDisplayName == columnNamePassed);
+    let columnValue:any;
+    const item = TABLE_COLUMN_LIST.find( x=>x.columnDisplayName == columnNamePassed);
     if (item?.columnReturnDataType == 'string'){
       if (item.columnIsNullable){
         columnValue = row?.columnNamePassed ?? '';
@@ -532,8 +532,8 @@ export const TABLE_COLUMN_LIST: ITableColumnDisplay[] = [
 ];
 
 export function convertDataType(extruderModelList:ExtruderModel[]): ExtruderDetail[]{
-  var result: ExtruderDetail[] = [];
-  for(let item of extruderModelList){
+  const result: ExtruderDetail[] = [];
+  for(const item of extruderModelList){
     result.push(item.extruderDetail);
   } 
   return result;

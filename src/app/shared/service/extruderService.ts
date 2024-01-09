@@ -23,7 +23,7 @@ export class ExtruderService {
   constructor(private http: HttpClient, private appConstantsService: AppConstantsService) { }
 
   getHttpOptions() {
-    var httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       })

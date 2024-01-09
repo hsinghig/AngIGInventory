@@ -33,13 +33,13 @@ export class ExtruderAllDataComponent implements AfterViewInit{
     this.extruderTblSortWithObject.disableClear = true;
     this.dataSource.sort = this.extruderTblSortWithObject;
     this.dataSource.sortingDataAccessor = (row:ExtruderModel, columnName:string) : any => {
-      var columnValue = this.getColumnValue(columnName, row); 
+      const columnValue = this.getColumnValue(columnName, row); 
       return columnValue;
     }
   }
 
   getColumnValue(columnNamePassed: string, row:ExtruderModel){
-    var columnValue:any;
+    let columnValue:any;
     switch(columnNamePassed){
       case 'rollnumber':
         columnValue = row.extruderDetail?.rollnumber??'';
@@ -74,7 +74,7 @@ export class ExtruderAllDataComponent implements AfterViewInit{
 
 
   changeColor(){
-    var colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
+    const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
     this.headerColor = this.colorList[colorRandomIndex];
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { debounce, debounceTime, distinctUntilChanged, tap } from 'rxjs';
 import { RollNumberSelectDialogComponent } from 'src/app/core/roll-number-select-dialog/roll-number-select-dialog.component';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { ErrorMessageModel, crossplyInsertModel } from 'src/app/shared/model/crossplyInsertModel';
@@ -20,6 +21,8 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
   styleUrl: './add-crossply.component.scss'
 })
 export class AddCrossplyComponent implements OnInit {
+  colorZeroValueFetched: boolean = false;
+  colorNinetyValueFetched: boolean = false;
   errorMessageList: string[] = [];
   formContainsValidationError: boolean = false;
   errorMessageModel: ErrorMessageModel | undefined;
@@ -55,6 +58,7 @@ export class AddCrossplyComponent implements OnInit {
   @ViewChild('colorZeroWidth') colorZeroSelectWidth:any;
   @ViewChild('colorNinetyColor') colorNinetySelectColor:any;
   @ViewChild('colorNinetyWidth') colorNinetySelectWidth:any;
+  @ViewChild('crossplyWidth') crossplySelectWidth:any;
 
   constructor(private sharedNavService: SharedNavService, 
     private formBuilder:FormBuilder,
@@ -69,49 +73,112 @@ export class AddCrossplyComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadDropdowns();
+    this.formValueChangeListeners();
+  }
+
+  resetValues(){
+   this.resetColorZeroValues();
+   this.resetColorNinetyValues();
+  }
+
+  resetColorZeroValues(){
+    if(this.colorZeroValueFetched){
+      this.colorZeroValueFetched = false;
+      this.resetColorZeroRollNumber();
+    }
+  }
+
+  resetColorNinetyValues(){
+    if (this.colorNinetyValueFetched){
+      this.colorNinetyValueFetched = false;
+      this.resetColorNinetyRollNumber();
+    }
+  }
+
+  formValueChangeListeners() {
+    this.addCrossplyFormGroup.controls['crossplyLocationId'].valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap((val) => console.log('Value change : ', val))
+    )
+      .subscribe((data) => {
+        this.resetValues();
+      });
+    
+      this.addCrossplyFormGroup.controls['crossplyWidthId'].valueChanges.pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        tap((val) => console.log('Value change : ', val))
+      )
+        .subscribe((data) => {
+         this.resetValues();
+        });
+
+        this.addCrossplyFormGroup.controls['crossplyColorId'].valueChanges.pipe(
+          debounceTime(400),
+          distinctUntilChanged(),
+          tap((val) => console.log('Value change : ', val))
+        )
+          .subscribe((data) => {
+          this.resetValues();
+          });
+
+          this.addCrossplyFormGroup.controls['colorZeroColorId'].valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            tap((val) => console.log('Value change : ', val))
+          ).subscribe((data) =>{
+            this.resetColorZeroValues();
+          });
+
+          this.addCrossplyFormGroup.controls['colorZeroWidthId'].valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            tap((val) => console.log('Value change : ', val))
+          ).subscribe((data) =>{
+            this.resetColorZeroValues();
+          });
+
+          this.addCrossplyFormGroup.controls['colorNinetyColorId'].valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            tap((val) => console.log('Value change : ', val))
+          ).subscribe((data) =>{
+            this.resetColorNinetyValues();
+          });
+
+          this.addCrossplyFormGroup.controls['colorNinetyWidthId'].valueChanges.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            tap((val) => console.log('Value change : ', val))
+          ).subscribe((data) =>{
+            this.resetColorNinetyValues();
+          });
   }
 
   //#region  "Methods"
   onSubmit(e:any) {
     console.log('Submitting here as well on submit', typeof(e));
     console.log(this.addCrossplyFormGroup.value);
-   // this.validateForm();          
+    this.validateForm();          
+  }
+
+
+  resetColorZeroRollNumber(){    
+    this.addCrossplyFormGroup.controls['colorZeroRollNumber'].patchValue(null);  
+  }
+  resetColorNinetyRollNumber(){
+    this.addCrossplyFormGroup.controls['colorNinetyRollNumber'].patchValue(null);
   }
 
   validateForm(){
     const errormsg:string[] = [];
-    var item:any = this.addCrossplyFormGroup.value;
-    if ((item.crossplyLocationId == null) || (item.crossplyLocationId == 0)){
-      errormsg.push("Crossply Location is required")
-    }
-    if ((item.crossplyColorId == null) || (item.crossplyColorId == 0)){
-      errormsg.push("Crossply Color is required")
-    }
-    if ((item.crossplyWidthId == null) || (item.crossplyWidthId == 0)){
-      errormsg.push("Crossply Color is required")
-    }
-    if (item.crossplyLength == 0){
-      errormsg.push('Crossply Length should be greater than zero');
-    }
-    if ((item.colorZeroColorId == null) || (item.colorZeroColorId == 0)){
-      errormsg.push('Color #0 Color is required')
-    }
-    if ((item.colorZeroWidthId == null) || (item.colorZeroWidthId == 0)){
-      errormsg.push('Color #0 Width is required')
-    }
-    if ((item.colorZeroRollNumber == null) || (item.colorZeroRollNumber == 0)){
-      errormsg.push('Color #0 RollNumber is required')
-    }
-    if ((item.colorNinetyColorId == null) || (item.colorNinetyColorId == 0)){
-      errormsg.push('Color #90 Color is required')
-    }
-    if ((item.colorNinetyWidthId == null) || (item.colorNinetyWidthId == 0)){
-      errormsg.push('Color #90 Width is required')
-    }
-    if ((item.colorNinetyRollNumber == null) || (item.colorNinetyRollNumber == 0)){
-      errormsg.push('Color #90 RollNumber is required')
-    }
-   
+    const item:any = this.addCrossplyFormGroup.value;  
+      const colorZeroWidth:string = this.colorZeroSelectWidth._elementRef.nativeElement.innerText; 
+        const crossplyWidth:string = this.crossplySelectWidth._elementRef.nativeElement.innerText;
+        if (+(colorZeroWidth) < +(crossplyWidth)) {
+          errormsg.push('Color #0  width should be greater than or equal to Crossply Width')
+        }
     if (errormsg.length == 0)
     {
       this.formContainsValidationError = false;
@@ -151,10 +218,13 @@ export class AddCrossplyComponent implements OnInit {
     
         dialogRef.afterClosed().subscribe(result => {
           if (result.data !=null){
+           
             if (controlName == 'colorNinetyRollNumber'){
+              this.colorNinetyValueFetched = true;
               this.addCrossplyFormGroup.controls['colorNinetyRollNumber'].patchValue(result.data.id);
             }
             if (controlName == 'colorZeroRollNumber'){
+              this.colorZeroValueFetched = true;
               this.addCrossplyFormGroup.controls['colorZeroRollNumber'].patchValue(result.data.id);
             }                  
           }             
@@ -202,3 +272,52 @@ export class AddCrossplyComponent implements OnInit {
   
   }
 }
+
+
+
+
+
+
+// validateForm(){
+//   const errormsg:string[] = [];
+//   var item:any = this.addCrossplyFormGroup.value;
+//   if ((item.crossplyLocationId == null) || (item.crossplyLocationId == 0)){
+//     errormsg.push("Crossply Location is required")
+//   }
+//   if ((item.crossplyColorId == null) || (item.crossplyColorId == 0)){
+//     errormsg.push("Crossply Color is required")
+//   }
+//   if ((item.crossplyWidthId == null) || (item.crossplyWidthId == 0)){
+//     errormsg.push("Crossply Color is required")
+//   }
+//   if (item.crossplyLength == 0){
+//     errormsg.push('Crossply Length should be greater than zero');
+//   }
+//   if ((item.colorZeroColorId == null) || (item.colorZeroColorId == 0)){
+//     errormsg.push('Color #0 Color is required')
+//   }
+//   if ((item.colorZeroWidthId == null) || (item.colorZeroWidthId == 0)){
+//     errormsg.push('Color #0 Width is required')
+//   }
+//   if ((item.colorZeroRollNumber == null) || (item.colorZeroRollNumber == 0)){
+//     errormsg.push('Color #0 RollNumber is required')
+//   }
+//   if ((item.colorNinetyColorId == null) || (item.colorNinetyColorId == 0)){
+//     errormsg.push('Color #90 Color is required')
+//   }
+//   if ((item.colorNinetyWidthId == null) || (item.colorNinetyWidthId == 0)){
+//     errormsg.push('Color #90 Width is required')
+//   }
+//   if ((item.colorNinetyRollNumber == null) || (item.colorNinetyRollNumber == 0)){
+//     errormsg.push('Color #90 RollNumber is required')
+//   }
+ 
+//   if (errormsg.length == 0)
+//   {
+//     this.formContainsValidationError = false;
+//     this.errorMessageList = [];
+//   } else {
+//     this.formContainsValidationError = true;
+//     this.errorMessageList = errormsg;              
+//   }
+// }

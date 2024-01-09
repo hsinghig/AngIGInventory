@@ -8,7 +8,7 @@ import { APP_CONSTANTS_NEW } from "src/app/app.contants";
 export class AppConstantsService {
     
     getURLForString(urlname: string) : string{
-        var result:string | undefined;
+        let result:string | undefined;
         result = APP_CONSTANTS_NEW.find(x => x.url_name == urlname)?.url_value;
         if (result){
             return result;

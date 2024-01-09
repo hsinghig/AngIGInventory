@@ -35,7 +35,7 @@ export class CrossplyService{
     }
 
     getExtruderRollNumber(colorId:any, widthId:any): Observable<any[]>{
-      var url = this.URL_GET_EXTRUDER_ROLLNUMBER + '?ColorId=' + colorId + '&WidthId=' + widthId;
+      const url = this.URL_GET_EXTRUDER_ROLLNUMBER + '?ColorId=' + colorId + '&WidthId=' + widthId;
       return this.http.get<any>(url).pipe(
         map(res => res.data)
       );

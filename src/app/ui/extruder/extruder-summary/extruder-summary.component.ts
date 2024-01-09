@@ -49,7 +49,7 @@ export class ExtruderSummaryComponent implements OnInit {
   }
 
   changeColor(){
-    var colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
+    const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
     this.headerColor = this.colorList[colorRandomIndex];
   }
 

@@ -67,16 +67,16 @@ export class AddExtruderComponent implements OnInit {
 
   checkFormValid(): ExtruderValidFormModel {
    
-    var locationIdValue = this.addExtruderFormGroup.controls['locationId'].value;
-    var colorIdValue = this.addExtruderFormGroup.controls['colorId'].value;
-    var widthIdValue = this.addExtruderFormGroup.controls['widthId'].value;
-    var createdByIdValue = this.addExtruderFormGroup.controls['createdById'].value;
-    var weightValue = this.addExtruderFormGroup.controls['weight'].value;
-    var lengthValue = this.addExtruderFormGroup.controls['length'].value;
-    var rollNumberValue = this.addExtruderFormGroup.controls['rollNumber'].value;
-    var commentValue = this.addExtruderFormGroup.controls['comment'].value;
+    const locationIdValue = this.addExtruderFormGroup.controls['locationId'].value;
+    const colorIdValue = this.addExtruderFormGroup.controls['colorId'].value;
+    const widthIdValue = this.addExtruderFormGroup.controls['widthId'].value;
+    const createdByIdValue = this.addExtruderFormGroup.controls['createdById'].value;
+    const weightValue = this.addExtruderFormGroup.controls['weight'].value;
+    const lengthValue = this.addExtruderFormGroup.controls['length'].value;
+    const rollNumberValue = this.addExtruderFormGroup.controls['rollNumber'].value;
+    const commentValue = this.addExtruderFormGroup.controls['comment'].value;
 
-    var item: ExtruderInsertModel = {
+    const item: ExtruderInsertModel = {
       locationId: locationIdValue == null ? 0: locationIdValue,        
       colorId: colorIdValue == null ? 0: colorIdValue,       
       widthId: widthIdValue == null ? 0 : widthIdValue,
@@ -87,7 +87,7 @@ export class AddExtruderComponent implements OnInit {
       rollNumber: rollNumberValue == null ? '': rollNumberValue 
     };  
 
-    var insertModel: ExtruderValidFormModel = {
+    const insertModel: ExtruderValidFormModel = {
       extruderInsertModel: item,
       isValidForm: false
     }
@@ -108,7 +108,7 @@ export class AddExtruderComponent implements OnInit {
   }
   onSubmit() {
     this.showError = false;
-    var data = this.checkFormValid();
+    const data = this.checkFormValid();
     if (data.isValidForm) {
       try {
         this.extruderService.insertExtruder(data.extruderInsertModel).subscribe(x => {
