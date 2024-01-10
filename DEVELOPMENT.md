@@ -31,3 +31,7 @@ color Gradient generator
   https://mycolor.space/?hex=%233C4A3F&sub=1
 
   patch values reactive forms : https://javascript.plainenglish.io/6-different-ways-to-set-values-for-reactive-forms-a0686f3dca0a
+
+  Create multiple form array controls
+  https://www.youtube.com/watch?v=DEuTcG8DxUI
+  

@@ -83,6 +83,10 @@ export class AddCrossplyComponent implements OnInit {
   }
 
   resetValues(){
+    if (this.formContainsValidationError){
+    this.formContainsValidationError = false;
+    this.errorMessageList = [];
+    }   
    this.resetColorZeroValues();
    this.resetColorNinetyValues();
   }
@@ -90,14 +94,14 @@ export class AddCrossplyComponent implements OnInit {
   resetColorZeroValues(){
     if(this.colorZeroValueFetched){
       this.colorZeroValueFetched = false;
-      this.resetColorZeroRollNumber();
+      this.resetCtrlToNone('colorZeroRollNumber');
     }
   }
 
   resetColorNinetyValues(){
     if (this.colorNinetyValueFetched){
       this.colorNinetyValueFetched = false;
-      this.resetColorNinetyRollNumber();
+      this.resetCtrlToNone('colorNinetyRollNumber');
     }
   }
 
@@ -169,8 +173,16 @@ export class AddCrossplyComponent implements OnInit {
     this.validateForm();          
   }
 
+  resetFormValidationError(){
+    if (this.formContainsValidationError){
+      this.formContainsValidationError = false;
+      this.errorMessageList = [];
+      }
+  }
 
-  resetColorZeroRollNumber(){    
+  resetCtrlToNone(controlName:string){  
+    this.addCrossplyFormGroup.get(controlName)?.patchValue(null); 
+    
     this.addCrossplyFormGroup.controls['colorZeroRollNumber'].patchValue(null);  
   }
   resetColorNinetyRollNumber(){
@@ -178,13 +190,24 @@ export class AddCrossplyComponent implements OnInit {
   }
 
   validateForm(){
-    const errormsg:string[] = [];
-    const item:any = this.addCrossplyFormGroup.value;  
-      const colorZeroWidth:string = this.colorZeroSelectWidth._elementRef.nativeElement.innerText; 
-        const crossplyWidth:string = this.crossplySelectWidth._elementRef.nativeElement.innerText;
-        if (+(colorZeroWidth) < +(crossplyWidth)) {
-          errormsg.push('Color #0  width should be greater than or equal to Crossply Width')
-        }
+    const errormsg:string[] = [];    
+    const colorZeroWidth:string = this.colorZeroSelectWidth._elementRef.nativeElement.innerText; 
+    const crossplyWidth:string = this.crossplySelectWidth._elementRef.nativeElement.innerText;
+    if (+(colorZeroWidth) < +(crossplyWidth)) {
+       errormsg.push('Color #0  width should be greater than or equal to Crossply Width')
+     }
+
+     const colorZeroRollNumber = this.addCrossplyFormGroup.controls['colorZeroRollNumber'].value;
+     const colorNinetyRollNumber = this.addCrossplyFormGroup.controls['colorNinetyRollNumber'].value;
+     if ((colorZeroRollNumber == null) || (colorNinetyRollNumber == null)){
+        errormsg.push('Color #0 Selected Roll Number and Color #90 Selected Roll Number is required to submit the form');
+     } else {
+        if (colorZeroRollNumber == colorNinetyRollNumber){
+       errormsg.push('Color #0 Selected Roll Number cannot be same as Color #90 Selected Roll Number');
+     }
+     }
+
+    
     if (errormsg.length == 0)
     {
       this.formContainsValidationError = false;
@@ -200,6 +223,7 @@ export class AddCrossplyComponent implements OnInit {
   }
 
   fetchRollNumberColorZero(){
+    this.resetFormValidationError();
     const colorId:number = this.addCrossplyFormGroup.controls['colorZeroColorId'].value ?? 0;
     const widthId:number = this.addCrossplyFormGroup.controls['colorZeroWidthId'].value ?? 0;
     const colorname:string = this.colorZeroSelectColor._elementRef.nativeElement.innerText; 
@@ -208,6 +232,7 @@ export class AddCrossplyComponent implements OnInit {
   }
 
   fetchRollNumberColorNinety(){
+    this.resetFormValidationError();
     const colorId:number = this.addCrossplyFormGroup.controls['colorNinetyColorId'].value ?? 0;
     const widthId:number = this.addCrossplyFormGroup.controls['colorNinetyWidthId'].value ?? 0;
     const colorname:string = this.colorNinetySelectColor._elementRef.nativeElement.innerText; 
