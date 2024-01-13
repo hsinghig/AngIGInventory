@@ -1,0 +1,28 @@
+<div class="add-lamination">
+  <form (ngSubmit)="onSubmit()" 
+  autocomplete="off"  [formGroup]="addLaminationFormGroup">
+      <mat-form-field class="example-full-width">
+          <mat-label>Favorite food</mat-label>
+          <input formControlName="title" matInput placeholder="Ex. Pizza" value="Sushi">
+        </mat-form-field>
+        <div class="child-component">
+          <button type="button" (click)="addAddress()">Add Address</button>
+          <ng-container formArrayName="contacts">
+              <div *ngFor="let item of contactList.controls; let i=index" [formGroupName]="i">
+                  <mat-label>Address {{i}}</mat-label>
+                  <mat-form-field class="example-full-width">
+                      <mat-label>Name</mat-label>
+                      <input formControlName="name" matInput placeholder="Ex. Pizza" value="Sushi">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Email</mat-label>
+                      <input formControlName="email" matInput placeholder="Ex. Pizza" value="Sushi">
+                    </mat-form-field>
+                    <button type="button" (click)="removeAddress(i)">Remove Address</button>
+              </div>
+          </ng-container>
+       </div>
+      <button type="submit" mat-raised-button color="warn">Submit Form</button>
+      <button type="button" mat-raised-button color="accemt" (click)="clearForm()">Clear Form</button>
+  </form>
+</div>
