@@ -1,2 +1,19 @@
-<p>Lamination home works!</p>
-<router-outlet></router-outlet>
+<div>
+    <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header>
+    <div *ngIf="showTable$">  
+      <div class="tableDisplay">
+        <mat-button-toggle-group class="button-container" (change)="changeView($event)">
+          <mat-button-toggle value="menu"><mat-icon>menu</mat-icon> List</mat-button-toggle>
+          <mat-button-toggle value="detail"> <mat-icon>filter_list</mat-icon>
+            Condensed</mat-button-toggle>
+        </mat-button-toggle-group>
+        <div *ngIf="showDetail">
+          <app-display-lamination></app-display-lamination>
+        </div>
+        <div *ngIf="showMenu">
+          <app-lamination-detail-expand></app-lamination-detail-expand>
+        </div>
+      </div>  
+    </div>
+    <router-outlet></router-outlet>
+  </div>

@@ -33,3 +33,14 @@ export interface ExtruderDataModel {
     modifiedById: number;
   }
   
+  export interface ExtruderDownloadModel {
+    extruderId:number;
+    locationName: string;
+    colorName: string;
+    widthName: string;
+    length: number;
+    weight: number;
+    rollNumber: string;
+    createdDate: string;
+    createdBy:string;
+  }

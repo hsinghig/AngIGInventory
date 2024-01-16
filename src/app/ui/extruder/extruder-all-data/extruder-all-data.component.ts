@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ExtruderModel } from 'src/app/shared/model/extruder.model';
+import { Router } from '@angular/router';
+import { ExtruderDownloadModel, ExtruderModel } from 'src/app/shared/model/extruder.model';
+import { DownloadService } from 'src/app/shared/service/downloadService';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
 
 @Component({
@@ -18,7 +20,9 @@ export class ExtruderAllDataComponent implements AfterViewInit{
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   @ViewChild('extruderTblSortWithObject') extruderTblSortWithObject = new MatSort();
-  constructor(private extruderService: ExtruderService ) {     
+  constructor(private extruderService: ExtruderService, 
+    private downloadService:DownloadService, 
+    private router:Router) {     
    
   }
 
@@ -74,6 +78,41 @@ export class ExtruderAllDataComponent implements AfterViewInit{
     return columnValue;
   }
 
+  
+  downloadExtruderFile(){
+    this.extruderService.getExtruderData().subscribe(data => {
+      var dataToPass:ExtruderDownloadModel[] = this.convertDataToExtruderDownloadModel(data);
+      const headersToParse: string[] = ['extruderId', 'locationName', 'colorName', 'widthName', 
+     'length', 'weight', 'rollNumber', 'createdDate', 'createdBy'];
+      const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber', 'Created Date', 'Created By'];
+    
+      this.downloadService.downloadFile(dataToPass, 'extruderData', headersToShow, headersToParse);
+    })
+  }
+
+  convertDataToExtruderDownloadModel(data: any[]): ExtruderDownloadModel[]{
+    const itemList: ExtruderDownloadModel[] = [];
+    data.forEach(x => {
+      var model:ExtruderDownloadModel = {
+        extruderId: x.extruderDetail.id,
+        locationName: x.extruderDetail.name,
+        colorName: x.extruderDetail.colorname,
+        widthName: x.extruderDetail.widthname,
+        length : x.extruderDetail.length,
+        weight: x.extruderDetail.weight,
+        rollNumber: x.extruderDetail.rollnumber,
+        createdDate: x.createdDateDisplayDateEST,
+        createdBy: x.extruderDetail.firstname + " " + x.extruderDetail.lastname
+      }
+      itemList.push(model);
+    });
+    console.log('print item list : ', itemList);
+    return itemList;
+  }
+
+  takeMeToAdd(){    
+    this.router.navigateByUrl('/extruder/add');
+  }
 
   changeColor(){
     const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
