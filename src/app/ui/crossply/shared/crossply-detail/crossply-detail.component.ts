@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { crossplySummaryModel } from 'src/app/shared/model/crossply.model';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
+import { DownloadService } from 'src/app/shared/service/downloadService';
 
 @Component({
   selector: 'app-crossply-detail',
@@ -30,6 +31,7 @@ export class CrossplyDetailComponent implements OnInit{
   expandedElement: crossplySummaryModel | null | undefined;
   
   constructor(private crossplyService: CrossplyService, 
+    private downloadService: DownloadService,
     private router: Router){}
 
   ngOnInit(): void {
@@ -39,6 +41,16 @@ export class CrossplyDetailComponent implements OnInit{
     })
   }
 
+  downloadCrossplyFile(){
+    this.crossplyService.getCrossplyAllData().subscribe(data => {
+      data.forEach(x => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
+    const headersToParse: string[] = ['crossplyId', 'crossplyLocation', 'crossplyColor', 'crossplyWidth', 
+     'crossplyLength', 'crossplyWeight', 'crossplyRollNumber', 'crossplyCreatedDate', 'crossplyFullName'];
+      const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber',
+       'Created Date', 'Created By'];      
+      this.downloadService.downloadFile(data, 'crossplyData', headersToShow, headersToParse);
+    });
+  }
   takeMeToAdd(){
     console.log('in button click of add /crossply/add');
     this.router.navigateByUrl('/crossply/add');

@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { crossplyModel } from 'src/app/shared/model/crossply.model';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
+import { DownloadService } from 'src/app/shared/service/downloadService';
 
 @Component({
   selector: 'app-display-crossply',
@@ -24,6 +25,7 @@ export class DisplayCrossplyComponent implements AfterViewInit{
   @ViewChild('crossplyTblSort') crossplyTblSort = new MatSort();
 
   constructor(private crossplyService: CrossplyService, 
+    private downloadService:DownloadService,
     private router:Router){}
 
   ngAfterViewInit():void {
@@ -80,6 +82,19 @@ export class DisplayCrossplyComponent implements AfterViewInit{
       return columnValue;
     }
 
+    downloadCrossplyFile(){
+      this.crossplyService.getCrossplyAllData().subscribe(data => {
+        data.forEach(x => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
+      const headersToParse: string[] = ['crossplyId', 'crossplyLocation', 'crossplyColor', 'crossplyWidth', 
+       'crossplyLength', 'crossplyWeight', 'crossplyRollNumber', 'crossplyCreatedDate', 'crossplyFullName'];
+        const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber',
+         'Created Date', 'Created By'];      
+        this.downloadService.downloadFile(data, 'crossplyData', headersToShow, headersToParse);
+      });
+    }
+  
+  
+
     takeMeToAdd(){
       console.log('in button click of add /crossply/add');
       this.router.navigateByUrl('/crossply/add');
@@ -89,6 +104,8 @@ export class DisplayCrossplyComponent implements AfterViewInit{
       const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
       this.headerColor = this.colorList[colorRandomIndex];
     }
+
+
   
     baseRandom(lower:number, upper:number) {
       return lower + Math.floor(Math.random() * (upper - lower + 1));

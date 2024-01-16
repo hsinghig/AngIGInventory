@@ -8,8 +8,7 @@ import { APP_CONSTANTS_NEW } from "src/app/app.contants";
 export class DownloadService {
 
     downloadFile(data:any[], filename='data', headerDisplay: string[], headersToParse: string[]){
-        let csvData = this.convertToCSV(data, headerDisplay, headersToParse);
-        console.log('parsed data : ', csvData);
+        let csvData = this.convertToCSV(data, headerDisplay, headersToParse);       
         let blob = new Blob(['\ufeff' + csvData], {type: 'text/csv;charset=utf-8;'});
         let downloadLink = document.createElement("a");
         let url = URL.createObjectURL(blob);

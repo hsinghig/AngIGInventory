@@ -76,3 +76,4 @@ export interface crossplySummaryModel {
     crossply: crossplyModel;
     crossplyDetailList: crossplyDetailModel[];
 }
+
