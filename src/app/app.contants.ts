@@ -36,13 +36,15 @@ export const LAMINATION_CONSTANTS = [
     { 'url_name': 'URL_GET_LAMINATION_DETAIL_DATA', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations/GetLaminationDetailData'},
     { 'url_name': 'URL_GET_LAMINATION_BY_ID', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations/GetLaminationsById?laminationId='},
     { 'url_name': 'URL_GET_LAMINATION_BY_REFNUMBER', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations/GetLaminationsByRefNumber?referenceNumber='},
-    { 'url_name': 'URL_POST_LAMINATION_INSERT', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations'}
+    { 'url_name': 'URL_POST_LAMINATION_INSERT', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations'},
+    { 'url_name': 'URL_GET_LAMINATION_SUMMARY_DATA', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Laminations/GetLaminationSummaryData'}
 ];
 
 export const APP_CONSTANTS_NEW = [
     ...GENERIC_CONSTANTS,
     ...EXTRUDER_CONSTANTS,
-    ...CROSSPLY_CONSTANTS
+    ...CROSSPLY_CONSTANTS,
+    ...LAMINATION_CONSTANTS
 ]
 
 //https://apiiginventory.azurewebsites.net/api/Crossplys/:crossplyId?crossplyId=2

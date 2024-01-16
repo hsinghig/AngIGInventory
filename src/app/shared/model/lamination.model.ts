@@ -78,3 +78,8 @@ export interface laminationInsertModel {
     createdById: number;
     laminationDetailList: laminationDetailInsertModel[];
 }
+
+export interface laminationSummaryModel {
+    lamination: laminationModel;
+    laminationDetailList: laminationDetailModel[];
+}

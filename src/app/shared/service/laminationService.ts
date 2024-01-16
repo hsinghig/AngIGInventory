@@ -17,8 +17,7 @@ export class LaminationService{
   URL_GET_LAMINATION_BY_ID=this.appConstantsService.getURLForString('URL_GET_LAMINATION_BY_ID');
   URL_GET_LAMINATION_BY_REFNUMBER=this.appConstantsService.getURLForString('URL_GET_LAMINATION_BY_REFNUMBER');
   URL_POST_LAMINATION_INSERT=this.appConstantsService.getURLForString('URL_POST_LAMINATION_INSERT');
-
-  URL_GET_CROSSPLY_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_CROSSPLY_SUMMARY_DATA');
+  URL_GET_LAMINATION_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_LAMINATION_SUMMARY_DATA');
 
   URL_GET_ALL_WIDTHS = this.appConstantsService.getURLForString('URL_GET_ALL_WIDTHS');
   URL_GET_USERS_ALL_USERS = this.appConstantsService.getURLForString('URL_GET_USERS_ALL_USERS');
@@ -53,7 +52,7 @@ export class LaminationService{
 
     getLaminationAllData():Observable<any[]>{
       return this.http.get<any[]>(this.URL_GET_LAMINATION_ALL_DATA).pipe(map((res:any) => res.data), 
-      catchError(this.handleError))
+      catchError(this.handleError));      
     }
 
     getLaminationDetailData():Observable<any[]>{
@@ -68,8 +67,8 @@ export class LaminationService{
       catchError(this.handleError))
     }
 
-    getCrossplySummaryData():Observable<any[]>{
-      return this.http.get<any[]>(this.URL_GET_CROSSPLY_SUMMARY_DATA).pipe(map((res:any) => res.data), 
+    getLaminationSummaryData():Observable<any[]>{
+      return this.http.get<any[]>(this.URL_GET_LAMINATION_SUMMARY_DATA).pipe(map((res:any) => res.data), 
       catchError(this.handleError))
     }
 

@@ -1,1 +1,75 @@
-<p>displaylamination works!</p>
+<div class="extruder-summary-container">
+    <div class="extruder-summary-header">
+        <h1 class="extruder-summary-header-text">Lamination Data</h1>
+        <div class="extruder-summary-button-container">
+            <button mat-mini-fab color="primary" aria-label="Add Extruder">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">
+                <mat-icon>settings</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" (click)="downloadLaminationFile()" aria-label="Download(CSV)">
+                <mat-icon>download</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div>
+        <table matSort #laminationTblSort="matSort" mat-table [dataSource]="dataSourceData" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="laminationId">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationLocationName">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationLocationName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationColorName">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Color </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationColorName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationLength">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Length </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationLength}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationWeight">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationWeight}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="referenceNumber">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Reference Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.referenceNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationFullName">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Created By </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationFullName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="laminationCreatedDate">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Created Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.laminationCreatedDate| date: 'YYYY-MM-dd hh:mm a': 'EDT' }} </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </div>
+</div>
