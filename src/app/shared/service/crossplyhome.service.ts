@@ -4,14 +4,14 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class ExtruderHomeService {
+export class CrossplyHomeService {
     private profileObs$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    getShowExtruderHomeObs(): Observable<boolean> {
+    getShowCrossplyHomeObs(): Observable<boolean> {
         return this.profileObs$.asObservable();
     }
 
-    setShowExtruderHomeObs(showTable: boolean) {
+    setShowCrossplyHomeObs(showTable: boolean) {
         this.profileObs$.next(showTable);
     }
 }

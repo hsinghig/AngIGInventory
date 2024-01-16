@@ -1,0 +1,88 @@
+<div class="extruder-summary-container">
+    <div class="extruder-summary-header">
+        <h1 class="extruder-summary-header-text">Crossply Data</h1>
+        <div class="extruder-summary-button-container">
+            <button mat-mini-fab color="primary" aria-label="Add Extruder">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">
+                <mat-icon>settings</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" aria-label="Download(CSV)">
+                <mat-icon>download</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div>
+        <table matSort #crossplyTblSort="matSort" mat-table [dataSource]="dataSourceData" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="crossplyId">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyLocation">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyLocation}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyColor">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Color </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyColor}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyWidth">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Width </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyWidth}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyLength">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Length </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyLength}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyWeight">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyWeight}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="crossplyRollNumber">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Roll Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyRollNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyFullName">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Created By </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyFullName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="crossplyCreatedDate">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> Created Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossplyCreatedDate}} </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="crossplyComment">
+                <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                    [style.background-color]="headerColor"> comment </th>
+                <td class="myoverflow" [matTooltip]="element.crossplyComment" mat-cell *matCellDef="let element">
+                    {{element.crossplyComment}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </div>
+</div>

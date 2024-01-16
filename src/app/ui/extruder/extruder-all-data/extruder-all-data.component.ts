@@ -23,7 +23,9 @@ export class ExtruderAllDataComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.extruderService.getExtruderData().subscribe(data => {     
+    this.extruderService.getExtruderData().subscribe(data => {  
+      data.forEach(x => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
+      
       this.dataSource = new MatTableDataSource(data);
       this.setSortAccessors();
     });

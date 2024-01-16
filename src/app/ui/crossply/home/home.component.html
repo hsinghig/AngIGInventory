@@ -1,6 +1,19 @@
 <div>
     <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header>
-    <div *ngIf="showTable$">     
+    <div *ngIf="showTable$">  
+      <div class="tableDisplay">
+        <mat-button-toggle-group class="button-container" (change)="changeView($event)">
+          <mat-button-toggle value="menu"><mat-icon>menu</mat-icon> List</mat-button-toggle>
+          <mat-button-toggle value="detail"> <mat-icon>filter_list</mat-icon>
+            Condensed</mat-button-toggle>
+        </mat-button-toggle-group>
+        <div *ngIf="showDetail">
+          <app-display-crossply></app-display-crossply>
+        </div>
+        <div *ngIf="showMenu">
+          <app-crossply-detail></app-crossply-detail>
+        </div>
+      </div>  
     </div>
     <router-outlet></router-outlet>
   </div>

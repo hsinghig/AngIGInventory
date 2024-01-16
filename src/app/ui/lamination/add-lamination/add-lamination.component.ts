@@ -96,8 +96,8 @@ export class AddLaminationComponent implements OnInit {
     });
   }
   clearForm() {
-    let frmArray = this.addLaminationFormGroup.get('extruderList') as FormArray;
-    frmArray.clear();
+    // let frmArray = this.addLaminationFormGroup.get('extruderList') as FormArray;
+    // frmArray.clear();
     this.addLaminationFormGroup.reset();
   }
 
@@ -113,14 +113,14 @@ export class AddLaminationComponent implements OnInit {
     }
   }
 
-  removeExtruder(position: number) {
-    console.log('remove extruder', position);
-    this.extruderList.removeAt(position);
+  removeExtruder() {
+    console.log('remove extruder', 0);
+    this.extruderList.removeAt(0);
   }
 
-  removeCrossply(position: number) {
-    console.log('remove crossply', position);
-    this.crossplyList.removeAt(position);  
+  removeCrossply() {
+    console.log('remove crossply', 0);
+    this.crossplyList.removeAt(0);  
   }
 
   onSubmit() {

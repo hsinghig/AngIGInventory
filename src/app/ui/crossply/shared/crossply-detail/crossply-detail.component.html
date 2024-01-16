@@ -1,0 +1,85 @@
+<div class="extruder-summary-container">
+  <div class="extruder-summary-header">
+    <h1 class="extruder-summary-header-text">Crossply Data</h1>
+    <div class="extruder-summary-button-container">
+      <button mat-mini-fab color="primary" (click)="takeMeToAdd()" aria-label="Add Extruder">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" aria-label="Download(CSV)">
+        <mat-icon>download</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+      <ng-container matColumnDef="crossplyId">
+        <th class="extruder-col-headerStyle"  mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyLocation">
+        <th class="extruder-col-headerStyle"  mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Location </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyLocation}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyColor">
+        <th  class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Color </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyColor}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyWidth">
+        <th  class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Width </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyWidth}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyLength">
+        <th class="extruder-col-headerStyle"  mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Length </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyLength}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyWeight">
+        <th  class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyWeight}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="crossplyCreatedDate">
+        <th  class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef  [style.background-color]="headerColor"> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.crossply.crossplyCreatedDate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">&nbsp;
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button aria-label="expand row"
+            (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+            @if (expandedElement === element) {
+            <mat-icon>keyboard_arrow_up</mat-icon>
+            } @else {
+            <mat-icon>keyboard_arrow_down</mat-icon>
+            }
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <app-crossply-detail-expand [dataSource]=element.crossplyDetailList></app-crossply-detail-expand>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+  </div>
+</div>

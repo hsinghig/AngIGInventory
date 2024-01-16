@@ -29,7 +29,8 @@ export class ExtruderSummaryComponent implements OnInit {
   expandedElement: ExtruderSummary | null | undefined;
   
 
-  constructor(private extruderService: ExtruderService, private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute, 
+  constructor(private extruderService: ExtruderService, 
+    private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute, 
     private extruderHomeService: ExtruderHomeService ) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);

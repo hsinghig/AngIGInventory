@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { crossplyModel, crossplySummaryModel } from 'src/app/shared/model/crossply.model';
+import { CrossplyService } from 'src/app/shared/service/crossplyService';
+import { CrossplyHomeService } from 'src/app/shared/service/crossplyhome.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
 @Component({
@@ -7,14 +11,56 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  showTable$: boolean = false;
+export class HomeComponent  implements OnInit{  
+  public showMenu:boolean = false;
+  public showDetail: boolean = true;
   public headerStyle='pageHeadercrossPlyStyle';
   public headerText= 'Crossply Home Page';
-  constructor(private sharedNavService: SharedNavService, private activatedRoute: ActivatedRoute) {  
+  public showTable$ = true;
+  public data:crossplySummaryModel[] = [];
+
+  constructor(private sharedNavService: SharedNavService,
+    private crossplyService: CrossplyService, private router: Router,
+    private crossplyHomeService: CrossplyHomeService,
+     private activatedRoute: ActivatedRoute) {  
     console.log('In crossply Home');
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+          switch(event.url){
+            case '/crossply':
+              this.crossplyHomeService.setShowCrossplyHomeObs(true);
+              break;
+            case '/crossply/add':
+              this.crossplyHomeService.setShowCrossplyHomeObs(false);
+              break;
+            case '/crossply/reports':
+              this.crossplyHomeService.setShowCrossplyHomeObs(false);
+          }
+      }
+    });
+  }
+  ngOnInit(): void {
+    this.crossplyHomeService.getShowCrossplyHomeObs().subscribe(data => this.showTable$ = data);
+  
+    this.crossplyService.getCrossplySummaryData().subscribe(x => {
+      console.log('Data Fetched :', x);
+      this.data = x;
+    })
+  }
+  changeView(data: MatButtonToggleChange){
+    const passedValue = data.value;
+    switch(passedValue){
+      case 'menu':
+        this.showDetail = true; 
+        this.showMenu = false;
+        break;
+      case 'detail':
+        this.showDetail = false; 
+        this.showMenu = true;
+        break;
+    }
   }
 }

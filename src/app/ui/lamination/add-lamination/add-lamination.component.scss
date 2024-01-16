@@ -9,7 +9,7 @@
     max-width: 800px;
     width: 800px;
     min-width:500px;
-    border: solid 1px red;
+    background-color:#e3f3e3;
 }
 .lamination-container {
     display: flex;
@@ -26,58 +26,55 @@
 }
 .add-extruder-crossply-buttons{
     display: flex;
-    width: 100%;
-    border: solid 2px gray;
+    width: 100%;  
     justify-content: space-around;    
     padding-top: 1rem;
     padding-bottom: 1rem;
+    background-color: #F3E3F3;
 }
-.child-container-extruder {
-    border: solid 1px gray;
+.child-container-extruder {   
     background-color: lightcyan;
 }
-.child-container-crossply{
-    border: solid 1px gray;
+.child-container-crossply{   
     background-color: lightpink;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 .child-item{
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;   
+}
+.child-item-extruder {
+    background-color: #006a6a;
+    color: #fff;
+}
+.child-item-crossply {
+    background-color: #EAFFFF;
+   
 }
 .child-container-header {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    padding-left:1rem;    
-    border-bottom: solid 1px gray;
+    padding-top:0.4rem;   
+    padding-left:1rem;   
 }
 .child-container-detail{
     display: flex;
-    flex-wrap: nowrap;
-    justify-content:space-around;  
+    flex-wrap: nowrap;     
     margin-top:1rem;  
-    border-bottom: solid 1px gray;
+    justify-content: space-around;    
 }
-.child-container-detail > .crossply-field-small {   
-    max-width: 160px;    
+.crossply-field-small {   
+    width: 15%;       
 }
-// .child-container-detail>.mat-mdc-form-field{
-//     max-width: 160px;
-// }
+.crossply-field-medium{
+    width: 16%;
+}
 .child-container-detail > .add-crossply-btn{
     margin-top:0.8rem;
-}
-.child-container-detail > .extruder-roll-number{
-    max-width: 100px;
+    width: 15%;
 }
 
 
-.extruderList-container{
-    display: flex;
-    border: solid 1px red;
-}
 .error-container {
     margin-left: 1rem;
     margin-top: 1rem;    
