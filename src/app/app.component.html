@@ -2,5 +2,8 @@
 <div class="top">    
     <app-core-breadcrumb></app-core-breadcrumb>
 </div>
+<div *ngIf="showLoader$| async as showLoader">
+    <app-core-loader *ngIf="showLoader"></app-core-loader>
+</div>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

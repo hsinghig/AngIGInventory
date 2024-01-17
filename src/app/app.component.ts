@@ -1,32 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ExtruderService } from './shared/service/extruderService';
-import { EMPTY, Observable, catchError, tap } from 'rxjs';
-import { ColorModel } from './shared/model/colorModel';
-import { SharedNavService } from './shared/service/sharedNavService';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { LoaderService } from './shared/service/loader.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{ 
+export class AppComponent { 
   errorMessage = '';
-  extruderColorList$: Observable<ColorModel[]> | undefined;
-  constructor(private sharedNavService: SharedNavService, private extruderService: ExtruderService) {   
-    
-  }
-  ngOnInit(): void {   
-    //this.navigatedURL= this.sharedNavService.getMessage();
-    this.extruderColorList$ = this.extruderService.getExtruderColors().pipe(
-      tap(x => {
-        console.log('In component');
-        console.log(x);
-      }),
-      catchError(err => {
-        this.errorMessage = err;
-        return EMPTY;
-      })
-    )
-  }
- 
+  showLoader$ = this.loaderService.loadingAction$;  
+  constructor(private loaderService:LoaderService) {  } 
 }
+
+//extruderColorList$: Observable<ColorModel[]> | undefined;
+ //this.navigatedURL= this.sharedNavService.getMessage();
+    // this.extruderColorList$ = this.extruderService.getExtruderColors().pipe(
+    //   tap(x => {
+    //     console.log('In component');
+    //     console.log(x);
+    //   }),
+    //   catchError(err => {
+    //     this.errorMessage = err;
+    //     return EMPTY;
+    //   })
+    // )

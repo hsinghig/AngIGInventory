@@ -1,0 +1,10 @@
+.loader-container{  
+    position:fixed; 
+    top: 45vh;    
+    left:45vw;
+    z-index: 999;
+}
+.loader{
+    display: flex;
+    justify-content: center;    
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { LaminationHomeService } from 'src/app/shared/service/laminationhome.service';
+import { LoaderService } from 'src/app/shared/service/loader.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
 @Component({
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit{
   public headerColor: string = '#84A98C';
 
   constructor(private sharedNavService: SharedNavService,
-    private router:Router,
+    private router:Router,  
     private laminationHomeService: LaminationHomeService,
      private activatedRoute: ActivatedRoute) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  ngOnInit(){
+  ngOnInit(){    
     this.laminationHomeService.getShowLaminationHomeObs().subscribe(data => this.showTable$ = data);
   
   }

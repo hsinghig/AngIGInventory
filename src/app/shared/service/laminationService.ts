@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ColorModel } from "../model/colorModel";
 import { crossplyInsertModel } from "../model/crossplyInsertModel";
-import { Observable, catchError, map, tap, throwError } from "rxjs";
+import { Observable, catchError, delay, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { AppConstantsService } from "./appConstants.service";
 
@@ -51,7 +51,7 @@ export class LaminationService{
     }
 
     getLaminationAllData():Observable<any[]>{
-      return this.http.get<any[]>(this.URL_GET_LAMINATION_ALL_DATA).pipe(map((res:any) => res.data), 
+      return this.http.get<any[]>(this.URL_GET_LAMINATION_ALL_DATA).pipe(delay(1),map((res:any) => res.data), 
       catchError(this.handleError));      
     }
 

@@ -1,7 +1,7 @@
-import { AfterViewChecked, AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, ViewChild, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { crossplyModel } from 'src/app/shared/model/crossply.model';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
 import { DownloadService } from 'src/app/shared/service/downloadService';
@@ -11,9 +11,9 @@ import { DownloadService } from 'src/app/shared/service/downloadService';
   templateUrl: './display-crossply.component.html',
   styleUrl: './display-crossply.component.scss'
 })
-export class DisplayCrossplyComponent implements AfterViewInit{
+export class DisplayCrossplyComponent implements OnInit, AfterViewInit{
   @Input() headerColor = '#84A98C';
-  
+  myData: crossplyModel[] = [];
   dataSourceData: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns = ['crossplyId', 'crossplyLocation', 
   'crossplyColor', 'crossplyWidth', 
@@ -24,8 +24,13 @@ export class DisplayCrossplyComponent implements AfterViewInit{
   @ViewChild('crossplyTblSort') crossplyTblSort = new MatSort();
 
   constructor(private crossplyService: CrossplyService, 
+    private activatedRoute:ActivatedRoute,
     private downloadService:DownloadService,
     private router:Router){}
+
+  ngOnInit(): void {
+    
+  }
 
   ngAfterViewInit():void {
     this.crossplyService.getCrossplyAllData().subscribe(data => {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { laminationSummaryModel } from 'src/app/shared/model/lamination.model';
 import { DownloadService } from 'src/app/shared/service/downloadService';
 import { LaminationService } from 'src/app/shared/service/laminationService';
+import { LoaderService } from 'src/app/shared/service/loader.service';
 
 @Component({
   selector: 'app-lamination-detail',
@@ -30,11 +31,16 @@ export class LaminationdetailComponent implements OnInit{
   expandedElement: laminationSummaryModel | null | undefined;
 
   constructor(private laminationService:LaminationService, 
-    private downloadService: DownloadService,
-    private router: Router){}
+    private loaderService: LoaderService,  
+    private router: Router){
+      this.loaderService.showLoader();
+    }
 
   ngOnInit(){
+   // this.loaderService.showLoader();
     this.laminationService.getLaminationSummaryData().subscribe(x => {
+      console.log('fetched data now hide loader');
+      this.loaderService.hideLoader();
       x.forEach(data => {
         data.laminationFullName = data.lamination.laminationFirstName + ' ' + data.lamination.laminationLastName
       });     
