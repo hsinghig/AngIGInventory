@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -12,9 +12,7 @@ import { LaminationService } from 'src/app/shared/service/laminationService';
   styleUrl: './displaylamination.component.scss'
 })
 export class DisplaylaminationComponent implements AfterViewInit{
-  headerColor = '#84A98C';
-  colorList = ['#84A98C', '#3C4A3F', '#9EAFA2', '#6CABA8'];
-
+  @Input() headerColor = '#84A98C';
   dataSourceData: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns = ['laminationId', 'laminationLocationName',
     'laminationColorName', 'laminationLength',
@@ -77,34 +75,6 @@ export class DisplaylaminationComponent implements AfterViewInit{
         break;
     }
     return columnValue;
-  }
-
-  downloadLaminationFile() {
-    this.laminationService.getLaminationAllData().subscribe(data => {
-      for(const element of data){
-        element.laminationFullName = element.laminationFirstName + ' ' + element.laminationLastName;
-      }
-     
-      const headersToParse: string[] = ['laminationId', 'laminationLocationName', 'laminationColorName', 
-        'laminationLength', 'laminationWeight', 'referenceNumber', 'laminationCreatedDate', 'laminationFullName'];
-      const headersToShow: string[] = ['Id', 'Location', 'Color', 'Length', 'Weight', 'Reference Number',
-        'Created Date', 'Created By'];
-      this.downloadService.downloadFile(data, 'laminationData', headersToShow, headersToParse);
-    });
-  }
-
-
-
-  takeMeToAdd() {   
-    this.router.navigateByUrl('/lamination/add');
-  }
-
-  changeColor() {
-    const colorRandomIndex = this.baseRandom(0, this.colorList.length - 1);
-    this.headerColor = this.colorList[colorRandomIndex];
-  }
-  baseRandom(lower: number, upper: number) {
-    return lower + Math.floor(Math.random() * (upper - lower + 1));
   }
 }
 

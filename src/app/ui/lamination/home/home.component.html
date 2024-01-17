@@ -1,22 +1,13 @@
 <div>
-    <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header>
-    
- <app-banner-buttons [headerText]="headerText" [showButtons]="showTable$" [headerTypePassed]="headerTypePassed"
- (colorSelected)="OnColorSelected($event)" ></app-banner-buttons>
-    <div *ngIf="showTable$">  
-      <div class="tableDisplay">
-        <mat-button-toggle-group class="button-container" (change)="changeView($event)">
-          <mat-button-toggle value="menu"><mat-icon>menu</mat-icon> List</mat-button-toggle>
-          <mat-button-toggle value="detail"> <mat-icon>filter_list</mat-icon>
-            Condensed</mat-button-toggle>
-        </mat-button-toggle-group>
-        <div *ngIf="showDetail">
-          <app-display-lamination></app-display-lamination>
-        </div>
-        <div *ngIf="showMenu">
-          <app-lamination-detail></app-lamination-detail>
-        </div>
-      </div>  
+  <app-banner-buttons [headerText]="headerText" [showButtons]="showTable$" [headerTypePassed]="headerTypePassed"
+    (colorSelected)="OnColorSelected($event)" (buttonSelected)="onButtonToggleSelected($event)"></app-banner-buttons>
+  <div *ngIf="showTable$">
+    <div *ngIf="showDetail">
+      <app-display-lamination [headerColor]="headerColor"></app-display-lamination>
     </div>
-    <router-outlet></router-outlet>
+    <div *ngIf="showMenu">
+      <app-lamination-detail [headerColor]="headerColor"></app-lamination-detail>
+    </div>
   </div>
+  <router-outlet></router-outlet>
+</div>

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit{
   public headerText= 'Lamination Home Page';
   public showTable$ = true;
   public headerTypePassed:string = 'lamination';
+  public headerColor: string = '#84A98C';
 
   constructor(private sharedNavService: SharedNavService,
     private router:Router,
@@ -61,5 +62,20 @@ export class HomeComponent implements OnInit{
 
   OnColorSelected(data: any){
     console.log('Color passed from child at home :', data);
+    this.headerColor = data;
+  }
+
+  onButtonToggleSelected(data:any){
+    console.log('button toggle selected :',data);
+    switch(data){
+      case 'menu':
+        this.showDetail = true;
+        this.showMenu = false;
+        break;
+      case 'detail':
+        this.showDetail = false;
+        this.showMenu = true;
+        break;
+    }
   }
 }
