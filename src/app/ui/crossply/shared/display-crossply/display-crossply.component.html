@@ -1,18 +1,3 @@
-<div class="extruder-summary-container">
-    <div class="extruder-summary-header">
-        <h1 class="extruder-summary-header-text">Crossply Data</h1>
-        <div class="extruder-summary-button-container">
-            <button mat-mini-fab color="primary" (click)="takeMeToAdd()" aria-label="Add Extruder">
-                <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">
-                <mat-icon>settings</mat-icon>
-            </button>
-            <button mat-mini-fab color="warn" (click)="downloadCrossplyFile()" aria-label="Download(CSV)">
-                <mat-icon>download</mat-icon>
-            </button>
-        </div>
-    </div>
     <div>
         <table matSort #crossplyTblSort="matSort" mat-table [dataSource]="dataSourceData" class="mat-elevation-z8">
 
@@ -82,4 +67,3 @@
         </table>
 
     </div>
-</div>

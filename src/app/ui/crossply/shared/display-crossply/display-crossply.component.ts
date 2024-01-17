@@ -12,8 +12,7 @@ import { DownloadService } from 'src/app/shared/service/downloadService';
   styleUrl: './display-crossply.component.scss'
 })
 export class DisplayCrossplyComponent implements AfterViewInit{
-  headerColor = '#84A98C';
-  colorList = ['#84A98C', '#3C4A3F', '#9EAFA2', '#6CABA8'];
+  @Input() headerColor = '#84A98C';
   
   dataSourceData: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns = ['crossplyId', 'crossplyLocation', 
@@ -80,34 +79,6 @@ export class DisplayCrossplyComponent implements AfterViewInit{
           break;
       }
       return columnValue;
-    }
-
-    downloadCrossplyFile(){
-      this.crossplyService.getCrossplyAllData().subscribe(data => {
-        data.forEach(x => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
-      const headersToParse: string[] = ['crossplyId', 'crossplyLocation', 'crossplyColor', 'crossplyWidth', 
-       'crossplyLength', 'crossplyWeight', 'crossplyRollNumber', 'crossplyCreatedDate', 'crossplyFullName'];
-        const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber',
-         'Created Date', 'Created By'];      
-        this.downloadService.downloadFile(data, 'crossplyData', headersToShow, headersToParse);
-      });
-    }
-  
-  
-
-    takeMeToAdd(){      
-      this.router.navigateByUrl('/crossply/add');
-    }
-  
-    changeColor(){
-      const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
-      this.headerColor = this.colorList[colorRandomIndex];
-    }
-
-
-  
-    baseRandom(lower:number, upper:number) {
-      return lower + Math.floor(Math.random() * (upper - lower + 1));
-    }
+    }    
   }
 

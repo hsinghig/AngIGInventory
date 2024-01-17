@@ -46,27 +46,12 @@ export class HomeComponent implements OnInit{
     this.laminationHomeService.getShowLaminationHomeObs().subscribe(data => this.showTable$ = data);
   
   }
-  changeView(data: MatButtonToggleChange){
-    const passedValue = data.value;
-    switch(passedValue){
-      case 'menu':
-        this.showDetail = true; 
-        this.showMenu = false;
-        break;
-      case 'detail':
-        this.showDetail = false; 
-        this.showMenu = true;
-        break;
-    }
-  }
-
+ 
   OnColorSelected(data: any){
-    console.log('Color passed from child at home :', data);
-    this.headerColor = data;
+     this.headerColor = data;
   }
 
   onButtonToggleSelected(data:any){
-    console.log('button toggle selected :',data);
     switch(data){
       case 'menu':
         this.showDetail = true;

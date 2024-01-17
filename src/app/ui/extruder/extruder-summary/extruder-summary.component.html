@@ -1,84 +1,71 @@
-<div class="extruder-summary-container">
-  <div class="extruder-summary-header">
-    <h1 class="extruder-summary-header-text">Extruder Data</h1>
-    <div class="extruder-summary-button-container">
-      <button mat-mini-fab color="primary" (click)="takeMeToAdd()" aria-label="Add Extruder">
-        <mat-icon>add</mat-icon>
-      </button>    
-      <button mat-mini-fab color="accent" (click)="changeColor()" aria-label="Switch Table Header Color">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <button mat-mini-fab color="warn" (click)="downloadExtruderFile()" aria-label="Download(CSV)">
-        <mat-icon>download</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div>
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<div>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
 
-      <!-- extruderColorName Column -->
-      <ng-container matColumnDef="extruderColorName">
-        <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor"> Color </th>
-        <td mat-cell *matCellDef="let element">
-          <div class="extruder-column-color-container">
-            <svg width="20" height="20">
-              <rect width="20" height="20"
-                style="fill:{{element.extruderColorName}};stroke-width:3;stroke:rgb(0,0,0)" />
-            </svg>
-            {{element.extruderColorName}}
-          </div>
-        </td>
-      </ng-container>
+    <!-- extruderColorName Column -->
+    <ng-container matColumnDef="extruderColorName">
+      <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
+        Color </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="extruder-column-color-container">
+          <svg width="20" height="20">
+            <rect width="20" height="20" style="fill:{{element.extruderColorName}};stroke-width:3;stroke:rgb(0,0,0)" />
+          </svg>
+          {{element.extruderColorName}}
+        </div>
+      </td>
+    </ng-container>
 
-      <!-- widthName Column -->
-      <ng-container matColumnDef="widthName">
-        <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor"> Width </th>
-        <td mat-cell *matCellDef="let element"> {{element.widthName}} </td>
-      </ng-container>
+    <!-- widthName Column -->
+    <ng-container matColumnDef="widthName">
+      <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
+        Width </th>
+      <td mat-cell *matCellDef="let element"> {{element.widthName}} </td>
+    </ng-container>
 
-      <!-- totalLength Column -->
-      <ng-container matColumnDef="totalLength">
-        <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor"> Total Length
-        </th>
-        <td mat-cell *matCellDef="let element"> {{element.totalLength}} </td>
-      </ng-container>
+    <!-- totalLength Column -->
+    <ng-container matColumnDef="totalLength">
+      <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
+        Total Length
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalLength}} </td>
+    </ng-container>
 
-      <!-- totalWeight Column -->
-      <ng-container matColumnDef="totalWeight">
-        <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor"> Total Weight
-        </th>
-        <td mat-cell *matCellDef="let element"> {{element.totalWeight}} </td>
-      </ng-container>
+    <!-- totalWeight Column -->
+    <ng-container matColumnDef="totalWeight">
+      <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
+        Total Weight
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalWeight}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="expand">
-        <th mat-header-cell *matHeaderCellDef [style.background-color]="headerColor" aria-label="row actions">&nbsp;
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-icon-button aria-label="expand row"
-            (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-            @if (expandedElement === element) {
-            <mat-icon>keyboard_arrow_up</mat-icon>
-            } @else {
-            <mat-icon>keyboard_arrow_down</mat-icon>
-            }
-          </button>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef [style.background-color]="headerColor" aria-label="row actions">&nbsp;
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row"
+          (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          @if (expandedElement === element) {
+          <mat-icon>keyboard_arrow_up</mat-icon>
+          } @else {
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          }
+        </button>
+      </td>
+    </ng-container>
 
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <app-extruder-detail [dataSource]=element.details></app-extruder-detail>
-          </div>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
-      </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-  </div>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <app-extruder-detail [dataSource]=element.details></app-extruder-detail>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
 </div>

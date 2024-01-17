@@ -17,10 +17,10 @@ export class HomeComponent  implements OnInit{
   public headerStyle='pageHeadercrossPlyStyle';
   public headerText= 'Crossply Home Page';
   public showTable$ = true;
-  public data:crossplySummaryModel[] = [];
+  public headerTypePassed:string = 'crossply';
+  public headerColor: string = '#84A98C';
 
-  constructor(private sharedNavService: SharedNavService,
-    private crossplyService: CrossplyService, private router: Router,
+  constructor(private sharedNavService: SharedNavService, private router: Router,
     private crossplyHomeService: CrossplyHomeService,
      private activatedRoute: ActivatedRoute) {  
     console.log('In crossply Home');
@@ -44,21 +44,20 @@ export class HomeComponent  implements OnInit{
   }
   ngOnInit(): void {
     this.crossplyHomeService.getShowCrossplyHomeObs().subscribe(data => this.showTable$ = data);
-  
-    this.crossplyService.getCrossplySummaryData().subscribe(x => {
-      console.log('Data Fetched :', x);
-      this.data = x;
-    })
   }
-  changeView(data: MatButtonToggleChange){
-    const passedValue = data.value;
-    switch(passedValue){
+  
+  OnColorSelected(data: any){
+    this.headerColor = data;
+  }
+
+  onButtonToggleSelected(data:any){   
+    switch(data){
       case 'menu':
-        this.showDetail = true; 
+        this.showDetail = true;
         this.showMenu = false;
         break;
       case 'detail':
-        this.showDetail = false; 
+        this.showDetail = false;
         this.showMenu = true;
         break;
     }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -12,8 +12,7 @@ import { ExtruderService } from 'src/app/shared/service/extruderService';
   styleUrl: './extruder-all-data.component.scss'
 })
 export class ExtruderAllDataComponent implements AfterViewInit{
-  headerColor = '#84A98C';
-  colorList = ['#84A98C', '#3C4A3F', '#9EAFA2', '#6CABA8'];
+  @Input() headerColor = '#84A98C'; 
   columnsToDisplay: string[] = [
     'rollnumber', 'name', 'colorname', 'widthname','length', 'weight', 'fullname', 'createdDate', 'comment'
   ]; 
@@ -76,51 +75,5 @@ export class ExtruderAllDataComponent implements AfterViewInit{
         break;
     }
     return columnValue;
-  }
-
-  
-  downloadExtruderFile(){
-    this.extruderService.getExtruderData().subscribe(data => {
-      var dataToPass:ExtruderDownloadModel[] = this.convertDataToExtruderDownloadModel(data);
-      const headersToParse: string[] = ['extruderId', 'locationName', 'colorName', 'widthName', 
-     'length', 'weight', 'rollNumber', 'createdDate', 'createdBy'];
-      const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber', 'Created Date', 'Created By'];
-    
-      this.downloadService.downloadFile(dataToPass, 'extruderData', headersToShow, headersToParse);
-    })
-  }
-
-  convertDataToExtruderDownloadModel(data: any[]): ExtruderDownloadModel[]{
-    const itemList: ExtruderDownloadModel[] = [];
-    data.forEach(x => {
-      var model:ExtruderDownloadModel = {
-        extruderId: x.extruderDetail.id,
-        locationName: x.extruderDetail.name,
-        colorName: x.extruderDetail.colorname,
-        widthName: x.extruderDetail.widthname,
-        length : x.extruderDetail.length,
-        weight: x.extruderDetail.weight,
-        rollNumber: x.extruderDetail.rollnumber,
-        createdDate: x.createdDateDisplayDateEST,
-        createdBy: x.extruderDetail.firstname + " " + x.extruderDetail.lastname
-      }
-      itemList.push(model);
-    });
-    console.log('print item list : ', itemList);
-    return itemList;
-  }
-
-  takeMeToAdd(){    
-    this.router.navigateByUrl('/extruder/add');
-  }
-
-  changeColor(){
-    const colorRandomIndex = this.baseRandom(0, this.colorList.length-1);
-    this.headerColor = this.colorList[colorRandomIndex];
-  }
-
-  baseRandom(lower:number, upper:number) {
-    return lower + Math.floor(Math.random() * (upper - lower + 1));
-  }
-
+  }  
 }
