@@ -95,8 +95,7 @@ export class DisplayCrossplyComponent implements AfterViewInit{
   
   
 
-    takeMeToAdd(){
-      console.log('in button click of add /crossply/add');
+    takeMeToAdd(){      
       this.router.navigateByUrl('/crossply/add');
     }
   

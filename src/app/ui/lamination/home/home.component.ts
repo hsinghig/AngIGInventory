@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit{
   public headerStyle='pageHeaderlaminationStyle';
   public headerText= 'Lamination Home Page';
   public showTable$ = true;
+  public headerTypePassed:string = 'lamination';
 
   constructor(private sharedNavService: SharedNavService,
     private router:Router,
@@ -56,5 +57,9 @@ export class HomeComponent implements OnInit{
         this.showMenu = true;
         break;
     }
+  }
+
+  OnColorSelected(data: any){
+    console.log('Color passed from child at home :', data);
   }
 }

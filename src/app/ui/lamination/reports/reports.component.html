@@ -1,1 +1,10 @@
-<p>Lamination reports works!</p>
+<app-banner-buttons [headerText]="headerText" [headerTypePassed]="headerTypePassed"
+ (colorSelected)="OnColorSelected($event)" ></app-banner-buttons>
+
+
+ <app-banner-buttons [headerText]="headerText" [showButtons]="false" [headerTypePassed]="headerTypePassed"
+ (colorSelected)="OnColorSelected($event)" ></app-banner-buttons>
+
+ 
+ <app-banner-buttons [headerText]="headerText" [showButtons]="true" [headerTypePassed]="headerTypePassed"
+ (colorSelected)="OnColorSelected($event)" ></app-banner-buttons>

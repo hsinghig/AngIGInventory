@@ -1,5 +1,8 @@
 <div>
     <app-page-header [headerStyle]="headerStyle" [headerText]="headerText"></app-page-header>
+    
+ <app-banner-buttons [headerText]="headerText" [showButtons]="showTable$" [headerTypePassed]="headerTypePassed"
+ (colorSelected)="OnColorSelected($event)" ></app-banner-buttons>
     <div *ngIf="showTable$">  
       <div class="tableDisplay">
         <mat-button-toggle-group class="button-container" (change)="changeView($event)">

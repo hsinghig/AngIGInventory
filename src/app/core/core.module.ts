@@ -10,10 +10,11 @@ import { PageHeaderComponent } from "./page-header/page-header.component";
 import { RouterModule } from "@angular/router";
 import { DisplayTableComponent } from "./display-table/display-table.component";
 import { RollNumberSelectDialogComponent } from "./roll-number-select-dialog/roll-number-select-dialog.component";
+import { BannerbuttonsComponent } from "./bannerbuttons/bannerbuttons.component";
 
 @NgModule({
-    declarations: [NavComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
+    declarations: [NavComponent, BannerbuttonsComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
     imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule, RouterModule],
-    exports: [NavComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
+    exports: [NavComponent, BannerbuttonsComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
 })
 export class CoreModule{}
