@@ -13,7 +13,7 @@ import { LaminationService } from 'src/app/shared/service/laminationService';
   styleUrl: './bannerbuttons.component.scss'
 })
 export class BannerbuttonsComponent {
-  colorList = ['#84A98C', '#3C4A3F', '#9EAFA2', '#6CABA8'];
+  colorList = ['#84A98C', '#9EAFA2', '#6CABA8'];
   @Input() headerText:string = '';
   @Input() headerTypePassed:string = '';
   @Input() showButtons:boolean = true;

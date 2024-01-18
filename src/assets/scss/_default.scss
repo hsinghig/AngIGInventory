@@ -10,6 +10,40 @@
     width: 100%;
 }
 
+//#region "bannerbuttons"
+.banner-button-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: $color-5;
+  padding:0.2rem;
+}
+.button-container-headerText {
+  padding-top:0.2rem;
+  margin-left: 1rem;
+  padding-left:1rem; 
+}
+.button-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.grid-button-container {
+  margin-right: 2rem;
+}
+.common-button-container > button {
+  margin-right: 1.2rem;
+}
+.first-button {
+  background-color: #f2e2a9;
+  color:#000;
+}
+.second-button{
+  background-color: #ffd740;
+  color: #000;
+}
+//#endregion "bannerbuttons"
+
 .pageHeader {
     border-radius: $x-small;
     height: $large;
@@ -116,6 +150,8 @@
 //#endregion "Extruder Home Page"
 
 //#region "Add Crossply"
+
+
 .parent-flex-center-child {
   display: flex;
   justify-content: center;

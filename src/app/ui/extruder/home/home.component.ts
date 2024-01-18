@@ -21,12 +21,13 @@ export class HomeComponent implements OnInit {
   public headerTypePassed: string = 'extruder';
   public headerColor: string = '#84A98C';
 
-  constructor(private extruderService: ExtruderService, private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute,
+  constructor( private sharedNavService: SharedNavService, private router: Router, private activatedRoute: ActivatedRoute,
     private extruderHomeService: ExtruderHomeService) {
     this.activatedRoute.url.subscribe(activeUrl => {
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
-
+    
+    
 
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
