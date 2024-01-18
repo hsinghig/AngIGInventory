@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { SaveDialogComponent } from 'src/app/core/savedialog/savedialog.component';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { ExtruderInsertModel, ExtruderValidFormModel } from 'src/app/shared/model/extruderInsertModel';
 import { LocationModel } from 'src/app/shared/model/locationModel';
@@ -39,7 +41,7 @@ export class AddExtruderComponent implements OnInit {
     comment: new FormControl('')
   })
 
-  
+
   locationList: LocationModel[] = [];
   colorList: ColorModel[] = [];
   widthList: WidthModel[] = [];
@@ -47,26 +49,26 @@ export class AddExtruderComponent implements OnInit {
 
 
   constructor(private sharedNavService: SharedNavService, private _snackBar: MatSnackBar, private router: Router,
-     private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
     private extruderHomeService: ExtruderHomeService, private inventoryCommonService:
-     InventoryCommonService, private extruderService: ExtruderService) {
+      InventoryCommonService, private extruderService: ExtruderService,
+    private dialog: MatDialog) {
     this.activatedRoute.url.subscribe(activeUrl => {
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
   }
 
   ngOnInit(): void {
-   
-    this.loadDropdowns();   
+    this.loadDropdowns();
   }
 
-  clearFormValues() {
+  clearFormValues() {      
     this.showError = false;
     this.addExtruderFormGroup.reset();
   }
 
   checkFormValid(): ExtruderValidFormModel {
-   
+
     const locationIdValue = this.addExtruderFormGroup.controls['locationId'].value;
     const colorIdValue = this.addExtruderFormGroup.controls['colorId'].value;
     const widthIdValue = this.addExtruderFormGroup.controls['widthId'].value;
@@ -77,29 +79,29 @@ export class AddExtruderComponent implements OnInit {
     const commentValue = this.addExtruderFormGroup.controls['comment'].value;
 
     const item: ExtruderInsertModel = {
-      locationId: locationIdValue == null ? 0: locationIdValue,        
-      colorId: colorIdValue == null ? 0: colorIdValue,       
+      locationId: locationIdValue == null ? 0 : locationIdValue,
+      colorId: colorIdValue == null ? 0 : colorIdValue,
       widthId: widthIdValue == null ? 0 : widthIdValue,
       userId: createdByIdValue == null ? 0 : createdByIdValue,
-      weight: weightValue == null ? 0: weightValue,     
-      length:  lengthValue == null ? 0: lengthValue,        
-      comment: commentValue == null ? '': commentValue,
-      rollNumber: rollNumberValue == null ? '': rollNumberValue 
-    };  
+      weight: weightValue == null ? 0 : weightValue,
+      length: lengthValue == null ? 0 : lengthValue,
+      comment: commentValue == null ? '' : commentValue,
+      rollNumber: rollNumberValue == null ? '' : rollNumberValue
+    };
 
     const insertModel: ExtruderValidFormModel = {
       extruderInsertModel: item,
       isValidForm: false
     }
-    if ((locationIdValue == 0) ||(colorIdValue == 0) || (widthIdValue == 0) || (createdByIdValue == 0)){
+    if ((locationIdValue == 0) || (colorIdValue == 0) || (widthIdValue == 0) || (createdByIdValue == 0)) {
       insertModel.isValidForm = false;
     } else {
       insertModel.isValidForm = true;
     }
-    return insertModel;  
+    return insertModel;
   }
 
-  displaySnackBar(message:string, state:string){
+  displaySnackBar(message: string, state: string) {
     this._snackBar.open(message, state, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
@@ -112,27 +114,53 @@ export class AddExtruderComponent implements OnInit {
     if (data.isValidForm) {
       try {
         this.extruderService.insertExtruder(data.extruderInsertModel).subscribe(x => {
-          console.log('return from server ', x);
-          this.displaySnackBar('Extruder Data Saved', 'SUCCESS');          
-          this.router.navigate(['/extruder']);          
+          this.launchDialog(false);
         });
       }
-      catch(error){
-        this.displaySnackBar('Error happened', 'FAILURE');
-        this.errorMessageFirstLine = 'Server Error While Saving Data';
-        this.errorMessageSecondLine = 'Try again later!!';
-        this.showError = true;  
-        console.log('error happened', error);      
+      catch (error) {
+        this.launchDialog(true);
+        this.showError = true;
+        console.log('error happened', error);
       }
     } else {
-      this.showError=true;
+      this.showError = true;
     }
+  }
+
+  launchDialog(hasError: boolean) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      hasError: hasError,
+      businessType: 'Extruder',
+      extruderHomePage: '/extruder/home'
+    };
+
+    const dialogRef = this.dialog.open(SaveDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        switch (data) {
+          case "goTohomePage":
+            this.router.navigateByUrl('extruder');
+            break;
+          case "addAnother":
+            this.clearFormValues();
+            break;
+          case "close":
+            break;
+        }
+        console.log("Dialog output:", data)
+      }
+    );
   }
 
   changeLocation(e: any) {
     console.log(e.target.value);
   }
-  loadDropdowns(){
+  loadDropdowns() {
     this.extruderService.getExtruderColors().subscribe(response => {
       this.colorList = response;
     });
@@ -151,7 +179,7 @@ export class AddExtruderComponent implements OnInit {
     });
   }
 
-  get locationId(){
+  get locationId() {
     return this.addExtruderFormGroup.controls['locationId'];
   }
 }

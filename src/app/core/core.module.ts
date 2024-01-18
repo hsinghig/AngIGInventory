@@ -12,10 +12,11 @@ import { DisplayTableComponent } from "./display-table/display-table.component";
 import { RollNumberSelectDialogComponent } from "./roll-number-select-dialog/roll-number-select-dialog.component";
 import { BannerbuttonsComponent } from "./bannerbuttons/bannerbuttons.component";
 import { LoaderComponent } from "./loader/loader.component";
+import { SaveDialogComponent } from "./savedialog/savedialog.component";
 
 @NgModule({
-    declarations: [NavComponent, LoaderComponent, BannerbuttonsComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
+    declarations: [NavComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
     imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule, RouterModule],
-    exports: [NavComponent, LoaderComponent, BannerbuttonsComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
+    exports: [NavComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
 })
 export class CoreModule{}

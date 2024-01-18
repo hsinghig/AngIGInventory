@@ -63,7 +63,7 @@
                         <p>{{errorMessageSecondLine}}</p>
                     </div>
                     <div class="add-extruder-button-container">
-                        <button mat-raised-button color="accent" (click)="clearFormValues()">Clear</button>
+                        <button type="button" mat-raised-button color="accent" (click)="clearFormValues()">Clear</button>
                         <button mat-raised-button color="warn"  [disabled]="addExtruderFormGroup.invalid" type="submit">Submit</button>
                     </div>
                 </form>               

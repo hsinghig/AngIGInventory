@@ -7,6 +7,7 @@ import { ExtruderSummary } from 'src/app/shared/model/extruderInsertModel';
 import { DownloadService } from 'src/app/shared/service/downloadService';
 import { ExtruderService } from 'src/app/shared/service/extruderService';
 import { ExtruderHomeService } from 'src/app/shared/service/extruderhome.service';
+import { LoaderService } from 'src/app/shared/service/loader.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
 @Component({
@@ -33,6 +34,7 @@ export class ExtruderSummaryComponent implements OnInit {
   constructor(private extruderService: ExtruderService, 
     private sharedNavService: SharedNavService, private downloadService:DownloadService,
      private router: Router, private activatedRoute: ActivatedRoute, 
+     private loaderService:LoaderService,
     private extruderHomeService: ExtruderHomeService ) {  
     this.activatedRoute.url.subscribe(activeUrl =>{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
@@ -40,7 +42,9 @@ export class ExtruderSummaryComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.extruderService.getExtruderSummary().subscribe(data => {     
+    this.loaderService.showLoader();
+    this.extruderService.getExtruderSummary().subscribe(data => {  
+      this.loaderService.hideLoader();   
       this.dataSource = data;
     });
   }

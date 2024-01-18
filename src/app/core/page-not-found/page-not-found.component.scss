@@ -1,6 +1,6 @@
 .imagecover {
     /* The image used */
-    background-image: url("../../../assets/img/404_page.jpg");
+    background-image: url("/assets/img/404_page_not_found.jpg");
   
     /* Full height */
     height: 80%;
@@ -9,21 +9,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.6;
+    //opacity: 0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .centerButton {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    opacity: 1;
+  .centerButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(84, 84, 77);
+    //opacity: 1;
   }
-  .mat-icon{
-    font-size:192px !important; //make it bigger, the default being 24px. 
-    width:192px;                //Do not forget to adjust the 
-    height:192px;      
-    opacity: 1;         //height and/or the width, as in the demo
-
-}
+  .page-not-found-take-home {
+    margin:0.2rem;
+    height: 3rem;
+    font-size: xx-large;    
+  }

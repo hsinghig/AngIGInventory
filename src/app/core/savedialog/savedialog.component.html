@@ -1,0 +1,16 @@
+<h1 mat-dialog-title class="dialog-title">{{businessType}} Save Dialog</h1>
+<div mat-dialog-content>
+  <div class="hasError" *ngIf="showError">
+    An error occurred while saving this data. Please fix the error and try again.    
+  </div>
+  <div class="success" *ngIf="!showError">
+    Your data has been saved.   
+    <div class="success-button-container">
+        <button mat-raised-button color="primary" mat-dialog-close="goTohomePage">{{businessType}} Home Page</button>
+        <button mat-raised-button color="warn" mat-dialog-close="addAnother">Add Another {{businessType}}</button>
+    </div>  
+  </div>  
+</div>
+<div mat-dialog-actions *ngIf="showError">
+  <button mat-raised-button color="accent" mat-dialog-close="close">Close</button>  
+</div>
