@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { ColorModel } from "../model/colorModel";
-import { crossplyInsertModel } from "../model/crossplyInsertModel";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { AppConstantsService } from "./appConstants.service";
+import { crossplyInsertModel } from "../model/crossply.model";
 
 @Injectable({
   providedIn: 'root'

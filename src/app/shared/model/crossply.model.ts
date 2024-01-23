@@ -53,11 +53,14 @@ export interface crossplyDetailInsertModel {
     colorNinetyRollNumber: number;
     colorZeroColorId: number;
     colorZeroWidthId: number;
+    colorZeroLength: number;
+    colorZeroWeight: number;
     colorNinetyColorId: number;
     colorNinetyWidthId: number;
+    colorNinetyLength: number;
+    colorNinetyWeight: number;
     createdById: number;
     createdBy: string;
-    comment: string;
 }
 
 export interface crossplyInsertModel {

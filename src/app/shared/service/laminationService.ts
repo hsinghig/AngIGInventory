@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ColorModel } from "../model/colorModel";
-import { crossplyInsertModel } from "../model/crossplyInsertModel";
 import { Observable, catchError, delay, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { AppConstantsService } from "./appConstants.service";

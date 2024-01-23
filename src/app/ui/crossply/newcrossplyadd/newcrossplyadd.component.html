@@ -1,0 +1,176 @@
+<div class="newcrossplyadd-parent-container">
+    <div class="newcrossplyadd-form-container">
+        <div class="newcrossplyadd-header">
+            <h1>Add Crossply</h1>
+        </div>
+        <div class="newcrossplyadd-form-body">
+            <form [formGroup]="addCrossplyFormGroup" (ngSubmit)="onSubmit()">
+                <div class="form-container">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose Location</mat-label>
+                        <mat-select formControlName="locationId" placeholder="Select Crossply location" required>
+                            <mat-option *ngFor="let location of crossplyLocationList"
+                                value="{{location.id}}">{{location.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Choose Color</mat-label>
+                        <mat-select formControlName="colorId" required>
+                            <mat-option *ngFor="let color of crossplyColorList"
+                                value="{{color.id}}">{{color.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Choose Width</mat-label>
+                        <mat-select formControlName="widthId" required>
+                            <mat-option *ngFor="let width of widthList" value="{{width.id}}">{{width.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Roll Number</mat-label>
+                        <input formControlName="rollNumber" matInput placeholder="Roll Number">
+                        <mat-hint>Existing Roll Number</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Enter Length</mat-label>
+                        <input formControlName="length" type="number" min="0" max="999999" matInput
+                            placeholder="Length" required>
+                        <mat-hint>Length in number ex: 322</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="extruder-form" appearance="fill">
+                        <mat-label>Enter Weight</mat-label>
+                        <input formControlName="weight" type="number" min="0" max="999999" matInput
+                            placeholder="Weight" required>
+                        <mat-hint>Weight in number ex: 200</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="crossply-submit-createdBy">
+                    <mat-form-field class="crossplySubmittedBy">
+                        <mat-label>Submitted By</mat-label>
+                        <mat-select formControlName="userId" required>
+                            <mat-option *ngFor="let user of userList" value={{user.id}}>{{user.email}} -
+                                {{user.firstname}} {{user.lastname}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="crossplyComment">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea #comments rows="2" formControlName="comment" matInput placeholder="..."></textarea>
+                        <mat-hint align="end">{{comments.value.length}}/500</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="extruder-crossply-buttons">
+                    <button type="button" mat-raised-button color="accent" (click)="addExtruder()">Add Extruder Detail
+                        (max of
+                        3)</button>
+                    <button type="button" mat-raised-button color="warn" (click)="removeExtruder()">Remove
+                        Extruder Detail</button>
+                </div>
+                <ng-container formArrayName="crossplyDetailList">
+                    <div class="child-item-extruder" *ngFor="let item of crossplyDetailList.controls; let i=index" [formGroupName]="i">
+                        <div class="extruder-detail-parent extruder-detail-parent-colorzero">
+                            <h2 class="extruderDetail mat-elevation-z2">Extruder Detail - Color Zero - {{i}}</h2>
+                            <div class="colorzero-container">
+                                <mat-form-field class="small-control">
+                                    <mat-label>Choose Color</mat-label>
+                                    <mat-select formControlName="colorZeroColorId" required>
+                                        <mat-option *ngFor="let color of extruderColorList"
+                                            value="{{color.id}}">{{color.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="small-control">
+                                    <mat-label>Choose Width</mat-label>
+                                    <mat-select formControlName="colorZeroWidthId" required>
+                                        <mat-option *ngFor="let width of widthList"
+                                            value="{{width.id}}">{{width.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="small-control smaller-control" appearance="fill">
+                                    <mat-label>Enter Length</mat-label>
+                                    <input formControlName="colorZeroLength" type="number" min="0" max="999999" matInput
+                                        placeholder="Length" required>
+
+                                </mat-form-field>
+                                <mat-form-field class="small-control smaller-control" appearance="fill">
+                                    <mat-label>Enter Weight</mat-label>
+                                    <input formControlName="colorZeroWeight" type="number" min="0" max="999999" matInput
+                                        placeholder="Weight" required>
+
+                                </mat-form-field>
+                                <button mat-mini-fab type="button" color="accent" matTooltip="Fetch Extruder Roll Number" (click)="fetchRollNumberColorZero(i)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <mat-form-field class="smallest-control" matTooltip="Click button on left to select" appearance="fill">
+                                    <mat-label>RollNo</mat-label>
+                                    <input readonly formControlName="colorZeroExtruderId" required matInput
+                                        placeholder="Roll Number">
+                                        <mat-hint></mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="extruder-detail-parent extruder-detail-parent-colorninety">
+                            <h2 class="extruderDetail mat-elevation-z2">Extruder Detail - Color Ninety - {{i}}</h2>
+                            <div class="colorzero-container">
+                                <mat-form-field class="small-control">
+                                    <mat-label>Choose Color</mat-label>
+                                    <mat-select formControlName="colorNinetyColorId" required>
+                                        <mat-option *ngFor="let color of extruderColorList"
+                                            value="{{color.id}}">{{color.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="small-control">
+                                    <mat-label>Choose Width</mat-label>
+                                    <mat-select formControlName="colorNinetyWidthId" required>
+                                        <mat-option *ngFor="let width of widthList"
+                                            value="{{width.id}}">{{width.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field class="small-control smaller-control" appearance="fill">
+                                    <mat-label>Enter Length</mat-label>
+                                    <input formControlName="colorNinetyLength" type="number" min="0" max="999999"
+                                        matInput placeholder="Length" required>
+
+                                </mat-form-field>
+                                <mat-form-field class="small-control smaller-control" appearance="fill">
+                                    <mat-label>Enter Weight</mat-label>
+                                    <input formControlName="colorNinetyWeight" type="number" min="0" max="999999"
+                                        matInput placeholder="Weight" required>
+
+                                </mat-form-field>
+                                <button mat-mini-fab color="warn"  type="button"  (click)="fetchRollNumberColorNinety(i)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <mat-form-field class="smallest-control" appearance="fill">
+                                    <mat-label>RollNo</mat-label>
+                                    <input readonly formControlName="colorNinetyExtruderId" required matInput
+                                        placeholder="Roll Number">
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="show-error" *ngIf="formHasErrors">
+                    <div class="error-container">
+                        <h2>The form has <span class="error-style">errors.</span> Please <span
+                                class="error-style">fix</span> these errors before resubmitting.</h2>
+                        <h3>Summary of Errors</h3>
+                        @for(error of errorList; track error){
+                        <p>{{error}}</p>
+                        }
+                    </div>
+                </div>
+                <div class="action-button-container">
+                    <p>{{this.addCrossplyFormGroup.value |json}}</p>
+                    <button type="reset" mat-raised-button (click)="clearForm()">Clear Form</button>
+                    <button type="submit" class="submitButton" color="warn" [disabled]="!addCrossplyFormGroup.valid"
+                        mat-raised-button>Save
+                        Crossply</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

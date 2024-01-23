@@ -12,7 +12,11 @@ You can add the following attribute to Controllers and Actions to exclude them f
 https://www.youtube.com/watch?v=4jwu63FZPH0     Part 6 How to use Github Actions for deploying to Azure App Service Angular
 startup command : pm2 serve /home/site/wwwroot/dist/ang-iginventory/browser --no-daemon
 
-
+  this.addLaminationFormGroup.get(['extruderList',i])?.patchValue({
+      extruderRollNumber: 44
+    });
+   
+   
 ## installing libraries
 npm install -g @angular/cli
 npm install -g npm@10.2.5
