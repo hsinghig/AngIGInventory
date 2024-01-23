@@ -129,19 +129,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     this.crossplyService.insertCrossply(insertModel).subscribe(data =>{
       console.log('Data successfully added', data);
     });
-    //console.log('value of form values : ', rt);
-    // var item:crossplyInsertModel = {
-    //   locationId: +this.addCrossplyFormGroup.controls['locationId'].value,
-    // colorId: +this.addCrossplyFormGroup.controls['colorId'].value ?? 0,
-    // widthId: +this.addCrossplyFormGroup.controls['widthId'].value ?? 0,
-    // rollNumber: this.addCrossplyFormGroup.controls['rollNumber'].value ?? '',
-    // length: +this.addCrossplyFormGroup.controls['length'].value ?? 0,
-    // weight: +this.addCrossplyFormGroup.controls['weight'].value ?? 0,
-    // userId: +this.addCrossplyFormGroup.controls['userId'].value ?? 0,
-    // comment: this.addCrossplyFormGroup.controls['comment'].value ?? '',
-    // crossplyDetailList: this.mapExtruderDetailTocrossplyDetailInsertModel()
-    // };
-    //console.log('detail', item);
+    
     this.validateForm();
     //this.mapTocrossplyDetailInsertModel();
   }
