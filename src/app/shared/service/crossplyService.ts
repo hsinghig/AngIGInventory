@@ -24,6 +24,7 @@ export class CrossplyService{
   URL_POST_EXTRUDER_INSERT = this.appConstantsService.getURLForString('URL_POST_EXTRUDER_INSERT');
   URL_GET_EXTRUDER_ALL_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_ALL_DATA');
   URL_GET_EXTRUDER_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_SUMMARY_DATA');
+  URL_GET_CROSSPLY_ROLLNUMBER = this.appConstantsService.getURLForString('URL_GET_CROSSPLY_ROLLNUMBER');
 
 
     constructor(private http: HttpClient, private appConstantsService: AppConstantsService){}
@@ -43,6 +44,13 @@ export class CrossplyService{
 
     getExtruderRollNumber(colorId:any, widthId:any): Observable<any[]>{
       const url = this.URL_GET_EXTRUDER_ROLLNUMBER + '?ColorId=' + colorId + '&WidthId=' + widthId;
+      return this.http.get<any>(url).pipe(
+        map(res => res.data)
+      );
+    }
+
+    getCrossplyRollNumber(colorId:any, widthId:any): Observable<any[]>{
+      const url = this.URL_GET_CROSSPLY_ROLLNUMBER + '?ColorId=' + colorId + '&WidthId=' + widthId;
       return this.http.get<any>(url).pipe(
         map(res => res.data)
       );

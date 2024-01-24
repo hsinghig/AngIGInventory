@@ -28,7 +28,7 @@
                     </mat-form-field>
                     <mat-form-field class="extruder-form" appearance="fill">
                         <mat-label>Roll Number</mat-label>
-                        <input formControlName="rollNumber" matInput placeholder="Roll Number">
+                        <input formControlName="rollNumber"  maxlength="20" matInput placeholder="Roll Number">
                         <mat-hint>Existing Roll Number</mat-hint>
                     </mat-form-field>
                     <mat-form-field class="extruder-form" appearance="fill">
@@ -103,7 +103,7 @@
                                 </button>
                                 <mat-form-field class="smallest-control" matTooltip="Click button on left to select" appearance="fill">
                                     <mat-label>RollNo</mat-label>
-                                    <input readonly formControlName="colorZeroExtruderId" required matInput
+                                    <input readonly formControlName="colorZeroRollNumber" required matInput
                                         placeholder="Roll Number">
                                         <mat-hint></mat-hint>
                                 </mat-form-field>
@@ -144,7 +144,7 @@
                                 </button>
                                 <mat-form-field class="smallest-control" appearance="fill">
                                     <mat-label>RollNo</mat-label>
-                                    <input readonly formControlName="colorNinetyExtruderId" required matInput
+                                    <input readonly formControlName="colorNinetyRollNumber" required matInput
                                         placeholder="Roll Number">
 
                                 </mat-form-field>
@@ -163,14 +163,13 @@
                     </div>
                 </div>
                 <div class="action-button-container">
-                    <p>{{this.addCrossplyFormGroup.value |json}}</p>
+                    <!-- <p>{{this.addCrossplyFormGroup.value |json}}</p> -->
                     <button type="reset" mat-raised-button (click)="clearForm()">Clear Form</button>
                     <button type="submit" class="submitButton" color="warn" [disabled]="!addCrossplyFormGroup.valid"
                         mat-raised-button>Save
                         Crossply</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

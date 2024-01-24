@@ -15,13 +15,13 @@
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="crossPlyMenu">Crossply</button>
     <mat-menu #crossPlyMenu="matMenu" xPosition="before">
-        <button (click)="OnMenuClick($event, 'crossply', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'crossply', 'home')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
         <button (click)="OnMenuClick($event, 'crossply', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
         <button (click)="OnMenuClick($event, 'crossply', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="laminationMenu">Lamination</button>
     <mat-menu #laminationMenu="matMenu" xPosition="before">
-        <button (click)="OnMenuClick($event, 'lamination', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'lamination', 'home')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
         <button (click)="OnMenuClick($event, 'lamination', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
         <button (click)="OnMenuClick($event, 'lamination', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
     </mat-menu>

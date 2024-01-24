@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { RollNumberSelectDialogComponent } from 'src/app/core/roll-number-select-dialog/roll-number-select-dialog.component';
+import { SaveDialogComponent } from 'src/app/core/savedialog/savedialog.component';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { crossplyDetailInsertModel, crossplyInsertModel } from 'src/app/shared/model/crossply.model';
 import { LocationModel } from 'src/app/shared/model/locationModel';
@@ -20,14 +22,8 @@ import { InventoryCommonService } from 'src/app/shared/service/inventoryCommonSe
 })
 export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   formHasErrors = false;
-  errorList: string[] = [
-    "Extruder Detail 0: roll width should be greater than or equal to crossply width",
-    "Extruder Detail 1: roll width should be greater than or equal to crossply width",
-    "Extruder 0: roll width should be greater than or equal to crossply width",
-    "Extruder 0: roll width should be greater than or equal to crossply width",
-    "Extruder 0: roll width should be greater than or equal to crossply width",
-    "Extruder 0: roll width should be greater than or equal to crossply width",
-  ];
+  errorList: string[] = [ ];
+  
   locationSubscription: Subscription | undefined;
   colorSubscription: Subscription | undefined;
   widthSubscription: Subscription | undefined;
@@ -60,6 +56,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     private crossplyService: CrossplyService,
     private inventoryCommonService: InventoryCommonService,
     private extruderService: ExtruderService,
+    private activatedRoute: ActivatedRoute, 
+    private router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -88,8 +86,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   resetValues(){
     for(let i =0; i<this.crossplyDetailList.length; i++){
       this.addCrossplyFormGroup.get(['crossplyDetailList', i])?.patchValue({
-        colorZeroExtruderId:null,
-        colorNinetyExtruderId:null
+        colorZeroRollNumber:null,
+        colorNinetyRollNumber:null
       });    
     }
   }
@@ -103,17 +101,21 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
       colorZeroWidthId: new FormControl('', [Validators.required]),
       colorZeroLength: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       colorZeroWeight: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      colorZeroExtruderId: new FormControl('', [Validators.required]),
+      colorZeroRollNumber: new FormControl('', [Validators.required]),
       colorNinetyColorId: new FormControl('', [Validators.required]),
       colorNinetyWidthId: new FormControl('', [Validators.required]),
       colorNinetyLength: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       colorNinetyWeight: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      colorNinetyExtruderId: new FormControl('', [Validators.required])
+      colorNinetyRollNumber: new FormControl('', [Validators.required])
     });
     return addExtruderDetailGroup;
   }
-
+  resetErrors(){
+    this.formHasErrors = false;
+    this.errorList = [];
+  }
   onSubmit() {
+    this.resetErrors();
     var item:any= this.addCrossplyFormGroup.getRawValue();
     var insertModel:crossplyInsertModel = {
       locationId: +item.locationId,
@@ -125,15 +127,21 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
       userId: +item.userId,
       comment: item.comment,
       crossplyDetailList: this.mapTocrossplyDetailInsertModel(item.crossplyDetailList)
-    }
-    this.crossplyService.insertCrossply(insertModel).subscribe(data =>{
-      console.log('Data successfully added', data);
-    });
-    
-    this.validateForm();
-    //this.mapTocrossplyDetailInsertModel();
-  }
+    };
 
+    this.validateForm(insertModel);
+    if (this.formHasErrors == false){
+      try{
+        this.crossplyService.insertCrossply(insertModel).subscribe(data =>{
+          this.launchDialog(false);
+        });  
+      }catch(error){
+        this.launchDialog(true);
+        this.formHasErrors =true;
+        console.log('error happened', error);
+      }        
+    }
+  }
 
 
   addExtruder() {
@@ -189,12 +197,12 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
             if (controlName == 'colorZero'){
               controlName = 'colorZero' + formValues.indexFetched.toString();             
               this.addCrossplyFormGroup.get(['crossplyDetailList', formValues.indexFetched])?.patchValue({
-                colorZeroExtruderId: result.data.id
+                colorZeroRollNumber: result.data.id
               });
             } else {
               controlName = 'colorNinety' + formValues.indexFetched.toString();
               this.addCrossplyFormGroup.get(['crossplyDetailList', formValues.indexFetched])?.patchValue({
-                colorNinetyExtruderId:result.data.id
+                colorNinetyRollNumber:result.data.id
               });
             }
             var foundIndex = this.rollNumberColorZeroFetchedList.findIndex(x =>x.controlName == controlName);
@@ -229,16 +237,60 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     return returnType;
   }
 
-  validateForm() {
-    //After the data is fetched do not change crossply location/color/width 
-    // because that determined the roll numbers
+  validateForm(insertModel:crossplyInsertModel) {
+    this.errorList = [];
+    if (insertModel.colorId == null){
+      this.errorList.push('Crossply ColorId cannot be null')
+    }
+    if (insertModel.rollNumber.length > 20){
+      this.errorList.push('Crossply Rollnumber cannot exceed 20 characters length');
+    }
 
+    if (insertModel.length <= 0){
+      this.errorList.push('Crossply Length should be greater than 0');
+    }
+    if(insertModel.weight <= 0){
+      this.errorList.push('Crossply weight should be greater than 0');
+    }
+
+    insertModel.crossplyDetailList.forEach(x => {
+      if (x.colorZeroRollNumber == x.colorNinetyRollNumber) {
+        this.errorList.push('Extruder Detail Color Zero RollNumber cannot be the same as Color Ninety RollNumber');
+      }
+
+      if (x.colorZeroWidthId < insertModel.widthId) {
+        this.errorList.push('Color Zero Width should be greater than or equal to Crossply Width');
+      }
+
+      if (x.colorZeroLength<=0){
+        this.errorList.push('Extruder Detail Color Zero length should be greater than 0');
+      }
+
+      
+      if (x.colorZeroWeight<=0){
+        this.errorList.push('Extruder Detail Color Zero Weight should be greater than 0');
+      }
+
+      
+      if (x.colorNinetyLength<=0){
+        this.errorList.push('Extruder Detail Color Ninety length should be greater than 0');
+      }
+
+      
+      if (x.colorNinetyLength<=0){
+        this.errorList.push('Extruder Detail Color Ninety length should be greater than 0');
+      }
+    });
+
+    if (this.errorList.length > 0) {
+      this.formHasErrors = true;
+    } else {
+      this.formHasErrors = false;
+    }
+  
     //Extruder zero width should be greater than or equal to width of crossply.
-
     // same level colorzero and colorninety cannot select same roll number
-
     // Sum of length of extruder should not exceed the length of crossply by 100
-
   }
 
   mapTocrossplyDetailInsertModel(crossplyDetailList:any[]){
@@ -254,7 +306,43 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     });    
     return detailList;
   }
+
   
+  launchDialog(hasError: boolean) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      hasError: hasError,
+      businessType: 'Crossply',
+      extruderHomePage: '/crossply/home'
+    };
+
+    const dialogRef = this.dialog.open(SaveDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        switch (data) {
+          case "goTohomePage":
+            this.router.navigateByUrl('/crossply/home');
+            break;
+          case "addAnother":
+            this.clearFormValues();
+            break;
+          case "close":
+            break;
+        }
+        console.log("Dialog output:", data)
+      }
+    );
+  }
+  
+  clearFormValues() {      
+    this.formHasErrors = false;
+    this.errorList = [];
+    this.addCrossplyFormGroup.reset();
+  }
 
   loadDropdowns() {
     this.locationSubscription = this.crossplyService.getCrossplyLocations().subscribe(response => {

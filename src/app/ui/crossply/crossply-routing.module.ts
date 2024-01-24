@@ -5,22 +5,27 @@ import { ReportsComponent } from './reports/reports.component';
 import { AddCrossplyComponent } from './add-crossply/add-crossply.component';
 import { CrossplyResolver } from 'src/app/shared/service/crossplyResolver.service';
 import { NewcrossplyaddComponent } from './newcrossplyadd/newcrossplyadd.component';
+import { BaseComponent } from './base/base.component';
 
 const routes: Routes = [{
   path: '',
-  component:HomeComponent, 
+  component: BaseComponent, 
   resolve: {data: CrossplyResolver},
   children: [
+    {
+      path: 'home',
+      component: HomeComponent
+    },
     {
       path:'reports',
       component:ReportsComponent
     },
     {
-      path:'add',
+      path:'addnew',
       component:AddCrossplyComponent
     },
     {
-      path:'addnew',
+      path:'add',
       component:NewcrossplyaddComponent
     }
   ]

@@ -14,10 +14,11 @@ import { CrossplyDetailComponent } from './shared/crossply-detail/crossply-detai
 import { CrossplyDetailExpandComponent } from './shared/crossply-detail-expand/crossply-detail-expand.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewcrossplyaddComponent } from './newcrossplyadd/newcrossplyadd.component';
+import { BaseComponent } from './base/base.component';
 
 
 @NgModule({
-  declarations: [HomeComponent,  NewcrossplyaddComponent, CrossplyDetailComponent, CrossplyDetailExpandComponent,
+  declarations: [HomeComponent, BaseComponent, NewcrossplyaddComponent, CrossplyDetailComponent, CrossplyDetailExpandComponent,
      DisplayCrossplyComponent, ReportsComponent, AddCrossplyComponent],
   imports: [
     CommonModule,

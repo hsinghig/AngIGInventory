@@ -26,7 +26,9 @@ export const CROSSPLY_CONSTANTS = [
     { 'url_name': 'URL_GET_CROSSPLY_DETAIL_DATA', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Crossplys/GetCrossplyDetailData'},
     { 'url_name': 'URL_GET_CROSSPLY_BY_ID', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Crossplys/GetCrossplyById?crossplyId='},
     { 'url_name': 'URL_POST_CROSSPLY_INSERT', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Crossplys'},
-    { 'url_name': 'URL_GET_CROSSPLY_SUMMARY_DATA', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Crossplys/GetCrossplySummaryData'}
+    { 'url_name': 'URL_GET_CROSSPLY_SUMMARY_DATA', 'url_value': 'https://apiiginventory.azurewebsites.net/api/Crossplys/GetCrossplySummaryData'},
+    { 'url_name': 'URL_GET_CROSSPLY_ROLLNUMBER', 'url_value':'https://apiiginventory.azurewebsites.net/api/Crossplys/GetRollNumber' }
+
 ];
 
 export const LAMINATION_CONSTANTS = [    

@@ -13,10 +13,11 @@ import { RollNumberSelectDialogComponent } from "./roll-number-select-dialog/rol
 import { BannerbuttonsComponent } from "./bannerbuttons/bannerbuttons.component";
 import { LoaderComponent } from "./loader/loader.component";
 import { SaveDialogComponent } from "./savedialog/savedialog.component";
+import { CrossplyRollNumberSelectDialogComponent } from "./crossply-roll-number-select-dialog/crossply-roll-number-select-dialog.component";
 
 @NgModule({
-    declarations: [NavComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
+    declarations: [NavComponent, CrossplyRollNumberSelectDialogComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageNotFoundComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, BreadcrumbComponent, PageHeaderComponent],
     imports: [CommonModule, DemoMaterialModule, ReactiveFormsModule, FormsModule, RouterModule],
-    exports: [NavComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
+    exports: [NavComponent, CrossplyRollNumberSelectDialogComponent, SaveDialogComponent, LoaderComponent, BannerbuttonsComponent, PageHeaderComponent, RollNumberSelectDialogComponent, DisplayTableComponent, FooterComponent, PageNotFoundComponent, BreadcrumbComponent, DemoMaterialModule ,ReactiveFormsModule, FormsModule]
 })
 export class CoreModule{}

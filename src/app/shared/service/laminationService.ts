@@ -3,6 +3,7 @@ import { ColorModel } from "../model/colorModel";
 import { Observable, catchError, delay, map, tap, throwError } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { AppConstantsService } from "./appConstants.service";
+import { laminationInsertModel } from "../model/lamination.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,16 +31,25 @@ export class LaminationService{
     constructor(private http: HttpClient, private appConstantsService: AppConstantsService){}
 
     //#region "Reference Tables"
-    getLaminationLocations(): Observable<any[]>{
-      return this.http.get<any>(this.URL_GET_LAMINATION_LOCATIONS).pipe(
-        map(res => res.data)
-      );
-    }
 
     getLaminationColors(): Observable<any[]>{
       return this.http.get<any>(this.URL_GET_LAMINATION_COLORS).pipe(
         map(res => res.data)
       );
+    }
+
+    getLaminationLocations(): Observable<any[]>{
+      return this.http.get<any>(this.URL_GET_LAMINATION_LOCATIONS).pipe(
+        tap(x => {
+          console.log(x);
+        }),
+        map(res => res.data)
+      );
+    }
+
+    getLaminationLocationList():Observable<any[]>{
+      return this.http.get<any[]>(this.URL_GET_LAMINATION_LOCATIONS).pipe(map((res:any) => res.data), 
+      catchError(this.handleError))
     }
 
     getExtruderRollNumber(colorId:any, widthId:any): Observable<any[]>{
@@ -84,12 +94,12 @@ export class LaminationService{
       return httpOptions;
     }
 
-    // insertCrossply(insertModel: crossplyInsertModel) {
-    //   return this.http.post<crossplyInsertModel>(this.URL_POST_CROSSPLY_INSERT, insertModel, this.getHttpOptions())
-    //   .pipe(
-    //     catchError(this.handleError)
-    //   );    
-    // }
+    insertLamination(insertModel: laminationInsertModel) {
+      return this.http.post<laminationInsertModel>(this.URL_POST_LAMINATION_INSERT, insertModel, this.getHttpOptions())
+      .pipe(
+        catchError(this.handleError)
+      );    
+    }
 
     private handleError(err: HttpErrorResponse): Observable<never> {
       // in a real world app, we may send the server to some remote logging infrastructure

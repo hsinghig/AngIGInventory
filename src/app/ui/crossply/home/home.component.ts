@@ -30,7 +30,7 @@ export class HomeComponent  implements OnInit{
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
           switch(event.url){
-            case '/crossply':
+            case '/crossply/home':
               this.crossplyHomeService.setShowCrossplyHomeObs(true);
               break;
             case '/crossply/add':

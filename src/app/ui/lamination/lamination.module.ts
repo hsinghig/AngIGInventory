@@ -11,10 +11,11 @@ import { DemoMaterialModule } from 'src/app/core/demo-material.module';
 import { DisplaylaminationComponent } from './shared/displaylamination/displaylamination.component';
 import { LaminationDetailExpandComponent } from './shared/lamination-detail-expand/lamination-detail-expand.component';
 import { LaminationdetailComponent } from './shared/laminationdetail/laminationdetail.component';
+import { BaseComponent } from './base/base.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, DisplaylaminationComponent,
+  declarations: [HomeComponent, BaseComponent, DisplaylaminationComponent,
      LaminationDetailExpandComponent, 
      LaminationdetailComponent,  ChildlaminationComponent, ReportsComponent, AddLaminationComponent],
   imports: [

@@ -27,20 +27,7 @@ export class HomeComponent implements OnInit{
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
     });
 
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-          switch(event.url){
-            case '/lamination':
-              this.laminationHomeService.setShowLaminationHomeObs(true);
-              break;
-            case '/lamination/add':
-              this.laminationHomeService.setShowLaminationHomeObs(false);
-              break;
-            case '/lamination/reports':
-              this.laminationHomeService.setShowLaminationHomeObs(false);
-          }
-      }
-    });
+    
   }
 
   ngOnInit(){    
