@@ -1,5 +1,6 @@
 <div>
-  <app-banner-buttons [headerText]="headerText" [showButtons]="showTable$" [headerTypePassed]="headerTypePassed"
+  <app-banner-buttons [headerText]="headerText" 
+  [showButtons]="showTable$" [headerTypePassed]="headerTypePassed"
     (colorSelected)="OnColorSelected($event)" (buttonSelected)="onButtonToggleSelected($event)"></app-banner-buttons>
   <div *ngIf="showTable$">
     <div *ngIf="showDetail">

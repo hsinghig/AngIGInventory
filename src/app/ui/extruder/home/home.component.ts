@@ -1,9 +1,5 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { ExtruderSummary } from 'src/app/shared/model/extruderInsertModel';
-import { ExtruderService } from 'src/app/shared/service/extruderService';
 import { ExtruderHomeService } from 'src/app/shared/service/extruderhome.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 
@@ -25,14 +21,11 @@ export class HomeComponent implements OnInit {
     private extruderHomeService: ExtruderHomeService) {
     this.activatedRoute.url.subscribe(activeUrl => {
       this.sharedNavService.raiseDataEmitterEvent(window.location.pathname);
-    });
-    
-    
-
+    });    
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         switch (event.url) {
-          case '/extruder':
+          case '/extruder/home':
             this.extruderHomeService.setShowExtruderHomeObs(true);
             break;
           case '/extruder/add':
@@ -40,9 +33,7 @@ export class HomeComponent implements OnInit {
             break;
           case '/extruder/reports':
             this.extruderHomeService.setShowExtruderHomeObs(false);
-        }
-        // handle NavigationEnd event here
-        // console.log(event.url);
+        }      
       }
     });
   }
@@ -51,13 +42,13 @@ export class HomeComponent implements OnInit {
     this.extruderHomeService.getShowExtruderHomeObs().subscribe(data => this.showTable$ = data);
 
   }
-
-  OnColorSelected(data: any) {
+ 
+  OnColorSelected(data: any){
     this.headerColor = data;
   }
 
-  onButtonToggleSelected(data: any) {
-    switch (data) {
+  onButtonToggleSelected(data:any){   
+    switch(data){
       case 'menu':
         this.showDetail = true;
         this.showMenu = false;

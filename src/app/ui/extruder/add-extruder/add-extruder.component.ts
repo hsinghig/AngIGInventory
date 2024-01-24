@@ -144,7 +144,7 @@ export class AddExtruderComponent implements OnInit {
       data => {
         switch (data) {
           case "goTohomePage":
-            this.router.navigate(['.'], {relativeTo: this.activatedRoute.parent, skipLocationChange:false});
+            this.router.navigateByUrl('/extruder/home'); // {relativeTo: this.activatedRoute.parent, skipLocationChange:false});
             break;
           case "addAnother":
             this.clearFormValues();

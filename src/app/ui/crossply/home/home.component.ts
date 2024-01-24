@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { crossplyModel, crossplySummaryModel } from 'src/app/shared/model/crossply.model';
-import { CrossplyService } from 'src/app/shared/service/crossplyService';
 import { CrossplyHomeService } from 'src/app/shared/service/crossplyhome.service';
 import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 

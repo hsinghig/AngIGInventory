@@ -9,7 +9,7 @@
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="extruderMenu">Extruder</button>
     <mat-menu #extruderMenu="matMenu" xPosition="before">
-        <button (click)="OnMenuClick($event, 'extruder', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
+        <button (click)="OnMenuClick($event, 'extruder', 'home')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
         <button (click)="OnMenuClick($event, 'extruder', 'add')"  mat-menu-item><mat-icon>add_circle</mat-icon>Add</button>    
         <button (click)="OnMenuClick($event, 'extruder', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>       
     </mat-menu>
