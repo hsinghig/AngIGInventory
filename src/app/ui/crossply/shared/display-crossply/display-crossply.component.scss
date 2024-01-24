@@ -4,3 +4,7 @@
     overflow: hidden;
     max-width: 10px;
 }
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+    padding: 0 16px 0 16px;
+    padding-top: 1rem;
+}
