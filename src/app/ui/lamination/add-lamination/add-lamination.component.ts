@@ -308,7 +308,6 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
       length: +item.laminationLength,
       weight: +item.laminationWeight,
       comment: item.laminationComment,
-      createdDate: "",
       createdById: this.getUserId(),
       laminationDetailList: detailList
     };
@@ -431,6 +430,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     var detailList:laminationDetailInsertModel[] = [];
     extruderList.forEach(x => {
       var detail:laminationDetailInsertModel = {
+        id: 0,
         laminationId: 0,
         isExtruder: true,
         isCrossply: false,
@@ -439,7 +439,6 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
         weight: x.extruderWeight,
         colorId: x.extruderColorId,
         widthId: x.extruderWidthId,
-        createdDate: "",
         createdById: createdBy
       }
       detailList.push(detail);     
@@ -453,6 +452,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     var detailList:laminationDetailInsertModel[] = [];
     crossplyList.forEach(x => {
       var detail:laminationDetailInsertModel = {
+        id: 0,
         laminationId: 0,
         isExtruder: false,
         isCrossply: true,
@@ -461,7 +461,6 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
         weight: x.crossplyWeight,
         colorId: x.crossplyColorId,
         widthId: x.crossplyWidthId,
-        createdDate: "",
         createdById: createdBy
       }
       detailList.push(detail);     

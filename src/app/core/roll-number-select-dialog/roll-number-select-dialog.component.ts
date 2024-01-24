@@ -24,7 +24,7 @@ export class RollNumberSelectDialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.crossplyService.getExtruderRollNumber(this.dataPassedFromParent.colorId, this.dataPassedFromParent.widthId).subscribe(response => {
-      console.log('data returned : ', response);
+      console.log('data returned crossplyService getExtruderRollNumber : ', response);
       this.dataSource = new MatTableDataSource(response);     
     });    
   }

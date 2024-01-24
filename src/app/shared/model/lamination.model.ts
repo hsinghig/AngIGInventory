@@ -55,6 +55,7 @@ export interface laminationDetailModel {
 }
 
 export interface laminationDetailInsertModel {
+    id: number;
     laminationId: number;
     isExtruder: boolean;
     isCrossply: boolean;
@@ -62,8 +63,7 @@ export interface laminationDetailInsertModel {
     length: number;
     weight: number;
     colorId: number;
-    widthId: number;
-    createdDate: string;
+    widthId: number;    
     createdById: number;
 }
 
@@ -73,8 +73,7 @@ export interface laminationInsertModel {
     referenceNumber: string;
     length: number;
     weight: number;
-    comment: string;
-    createdDate: string;
+    comment: string;    
     createdById: number;
     laminationDetailList: laminationDetailInsertModel[];
 }
