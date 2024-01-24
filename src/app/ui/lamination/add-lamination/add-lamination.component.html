@@ -141,7 +141,7 @@
                                   
                                 </mat-form-field>
     
-                                <button mat-mini-fab type="button" color="warn" matTooltip="Fetch Crossply Roll Number"
+                                <button mat-mini-fab type="button" color="primary" matTooltip="Fetch Crossply Roll Number"
                                     (click)="fetchCrossplyRollNumber(i)">
                                     <mat-icon>add</mat-icon>
                                 </button>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="action-button-container">
-                    <p>{{this.addLaminationFormGroup.value |json}}</p>
+                    <!-- <p>{{this.addLaminationFormGroup.value |json}}</p> -->
                     <button type="reset" mat-raised-button (click)="clearForm()">Clear Form</button>
                     <button type="submit" class="submitButton" color="warn" [disabled]="!addLaminationFormGroup.valid"
                         mat-raised-button>Save Lamination</button>

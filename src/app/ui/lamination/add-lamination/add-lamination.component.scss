@@ -38,8 +38,7 @@
 .add-extruder-crossply-buttons{
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
-    border:solid 1px gray;
+    justify-content: space-around;   
     padding: 1rem;
 }
 .child-container-extruder{
@@ -47,10 +46,11 @@
     flex-direction: column;   
 }
 .child-container-extruder-color{
-    background-color: orange;
+    background-color: #B7D0C4;
 }
 .child-container-crossply-color{
-    background-color: green;
+    background-color: #698A8D;
+    color:#fff;
 }
 .extruderDetail{
     margin-left: 1rem;
