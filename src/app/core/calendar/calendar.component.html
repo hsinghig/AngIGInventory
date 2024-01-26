@@ -1,0 +1,17 @@
+<div class="my-container">
+    <div class="parent-container">
+      <div class="month-container">
+        <h1>{{currentDate| date: 'MMM-YYYY'}}</h1>
+      </div>
+      <div class="days-container">
+        @for(day of daysList; track day){
+          <b class='day-item'>{{day}}</b>
+        }
+      </div>
+      <div class="date-container">
+        @for(day of dateList; track day){
+          <b class="date-item">{{day}}</b>
+        }
+      </div>
+    </div>
+  </div>
