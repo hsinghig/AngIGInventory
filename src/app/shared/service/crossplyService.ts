@@ -56,10 +56,14 @@ export class CrossplyService{
       );
     }
 
-    getCrossplyAllData():Observable<any[]>{
-      return this.http.get<any[]>(this.URL_GET_CROSSPLY_ALL_DATA).pipe(map((res:any) => res.data), 
-      catchError(this.handleError))
-    }
+    // getCrossplyAllData():Observable<any[]>{
+    //   return this.http.get<any[]>(this.URL_GET_CROSSPLY_ALL_DATA).pipe(map((res:any) => res.data), 
+    //   catchError(this.handleError))
+    // }
+
+    getCrossplyAllData$ = this.http.get<any[]>(this.URL_GET_CROSSPLY_ALL_DATA).pipe(map((res:any) => res.data), 
+    catchError(this.handleError));
+    
 
     getCrossplyDetailData():Observable<any[]>{
       return this.http.get<any[]>(this.URL_GET_CROSSPLY_DETAIL_DATA).pipe(map((res:any) => res.data), 

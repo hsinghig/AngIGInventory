@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ExtruderDownloadModel } from 'src/app/shared/model/extruder.model';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
 import { DownloadService } from 'src/app/shared/service/downloadService';
@@ -12,13 +13,17 @@ import { LaminationService } from 'src/app/shared/service/laminationService';
   templateUrl: './bannerbuttons.component.html',
   styleUrl: './bannerbuttons.component.scss'
 })
-export class BannerbuttonsComponent {
+export class BannerbuttonsComponent implements OnDestroy{
   colorList = ['#84A98C', '#9EAFA2', '#6CABA8'];
   @Input() headerText:string = '';
   @Input() headerTypePassed:string = '';
   @Input() showButtons:boolean = true;
   @Output() colorSelected = new EventEmitter<string>();
   @Output() buttonSelected = new EventEmitter<string>();
+
+  subExtruder$: Subscription | undefined;
+  subCrossply$: Subscription | undefined;
+  subLamination$: Subscription | undefined;
 
 
   constructor(private router: Router,  private downloadService:DownloadService,
@@ -59,7 +64,7 @@ export class BannerbuttonsComponent {
   }
 
   downloadExtruderFile(){
-    this.extruderService.getExtruderData().subscribe(data => {
+    this.subExtruder$ = this.extruderService.getExtruderData().subscribe(data => {
       var dataToPass:ExtruderDownloadModel[] = this.convertDataToExtruderDownloadModel(data);
       const headersToParse: string[] = ['extruderId', 'locationName', 'colorName', 'widthName', 
      'length', 'weight', 'rollNumber', 'createdDate', 'createdBy'];
@@ -70,8 +75,8 @@ export class BannerbuttonsComponent {
   }
 
   downloadCrossplyFile(){
-    this.crossplyService.getCrossplyAllData().subscribe(data => {
-      data.forEach(x => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
+    this.subCrossply$ = this.crossplyService.getCrossplyAllData$.subscribe(data => {
+      data.forEach((x:any) => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
     const headersToParse: string[] = ['crossplyId', 'crossplyLocation', 'crossplyColor', 'crossplyWidth', 
      'crossplyLength', 'crossplyWeight', 'crossplyRollNumber', 'crossplyCreatedDate', 'crossplyFullName'];
       const headersToShow: string[] = ['Id', 'Location', 'Color', 'Width', 'Length', 'Weight', 'RollNumber',
@@ -80,7 +85,7 @@ export class BannerbuttonsComponent {
     });
   }
   downloadLaminationFile(){
-    this.laminationService.getLaminationAllData().subscribe(data => {
+    this.subLamination$ = this.laminationService.getLaminationAllData().subscribe(data => {
       for(const element of data){
         element.laminationFullName = element.laminationFirstName + ' ' + element.laminationLastName;
       }
@@ -121,5 +126,11 @@ export class BannerbuttonsComponent {
     });
     console.log('print item list : ', itemList);
     return itemList;
+  }
+
+  ngOnDestroy(): void {
+    this.subExtruder$?.unsubscribe();
+    this.subCrossply$?.unsubscribe();
+    this.subLamination$?.unsubscribe();
   }
 }

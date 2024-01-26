@@ -5,7 +5,7 @@ import { inject } from "@angular/core";
 
 export const CrossplyResolver: ResolveFn<crossplyModel[]> = (
     route:ActivatedRouteSnapshot, state:RouterStateSnapshot) => {
-        return inject(CrossplyService).getCrossplyAllData();
+        return inject(CrossplyService).getCrossplyAllData$;
     };
 
 
