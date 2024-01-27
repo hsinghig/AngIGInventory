@@ -9,10 +9,10 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Choose Location</mat-label>
                         <mat-select formControlName="laminationLocationId" placeholder="Select Lamination Location" required>
-                            <!-- <mat-option *ngFor="let color of laminationLocationList"
-                            value="{{color.id}}">{{color.name}}</mat-option> -->
-                             <mat-option value="1">LAM A</mat-option>
-                            <mat-option value="2">LAM B</mat-option> 
+                            <mat-option *ngFor="let color of laminationLocationList"
+                            value="{{color.id}}">{{color.name}}</mat-option>
+                             <!-- <mat-option value="1">LAM A</mat-option>
+                            <mat-option value="2">LAM B</mat-option>  -->
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field>

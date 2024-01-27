@@ -480,9 +480,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
       this.crossplyColorList = x;
       this.laminationColorList= x;
     });
-    // this.locationSubscription = this.laminationService.getLaminationLocationList().subscribe(x => {
-    //   this.laminationLocationList = x;
-    // });
+    this.locationSubscription = this.laminationService.getLaminationLocationList().subscribe(x => {
+      this.laminationLocationList = x;
+    });
     this.userSubscription = this.inventoryCommonService.getAllUsers().subscribe(x =>{
       this.userList = x;
     });

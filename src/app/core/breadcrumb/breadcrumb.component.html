@@ -1,5 +1,7 @@
 <ul class="breadcrumb">
     <li *ngFor="let navLinkModel of navLinkModelList; index as i; first as isFirst">
+        @if (i !=0 ){
         <a routerLink={{navLinkModel.URL}}>{{navLinkModel.linkText}}</a>
+        }
     </li>
 </ul>

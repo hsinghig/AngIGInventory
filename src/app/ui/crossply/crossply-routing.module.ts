@@ -27,6 +27,9 @@ const routes: Routes = [{
     {
       path:'add',
       component:NewcrossplyaddComponent
+    },
+    {
+      path: '', redirectTo: 'home', pathMatch: 'full' 
     }
   ]
 }];

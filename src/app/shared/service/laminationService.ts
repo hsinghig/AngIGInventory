@@ -9,9 +9,8 @@ import { laminationInsertModel } from "../model/lamination.model";
   providedIn: 'root'
 })
 export class LaminationService{
-
   URL_GET_LAMINATION_COLORS=this.appConstantsService.getURLForString('URL_GET_LAMINATION_COLORS');
-  URL_GET_LAMINATION_LOCATIONS=this.appConstantsService.getURLForString(' URL_GET_LAMINATION_LOCATIONS');
+  URL_GET_LAMINATION_LOCATIONS=this.appConstantsService.getURLForString('URL_GET_LAMINATION_LOCATIONS');
   URL_GET_LAMINATION_ALL_DATA=this.appConstantsService.getURLForString('URL_GET_LAMINATION_ALL_DATA');
   URL_GET_LAMINATION_DETAIL_DATA=this.appConstantsService.getURLForString('URL_GET_LAMINATION_DETAIL_DATA');
   URL_GET_LAMINATION_BY_ID=this.appConstantsService.getURLForString('URL_GET_LAMINATION_BY_ID');
@@ -19,14 +18,8 @@ export class LaminationService{
   URL_POST_LAMINATION_INSERT=this.appConstantsService.getURLForString('URL_POST_LAMINATION_INSERT');
   URL_GET_LAMINATION_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_LAMINATION_SUMMARY_DATA');
 
-  URL_GET_ALL_WIDTHS = this.appConstantsService.getURLForString('URL_GET_ALL_WIDTHS');
-  URL_GET_USERS_ALL_USERS = this.appConstantsService.getURLForString('URL_GET_USERS_ALL_USERS');
-
   URL_GET_EXTRUDER_ROLLNUMBER = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_ROLLNUMBER');
-  URL_POST_EXTRUDER_INSERT = this.appConstantsService.getURLForString('URL_POST_EXTRUDER_INSERT');
-  URL_GET_EXTRUDER_ALL_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_ALL_DATA');
-  URL_GET_EXTRUDER_SUMMARY_DATA = this.appConstantsService.getURLForString('URL_GET_EXTRUDER_SUMMARY_DATA');
-
+  
 
     constructor(private http: HttpClient, private appConstantsService: AppConstantsService){}
 
@@ -37,18 +30,11 @@ export class LaminationService{
         map(res => res.data)
       );
     }
-
-    getLaminationLocations(): Observable<any[]>{
-      return this.http.get<any>(this.URL_GET_LAMINATION_LOCATIONS).pipe(
-        tap(x => {
-          console.log(x);
-        }),
-        map(res => res.data)
-      );
-    }
-
+    
     getLaminationLocationList():Observable<any[]>{
-      return this.http.get<any[]>(this.URL_GET_LAMINATION_LOCATIONS).pipe(map((res:any) => res.data), 
+      return this.http.get<any[]>(this.URL_GET_LAMINATION_LOCATIONS).pipe(
+        tap(data => console.log("data fetched lam locations ", JSON.stringify(data))),
+        map((res:any) => res.data), 
       catchError(this.handleError))
     }
 
