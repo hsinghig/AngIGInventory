@@ -9,35 +9,14 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Choose Location</mat-label>
                         <mat-select formControlName="laminationLocationId" placeholder="Select Lamination Location" required>
-                            <mat-option *ngFor="let color of laminationLocationList"
-                            value="{{color.id}}">{{color.name}}</mat-option>
-                             <!-- <mat-option value="1">LAM A</mat-option>
-                            <mat-option value="2">LAM B</mat-option>  -->
+                            <mat-option *ngFor="let location of laminationLocationList"
+                            value="{{location.id}}">{{location.name}}</mat-option>                         
                         </mat-select>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Choose Color</mat-label>
-                        <mat-select formControlName="laminationColorId" required>
-                            <mat-option *ngFor="let color of laminationColorList"
-                                value="{{color.id}}">{{color.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    </mat-form-field>                  
                     <mat-form-field>
                         <mat-label>Reference Number</mat-label>
                         <input matInput formControlName="laminationReferenceNumber" value="2">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Enter Length</mat-label>
-                        <input formControlName="laminationLength" type="number" min="0" max="999999" matInput
-                            placeholder="Length" required>
-                        <mat-hint>Length in number ex: 322</mat-hint>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Enter Weight</mat-label>
-                        <input formControlName="laminationWeight" type="number" min="0" max="999999" matInput
-                            placeholder="Weight" required>
-                        <mat-hint>Weight in number ex: 200</mat-hint>
-                    </mat-form-field>
+                    </mat-form-field>                  
                     <mat-form-field class="laminationSubmittedBy">
                         <mat-label>Submitted By</mat-label>
                         <mat-select formControlName="laminationSubmittedBy" required>
@@ -95,6 +74,13 @@
                                     <input formControlName="extruderWeight" type="number" min="0" max="999999" matInput
                                         placeholder="Weight" required>                                    
                                 </mat-form-field>
+                                <mat-form-field class="small-control" appearance="fill">
+                                    <mat-label>Winder No.</mat-label>
+                                    <mat-select formControlName="extruderWinderNumber" required>
+                                        <mat-option *ngFor="let number of  winderNumberList"
+                                            value="{{number}}">{{number}}</mat-option>
+                                    </mat-select>                                   
+                                </mat-form-field>
                                 <button mat-mini-fab type="button" color="accent" matTooltip="Fetch Extruder Roll Number"
                                     (click)="fetchExtruderRollNumber(i)">
                                     <mat-icon>add</mat-icon>
@@ -140,7 +126,13 @@
                                         placeholder="Weight" required>
                                   
                                 </mat-form-field>
-    
+                                <mat-form-field class="small-control" appearance="fill">
+                                    <mat-label>Winder No.</mat-label>
+                                    <mat-select formControlName="crossplyWinderNumber" required>
+                                        <mat-option *ngFor="let number of  winderNumberList"
+                                            value="{{number}}">{{number}}</mat-option>
+                                    </mat-select>                                   
+                                </mat-form-field>
                                 <button mat-mini-fab type="button" color="primary" matTooltip="Fetch Crossply Roll Number"
                                     (click)="fetchCrossplyRollNumber(i)">
                                     <mat-icon>add</mat-icon>

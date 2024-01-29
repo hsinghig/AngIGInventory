@@ -22,8 +22,7 @@ export class LaminationdetailComponent implements OnInit{
   @Input() headerColor = '#84A98C';
    columnsToDisplay: string[] = 
    ['laminationId', 'laminationLocationName',
-   'laminationColorName', 'laminationLength',
-   'laminationWeight', 'referenceNumber','laminationFullName',
+    'referenceNumber','laminationFullName',
     'laminationCreatedDate'];
   
   dataSource: any[] = [];

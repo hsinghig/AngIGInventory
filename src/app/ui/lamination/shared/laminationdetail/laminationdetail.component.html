@@ -12,22 +12,6 @@
     <td mat-cell *matCellDef="let element"> {{element.lamination.laminationLocationName}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="laminationColorName">
-    <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor"> Color
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.lamination.laminationColorName}} </td>
-  </ng-container>
-  <ng-container matColumnDef="laminationLength">
-    <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
-      Length </th>
-    <td mat-cell *matCellDef="let element"> {{element.lamination.laminationLength}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="laminationWeight">
-    <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">
-      Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.lamination.laminationWeight}} </td>
-  </ng-container>
 
   <ng-container matColumnDef="referenceNumber">
     <th class="extruder-col-headerStyle" mat-header-cell *matHeaderCellDef [style.background-color]="headerColor">

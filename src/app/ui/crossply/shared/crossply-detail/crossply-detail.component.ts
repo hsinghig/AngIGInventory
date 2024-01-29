@@ -36,6 +36,7 @@ export class CrossplyDetailComponent implements OnInit{
 
   ngOnInit(): void {
     this.crossplyService.getCrossplySummaryData().subscribe(x => {    
+      console.log('crossply detail component : getCrossplySummaryData : ', x);
       this.dataSource = x;
     })
   }

@@ -5,55 +5,46 @@
       <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.crossplyDetailId}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="colorZeroColor">
-      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 </th>
-      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorZeroColor}} </td>
+    <ng-container matColumnDef="crossplyId">
+      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Crossply Id </th>
+      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.crossplyId}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="colorZeroWidth">
-      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 Width </th>
-      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorZeroWidth}} </td>
+    <ng-container matColumnDef="detailColorName">
+      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color </th>
+      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.detailColorName}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="colorZeroRollNumber">
-      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 RollNumber </th>
-      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorZeroRollNumber}} </td>
+    <ng-container matColumnDef="detailWidthName">
+      <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Width </th>
+      <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.detailWidthName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="colorZeroLength">
-        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 Length </th>
-        <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorZeroWidth}} </td>
+    <ng-container matColumnDef="detailRollNumber">
+        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Roll Number </th>
+        <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.detailRollNumber}} </td>
       </ng-container>
     
-      <ng-container matColumnDef="colorZeroWeight">
-        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 Weight </th>
-        <td class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.colorZeroWeight}} </td>
+      <ng-container matColumnDef="detailLength">
+        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Length </th>
+        <td class="extruder-detail-rowStyle"  mat-cell *matCellDef="let element"> {{element.detailLength}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="colorNinetyColor">
-        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 </th>
-        <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorNinetyColor}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="colorNinetyWidth">
-        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 Width </th>
-        <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorNinetyWidth}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="colorNinetyRollNumber">
-        <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 RollNumber </th>
-        <td   class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorNinetyRollNumber}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="colorNinetyLength">
-          <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 Length </th>
-          <td   class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorNinetyWidth}} </td>
+      <ng-container matColumnDef="detailWeight">
+          <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Weight </th>
+          <td   class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.detailWeight}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isColorZero">
+          <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #0 </th>
+          <td   class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.isColorZero}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isColorNinety">
+          <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 </th>
+          <td   class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.isColorNinety}} </td>
         </ng-container>
       
-        <ng-container matColumnDef="colorNinetyWeight">
-          <th mat-header-cell *matHeaderCellDef class="extruder-detail-headerStyle"> Color #90 Weight </th>
-          <td  class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.colorNinetyWeight}} </td>
-        </ng-container>
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

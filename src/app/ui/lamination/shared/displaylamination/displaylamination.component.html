@@ -13,25 +13,6 @@
             <td mat-cell *matCellDef="let element"> {{element.laminationLocationName}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="laminationColorName">
-            <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
-                [style.background-color]="headerColor"> Color </th>
-            <td mat-cell *matCellDef="let element"> {{element.laminationColorName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="laminationLength">
-            <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
-                [style.background-color]="headerColor"> Length </th>
-            <td mat-cell *matCellDef="let element"> {{element.laminationLength}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="laminationWeight">
-            <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
-                [style.background-color]="headerColor"> Weight </th>
-            <td mat-cell *matCellDef="let element"> {{element.laminationWeight}} </td>
-        </ng-container>
-
-
         <ng-container matColumnDef="referenceNumber">
             <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
                 [style.background-color]="headerColor"> Reference Number </th>
@@ -51,6 +32,12 @@
                 }} </td>
         </ng-container>
 
+        
+        <ng-container matColumnDef="laminationComment">
+            <th class="extruder-col-headerStyle" mat-sort-header mat-header-cell *matHeaderCellDef
+                [style.background-color]="headerColor"> Comment </th>
+            <td mat-cell *matCellDef="let element"> {{element.laminationComment}} </td>
+        </ng-container>
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

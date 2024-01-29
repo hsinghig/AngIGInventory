@@ -1,46 +1,50 @@
-.newcrossplyadd-parent-container{
+.add-lamination-parent-container{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.newcrossplyadd-form-container{
-    width: 800px;   
+.add-lamination-form-container {
+    width: 816px;   
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FCFAEA;
     flex-direction: column;
 }
-.newcrossplyadd-header{
+.add-lamination-header{
     padding-top:0.4rem;
 }
-.newcrossplyadd-form-body{
-    
+.add-lamination-form-body{    
     width: 100%;
-    background-color: #e3f3e3;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    background-color: #e3f3e3;   
 }
-.form-container{
+.lamination-container{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: row;
+    padding-top:0.4rem;
 }
-.extruder-crossply-buttons{
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+
+.laminationComment {
+    width: 80%;
+    margin-left:1rem;
 }
-.extruder-detail-parent{
+.add-extruder-crossply-buttons{
     display: flex;
-    flex-direction: column;   
+    flex-wrap: nowrap;
+    justify-content: space-around;   
+    padding: 1rem;
 }
-.extruder-detail-parent-colorzero{
+.child-container-extruder{
+    display: flex;
+    flex-direction: column;  
+    width: 100%;  
+}
+.child-container-extruder-color{
     background-color: #B7D0C4;
 }
-.extruder-detail-parent-colorninety{
+.child-container-crossply-color{
     background-color: #698A8D;
     color:#fff;
 }
@@ -48,17 +52,17 @@
     margin-left: 1rem;
     font-weight: bold;
 }
-.colorzero-container{
+.child-container-detail{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around;   
 }
 .small-control{
-    width: 180px;
+    width: 144px;
 }
 .smaller-control{
-    width: 140px;
+    width: 128px;
 }
 .smallest-control{
     width: 80px;

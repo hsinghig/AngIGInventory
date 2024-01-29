@@ -4,7 +4,7 @@
     align-items: center;
 }
 .add-lamination-form-container {
-    width: 800px;   
+    width: 816px;   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,24 +16,19 @@
 }
 .add-lamination-form-body{    
     width: 100%;
-    background-color: #e3f3e3;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    background-color: #e3f3e3;   
 }
 .lamination-container{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: row;
+    padding-top:0.4rem;
 }
-.lamination-comment-container{
-    margin-left:2rem;  
-   
-}
+
 .laminationComment {
     width: 80%;
+    margin-left:1rem;
 }
 .add-extruder-crossply-buttons{
     display: flex;
@@ -43,7 +38,8 @@
 }
 .child-container-extruder{
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;  
+    width: 100%;  
 }
 .child-container-extruder-color{
     background-color: #B7D0C4;
@@ -63,10 +59,10 @@
     justify-content: space-around;   
 }
 .small-control{
-    width: 180px;
+    width: 144px;
 }
 .smaller-control{
-    width: 140px;
+    width: 128px;
 }
 .smallest-control{
     width: 80px;

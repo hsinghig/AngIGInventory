@@ -22,6 +22,7 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
 export class AddLaminationComponent implements OnInit, OnDestroy {
   formHasErrors: boolean = false;
   errorList: string[] = [];
+  winderNumberList = [1,2,3,4,5,6,7,8,9,10];
 
   locationSubscription: Subscription | undefined;
   colorSubscription: Subscription | undefined;
@@ -111,12 +112,15 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   }
 
   getExtruderFormGroup(){
+
+    
     const extruderFormGroup = this.fb.group({
       extruderColorId: new FormControl("", [Validators.required]),
       extruderWidthId: new FormControl("", [Validators.required]),
       extruderRollNumber: new FormControl('', [Validators.required]),
       extruderLength: new FormControl('', [Validators.required]),
-      extruderWeight: new FormControl('', [Validators.required])
+      extruderWeight: new FormControl('', [Validators.required]),
+      extruderWinderNumber: new FormControl('', [Validators.required])
     });
     return extruderFormGroup;
   }
@@ -127,7 +131,8 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
       crossplyWidthId: new FormControl("", [Validators.required]),
       crossplyRollNumber: new FormControl('', [Validators.required]),
       crossplyLength: new FormControl('', [Validators.required]),
-      crossplyWeight: new FormControl('', [Validators.required])
+      crossplyWeight: new FormControl('', [Validators.required]),
+      crossplyWinderNumber: new FormControl('', [Validators.required])
     });
     return crossplyFormGroup;
   }

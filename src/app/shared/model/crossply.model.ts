@@ -48,17 +48,15 @@ export interface crossplyDetailModel {
 }
 
 export interface crossplyDetailInsertModel {
+    id: number;
     crossplyId: number;
-    colorZeroRollNumber: number;
-    colorNinetyRollNumber: number;
-    colorZeroColorId: number;
-    colorZeroWidthId: number;
-    colorZeroLength: number;
-    colorZeroWeight: number;
-    colorNinetyColorId: number;
-    colorNinetyWidthId: number;
-    colorNinetyLength: number;
-    colorNinetyWeight: number;
+    isColorZero: boolean;
+    isColorNinety: boolean;
+    extruderRollNumber: number;
+    extruderLength: number;
+    extruderWeight: number;
+    extruderColorId: number;
+    extruderWidthId: number;    
     createdById: number;
     createdBy: string;
 }

@@ -13,7 +13,7 @@ import { DownloadService } from 'src/app/shared/service/downloadService';
   styleUrl: './display-crossply.component.scss'
 })
 export class DisplayCrossplyComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() headerColor = '#84A98C';
+  @Input() headerColor = '#84A98C'; 
   sub$: Subscription | undefined;
   myData: crossplyModel[] = [];
   dataSourceData: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -37,9 +37,10 @@ export class DisplayCrossplyComponent implements OnInit, AfterViewInit, OnDestro
 
   ngAfterViewInit(): void {
     this.sub$ = this.crossplyService.getCrossplyAllData$.subscribe(data => {
-      data.forEach((x: any) => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
-      this.dataSourceData = new MatTableDataSource(data);
-      this.setSortAccessors();
+      console.log('data fetched crossply display-crossply', data);     
+        data.forEach((x: any) => x.crossplyFullName = x.crossplyFirstName + " " + x.crossplyLastName);
+        this.dataSourceData = new MatTableDataSource(data);
+        this.setSortAccessors();     
     });
   }
 
