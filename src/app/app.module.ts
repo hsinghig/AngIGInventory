@@ -8,6 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { CoreModule } from "./core/core.module";
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { CoreModule } from "./core/core.module";
         CoreModule
     ],
     providers: [
-        provideHttpClient()
+        provideHttpClient(),
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
     ], 
     bootstrap: [AppComponent]
 })
