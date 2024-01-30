@@ -156,7 +156,8 @@
                     </div>
                 </div>
                 <div class="action-button-container">
-                    <!-- <p>{{this.addLaminationFormGroup.value |json}}</p> -->
+                    <!-- <p>{{this.addLaminationFormGroup.value |json}}</p>
+                    <p>Valid {{this.addLaminationFormGroup.valid}}</p> -->
                     <button type="reset" mat-raised-button (click)="clearForm()">Clear Form</button>
                     <button type="submit" class="submitButton" color="warn" [disabled]="!addLaminationFormGroup.valid"
                         mat-raised-button>Save Lamination</button>

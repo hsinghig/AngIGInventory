@@ -44,9 +44,6 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   public addLaminationFormGroup = this.fb.group({
     laminationLocationId: new FormControl('', [Validators.required]),
     laminationReferenceNumber: new FormControl('', [Validators.required]),
-    laminationColorId: new FormControl('', [Validators.required]),
-    laminationLength: new FormControl('', [Validators.required]),
-    laminationWeight: new FormControl('', [Validators.required]),
     laminationSubmittedBy: new FormControl('', [Validators.required]),
     laminationComment: new FormControl(''),
     extruderList: new FormArray([
@@ -89,12 +86,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       this.resetValues();
     });
-    this.addLaminationFormGroup.controls['laminationColorId'].valueChanges.pipe(
-      debounceTime(100),
-      distinctUntilChanged()
-    ).subscribe(data => {
-      this.resetValues();
-    });
+   
   }
 
   resetValues(){
