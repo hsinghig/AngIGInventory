@@ -5,4 +5,7 @@ export interface ColorModel{
     isCrossPly: boolean;
     isActive: boolean;
     comment: string;
+    extruderWtMultiplier: number;
+    crossplyWtMultiplier:number;
+
 }

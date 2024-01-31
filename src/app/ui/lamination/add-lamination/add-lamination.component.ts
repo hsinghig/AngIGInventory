@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { INCHES_TO_FEET_MULTIPLIER } from 'src/app/app.contants';
 import { CrossplyRollNumberSelectDialogComponent } from 'src/app/core/crossply-roll-number-select-dialog/crossply-roll-number-select-dialog.component';
 import { RollNumberSelectDialogComponent } from 'src/app/core/roll-number-select-dialog/roll-number-select-dialog.component';
 import { SaveDialogComponent } from 'src/app/core/savedialog/savedialog.component';
@@ -111,7 +112,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
       extruderWidthId: new FormControl("", [Validators.required]),
       extruderRollNumber: new FormControl('', [Validators.required]),
       extruderLength: new FormControl('', [Validators.required]),
-      extruderWeight: new FormControl('', [Validators.required]),
+      extruderWeight: new FormControl(''),
       extruderWinderNumber: new FormControl('', [Validators.required])
     });
     return extruderFormGroup;
@@ -123,7 +124,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
       crossplyWidthId: new FormControl("", [Validators.required]),
       crossplyRollNumber: new FormControl('', [Validators.required]),
       crossplyLength: new FormControl('', [Validators.required]),
-      crossplyWeight: new FormControl('', [Validators.required]),
+      crossplyWeight: new FormControl(''),
       crossplyWinderNumber: new FormControl('', [Validators.required])
     });
     return crossplyFormGroup;
@@ -288,7 +289,35 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   }
 
   //#endregion "Add Button Actions"
+  calculateWeight(isExtruder: boolean, colorId:string, length:number, widthId:string){
+    var returnValue = 1;
+    var color = this.getColorMultiplier(isExtruder, colorId);
+    var width = this.widthList.find(x => x.id.toString() == widthId)?.name;
+    var widthMultiplier = 1;
+    if (width != null && color !=null){
+      widthMultiplier = INCHES_TO_FEET_MULTIPLIER * +(width);
+      console.log("extruder : ", isExtruder, " ,color : ", color, " ,length: ", length, " ,width: ", width, " , widthMultiplier: ", widthMultiplier);
+      returnValue = Math.round(color * length * widthMultiplier);
+      console.log("Calculated value : ", returnValue);      
+    }
+    return returnValue;
+  }
 
+  getColorMultiplier(isExtruder:boolean, colorId:string){
+    var returnValue = 1;
+    if (isExtruder){
+      var color = this.extruderColorList.find(x => x.id.toString() == colorId && x.isExtuder == true)?.extruderWtMultiplier;
+      if (color !=null){
+        returnValue = color;
+      }     
+    }else {
+      var color = this.extruderColorList.find(x => x.id.toString() == colorId && x.isCrossPly == true)?.crossplyWtMultiplier;
+      if (color !=null){
+        returnValue = color;
+      }
+    }
+    return returnValue;
+  }
   onSubmit() {
     this.resetErrors();
     var item:any = this.addLaminationFormGroup.getRawValue();
@@ -426,6 +455,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     var createdBy = this.getUserId();   
     var detailList:laminationDetailInsertModel[] = [];
     extruderList.forEach(x => {
+      if (x.extruderWeight == null || x.extruderWeight <=0){
+        x.extruderWeight = this.calculateWeight(true, x.extruderColorId, x.extruderLength, x.extruderWidthId);
+      }
       var detail:laminationDetailInsertModel = {
         id: 0,
         laminationId: 0,
@@ -448,6 +480,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
    
     var detailList:laminationDetailInsertModel[] = [];
     crossplyList.forEach(x => {
+      if (x.crossplyWeight == null || x.crossplyWeight <=0){
+        x.crossplyWeight = this.calculateWeight(false, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
+      }
       var detail:laminationDetailInsertModel = {
         id: 0,
         laminationId: 0,

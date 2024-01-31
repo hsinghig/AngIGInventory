@@ -3,14 +3,12 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
-import { CrossplyRollNumberSelectDialogComponent } from 'src/app/core/crossply-roll-number-select-dialog/crossply-roll-number-select-dialog.component';
+import { INCHES_TO_FEET_MULTIPLIER } from 'src/app/app.contants';
 import { RollNumberSelectDialogComponent } from 'src/app/core/roll-number-select-dialog/roll-number-select-dialog.component';
 import { SaveDialogComponent } from 'src/app/core/savedialog/savedialog.component';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { crossplyDetailInsertModel, crossplyInsertModel } from 'src/app/shared/model/crossply.model';
-import { laminationDetailInsertModel, laminationInsertModel } from 'src/app/shared/model/lamination.model';
-import { LocationModel } from 'src/app/shared/model/locationModel';
-import { RollNumberFetchedModel, RollNumberFetchedList, RollNumberFormValuesModel } from 'src/app/shared/model/rollNumber.model';
+import { RollNumberFormValuesModel } from 'src/app/shared/model/rollNumber.model';
 import { UserModel } from 'src/app/shared/model/userModel';
 import { WidthModel } from 'src/app/shared/model/widthModel';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
@@ -37,10 +35,10 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   crossplyColorSubscription: Subscription | undefined;
   getExtruderRollNumberSubscription: Subscription | undefined;
 
-  extruderColorList: any[] = [];
-  widthList: any[] = [];
+  extruderColorList: ColorModel[] = [];
+  widthList: WidthModel[] = [];
   // NOTE LAMINATION COLOR LIST IS SAME AS CROSSPLY COLOR LIST
-  crossplyColorList: any[] = [];
+  crossplyColorList: ColorModel[] = [];
   crossplyLocationList: any[] = [];
   laminationColorList: any[] = [];
   userList: UserModel[] = [];
@@ -49,9 +47,9 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     locationId: new FormControl('', [Validators.required]),    
     colorId: new FormControl('', [Validators.required]),
     widthId: new FormControl('', [Validators.required]),
-    rollNumber: new FormControl('', [Validators.required]),
+    rollNumber: new FormControl(''),
     length: new FormControl('', [Validators.required]),
-    weight: new FormControl('', [Validators.required]),
+    weight: new FormControl(''),
     userId: new FormControl('', [Validators.required]),
     comment: new FormControl(''),
     extruderList: new FormArray([
@@ -125,7 +123,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
       extruderWidthId: new FormControl("", [Validators.required]),
       extruderRollNumber: new FormControl('', [Validators.required]),
       extruderLength: new FormControl('', [Validators.required]),
-      extruderWeight: new FormControl('', [Validators.required])
+      extruderWeight: new FormControl('')
     });
     return extruderFormGroup;
   }
@@ -136,7 +134,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
       crossplyWidthId: new FormControl("", [Validators.required]),
       crossplyRollNumber: new FormControl('', [Validators.required]),
       crossplyLength: new FormControl('', [Validators.required]),
-      crossplyWeight: new FormControl('', [Validators.required])
+      crossplyWeight: new FormControl('')
     });
     return crossplyFormGroup;
   }
@@ -313,6 +311,10 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     var detailCrossplyList = this.mapCrossplyTocrossplyDetailInsertModel(item.crossplyList);
     var detailList:crossplyDetailInsertModel[] = [...detailExtruderList, ...detailCrossplyList];
 
+    if (item.weight == null || item.weight <=0){
+      item.weight = this.calculateWeight(false, item.colorId, item.length, item.widthId);
+    }
+
     var request:crossplyInsertModel = {   
       locationId: +item.locationId,
       colorId: +item.colorId,
@@ -347,6 +349,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   }
 
   validateFormValues(data:crossplyInsertModel){
+    console.log('Validation for crossply object : ', data);
     this.errorList = [];
     if (data.locationId == null){
       this.errorList.push('Crossply Location field is required');
@@ -448,6 +451,37 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     var item = this.userList.find(x => x.id == createdById);
     return item?.displayName;
   }
+
+  calculateWeight(isExtruder: boolean, colorId:string, length:number, widthId:string){
+    var returnValue = 1;
+    var color = this.getColorMultiplier(isExtruder, colorId);
+    var width = this.widthList.find(x => x.id.toString() == widthId)?.name;
+    var widthMultiplier = 1;
+    if (width != null && color !=null){
+      widthMultiplier = INCHES_TO_FEET_MULTIPLIER * +(width);
+      console.log("extruder : ", isExtruder, " ,color : ", color, " ,length: ", length, " ,width: ", width, " , widthMultiplier: ", widthMultiplier);
+      returnValue = Math.round(color * length * widthMultiplier);
+      console.log("Calculated value : ", returnValue);      
+    }
+    return returnValue;
+  }
+
+  getColorMultiplier(isExtruder:boolean, colorId:string){
+    var returnValue = 1;
+    if (isExtruder){
+      var color = this.extruderColorList.find(x => x.id.toString() == colorId && x.isExtuder == true)?.extruderWtMultiplier;
+      if (color !=null){
+        returnValue = color;
+      }     
+    }else {
+      var color = this.extruderColorList.find(x => x.id.toString() == colorId && x.isCrossPly == true)?.crossplyWtMultiplier;
+      if (color !=null){
+        returnValue = color;
+      }
+    }
+    return returnValue;
+  }
+
   mapExtruderTocrossplyDetailInsertModel(extruderList:any[]){
     var createdUserId:number = this.getUserId();   
     var username:string = this.getCreatedBy(createdUserId) ?? "";
@@ -456,6 +490,9 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     var isColorNinety:boolean = false;
     isColorZero = true;
     extruderList.forEach(x => {
+      if (x.extruderWeight == null || x.extruderWeight <=0){
+        x.extruderWeight = this.calculateWeight(true, x.extruderColorId, x.extruderLength, x.extruderWidthId);
+      }
       var detail:crossplyDetailInsertModel = {
         id: 0,
         crossplyId:0,
@@ -483,6 +520,10 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
    
     isColorNinety = true;
     extruderList.forEach(x => {
+      if (x.crossplyWeight == null || x.crossplyWeight <=0){
+        x.crossplyWeight = this.calculateWeight(false, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
+      }
+
       var detail:crossplyDetailInsertModel = {
         id: 0,
         crossplyId:0,
@@ -506,6 +547,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
       this.crossplyLocationList = response;
     });
     this.extruderColorSubscription = this.extruderService.getExtruderColors().subscribe(x => {
+      console.log('data for color : ', x);
       this.extruderColorList = x;
     });
     this.widthSubscription = this.inventoryCommonService.getWidths().subscribe(x => {

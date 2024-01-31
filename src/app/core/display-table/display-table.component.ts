@@ -18,7 +18,7 @@ export class DisplayTableComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.getColumnsDisplay();
     this.displayData= convertDataType(HARDCODED_DATA);
-    console.log(this.displayData);
+   // console.log(this.displayData);
     this.dataSource = new MatTableDataSource(this.displayData);
   }
 
@@ -34,7 +34,7 @@ export class DisplayTableComponent implements OnInit, AfterViewInit{
   getColumnsDisplay() {
     const itemList:ITableColumnDisplay[] = TABLE_COLUMN_LIST_SMALL;
     this.displayedColumns = itemList.map(x => x.columnDisplayName);
-    console.log(this.displayedColumns);
+  //  console.log(this.displayedColumns);
   }
 
   getColumnValue(columnNamePassed: string, row:any){

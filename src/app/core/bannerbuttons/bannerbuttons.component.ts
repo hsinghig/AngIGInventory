@@ -124,7 +124,7 @@ export class BannerbuttonsComponent implements OnDestroy{
       }
       itemList.push(model);
     });
-    console.log('print item list : ', itemList);
+    // console.log('print item list : ', itemList);
     return itemList;
   }
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { INCHES_TO_FEET_MULTIPLIER } from 'src/app/app.contants';
 import { SaveDialogComponent } from 'src/app/core/savedialog/savedialog.component';
 import { ColorModel } from 'src/app/shared/model/colorModel';
 import { ExtruderInsertModel, ExtruderValidFormModel } from 'src/app/shared/model/extruderInsertModel';
@@ -35,7 +36,7 @@ export class AddExtruderComponent implements OnInit {
     colorId: new FormControl(0, [Validators.required]),
     widthId: new FormControl(0, [Validators.required]),
     rollNumber: new FormControl(''),
-    length: new FormControl(0),
+    length: new FormControl(0, [Validators.required]),
     weight: new FormControl(0),
     createdById: new FormControl(0, [Validators.required]),
     comment: new FormControl('')
@@ -66,6 +67,31 @@ export class AddExtruderComponent implements OnInit {
     this.showError = false;
     this.addExtruderFormGroup.reset();
   }
+  calculateWeight(colorId?:string, length?:number, widthId?:number){
+    var returnValue = 1;
+    if (colorId == null || length == null){
+      return returnValue;
+    }
+    var color = this.getColorMultiplier(colorId);
+    var width = this.widthList.find(x => x.id == widthId)?.name;
+    var widthMultiplier = 1;
+    if (width != null && color !=null){
+      widthMultiplier = INCHES_TO_FEET_MULTIPLIER * +(width);
+      console.log("extruder : ", true , " ,color : ", color, " ,length: ", length, " ,width: ", width, " , widthMultiplier: ", widthMultiplier);
+      returnValue = Math.round(color * length * widthMultiplier);
+      console.log("Calculated value : ", returnValue);      
+    }
+    return returnValue;
+  }
+
+  getColorMultiplier(colorId:string){
+    var returnValue = 1;   
+      var color = this.colorList.find(x => x.id.toString() == colorId && x.isExtuder == true)?.extruderWtMultiplier;
+      if (color !=null){
+        returnValue = color;
+      } 
+    return returnValue;
+  }
 
   checkFormValid(): ExtruderValidFormModel {
 
@@ -73,10 +99,15 @@ export class AddExtruderComponent implements OnInit {
     const colorIdValue = this.addExtruderFormGroup.controls['colorId'].value;
     const widthIdValue = this.addExtruderFormGroup.controls['widthId'].value;
     const createdByIdValue = this.addExtruderFormGroup.controls['createdById'].value;
-    const weightValue = this.addExtruderFormGroup.controls['weight'].value;
+    var weightValue = this.addExtruderFormGroup.controls['weight'].value;
     const lengthValue = this.addExtruderFormGroup.controls['length'].value;
     const rollNumberValue = this.addExtruderFormGroup.controls['rollNumber'].value;
     const commentValue = this.addExtruderFormGroup.controls['comment'].value;
+
+    
+    if ((weightValue == null || weightValue <=0) && (lengthValue !=null) && (widthIdValue !=null)){
+      weightValue = this.calculateWeight(colorIdValue?.toString(), lengthValue, widthIdValue);
+    }
 
     const item: ExtruderInsertModel = {
       locationId: locationIdValue == null ? 0 : locationIdValue,
@@ -166,7 +197,7 @@ export class AddExtruderComponent implements OnInit {
     });
 
     this.extruderService.getExtruderLocations().subscribe(response => {
-      console.log('Data coming from locations', response);
+      //console.log('Data coming from locations', response);
       this.locationList = response;
     });
 
