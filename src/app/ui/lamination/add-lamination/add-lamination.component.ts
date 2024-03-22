@@ -21,6 +21,7 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
   styleUrl: './add-lamination.component.scss'
 })
 export class AddLaminationComponent implements OnInit, OnDestroy {
+  SEPERATOR_STRING: string = '-(';
   formHasErrors: boolean = false;
   errorList: string[] = [];
   winderNumberList = [1,2,3,4,5,6,7,8,9,10];
@@ -170,7 +171,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
             if (result.data !=null){
               if (controlName == 'extruder'){                           
                 this.addLaminationFormGroup.get(['extruderList', formValues.indexFetched])?.patchValue({
-                  extruderRollNumber: result.data.id
+                  extruderRollNumber: result.data.id + '-(' + result.data.rollnumber + ')'
                 });             
               }             
             }
@@ -201,7 +202,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
             if (result.data !=null){
               if (controlName == 'crossply'){                           
                 this.addLaminationFormGroup.get(['crossplyList', formValues.indexFetched])?.patchValue({
-                  crossplyRollNumber: result.data.id
+                  crossplyRollNumber: result.data.id + '-(' + result.data.rollnumber + ')'
                 });             
               }             
             }
@@ -267,7 +268,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   //#region "Add Button Actions"
 
   addExtruder() {
-    if (this.extruderList.length < 3) {
+    if (this.extruderList.length < 5) {
       this.extruderList.push(this.getExtruderFormGroup());
     }
   }
@@ -342,9 +343,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     if (this.formHasErrors == false){
       try{
         console.log('Form sent to service', request);
-        this.laminationService.insertLamination(request).subscribe(data =>{
-          this.launchDialog(false);
-        });  
+         this.laminationService.insertLamination(request).subscribe(data =>{
+           this.launchDialog(false);
+         });  
       }catch(error){
         this.launchDialog(true);
         this.formHasErrors =true;
@@ -463,7 +464,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
         laminationId: 0,
         isExtruder: true,
         isCrossply: false,
-        rollNumberId: x.extruderRollNumber,
+        rollNumberId: this.getStringValue(x.extruderRollNumber,this.SEPERATOR_STRING) ,
         length: x.extruderLength,
         weight: x.extruderWeight,
         colorId: x.extruderColorId,
@@ -488,7 +489,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
         laminationId: 0,
         isExtruder: false,
         isCrossply: true,
-        rollNumberId: x.crossplyRollNumber,
+        rollNumberId: this.getStringValue(x.crossplyRollNumber, this.SEPERATOR_STRING),
         length: x.crossplyLength,
         weight: x.crossplyWeight,
         colorId: x.crossplyColorId,
@@ -499,6 +500,11 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     });
     return detailList;
 
+  }
+
+  getStringValue(passedValue:string, separatorString: string){
+    const indexOf = passedValue.indexOf(separatorString);
+    return +(passedValue.substring(0, indexOf));
   }
 
   loadDropdowns(){

@@ -4,7 +4,7 @@
     align-items: center;
 }
 .add-lamination-form-container {
-    width: 816px;   
+    width: 1008px;   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,8 @@
 
 .laminationComment {
     width: 80%;
-    margin-left:1rem;
+    margin-left:2rem;
+    padding-left:1.6rem;
 }
 .add-extruder-crossply-buttons{
     display: flex;
@@ -65,7 +66,7 @@
     width: 128px;
 }
 .smallest-control{
-    width: 80px;
+    width: 200px;
 }
 .show-error {
     background-color: rgb(245, 229, 224);

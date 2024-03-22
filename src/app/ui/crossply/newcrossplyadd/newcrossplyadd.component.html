@@ -65,7 +65,7 @@
                     <button type="button" mat-raised-button color="warn" (click)="removeColorZeroExtruder()">Remove
                         Color #0</button>
                     <button type="button" mat-raised-button color="primary" (click)="addColorNinetyExtruder()">Add
-                        Color #90 (max of 3)</button>
+                        Color #90 (max of 5)</button>
                     <button type="button" mat-raised-button color="warn" (click)="removeColorNinetyExtruder()">Remove
                         Color #90</button>
                 </div>
@@ -91,9 +91,9 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
-                                    <mat-label>Length</mat-label>
+                                    <mat-label>Length used</mat-label>
                                     <input formControlName="extruderLength" type="number" min="0" max="999999" matInput
-                                        placeholder="Length" required>
+                                        placeholder="Length used" required>
 
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
@@ -107,7 +107,7 @@
                                 </button>
                                 <mat-form-field class="smallest-control">
                                     <mat-label>Roll Number</mat-label>
-                                    <input matInput formControlName="extruderRollNumber" value="2" readonly>
+                                    <input matInput formControlName="extruderRollNumber" readonly>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -135,9 +135,9 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
-                                    <mat-label>Length</mat-label>
+                                    <mat-label>Length used</mat-label>
                                     <input formControlName="crossplyLength" type="number" min="0" max="999999" matInput
-                                        placeholder="Length" required>
+                                        placeholder="Length used" required>
 
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
@@ -152,7 +152,7 @@
                                 </button>
                                 <mat-form-field class="smallest-control">
                                     <mat-label>Roll Number</mat-label>
-                                    <input matInput formControlName="crossplyRollNumber" value="2" readonly>
+                                    <input matInput formControlName="crossplyRollNumber" readonly>
                                 </mat-form-field>
                             </div>
                         </div>

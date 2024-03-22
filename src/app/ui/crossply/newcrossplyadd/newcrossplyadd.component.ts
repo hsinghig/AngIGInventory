@@ -23,7 +23,7 @@ import { SharedNavService } from 'src/app/shared/service/sharedNavService';
   styleUrl: './newcrossplyadd.component.scss'
 })
 export class NewcrossplyaddComponent implements OnInit, OnDestroy {
-  
+  SEPERATOR_STRING: string = '-(';
   formHasErrors: boolean = false;
   errorList: string[] = [];
   
@@ -179,7 +179,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
             if (result.data !=null){
               if (controlName == 'extruder'){                           
                 this.addCrossplyFormGroup.get(['extruderList', formValues.indexFetched])?.patchValue({
-                  extruderRollNumber: result.data.id
+                  extruderRollNumber: result.data.id + '-(' + result.data.rollnumber + ')'
                 });             
               }             
             }
@@ -210,7 +210,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
             if (result.data !=null){
               if (controlName == 'crossply'){                           
                 this.addCrossplyFormGroup.get(['crossplyList', formValues.indexFetched])?.patchValue({
-                  crossplyRollNumber: result.data.id
+                  crossplyRollNumber: result.data.id +'-(' + result.data.rollnumber + ')'
                 });             
               }             
             }
@@ -283,7 +283,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   }
 
   addColorNinetyExtruder() {
-    if (this.crossplyList.length < 3) {
+    if (this.crossplyList.length < 5) {
       this.crossplyList.push(this.getCrossplyFormGroup());
     }
   }
@@ -502,7 +502,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
         extruderWidthId: x.extruderWidthId,
         extruderLength: x.extruderLength,
         extruderWeight: x.extruderWeight,
-        extruderRollNumber: x.extruderRollNumber,
+        extruderRollNumber: this.getStringValue(x.extruderRollNumber,this.SEPERATOR_STRING),
         createdById: createdUserId,
         createdBy: username
       }
@@ -533,7 +533,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
         extruderWidthId: x.crossplyWidthId,
         extruderLength: x.crossplyLength,
         extruderWeight: x.crossplyWeight,
-        extruderRollNumber: x.crossplyRollNumber,
+        extruderRollNumber: this.getStringValue(x.crossplyRollNumber, this.SEPERATOR_STRING),
         createdById: createdUserId,
         createdBy: username
       }
@@ -561,6 +561,11 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     this.userSubscription = this.inventoryCommonService.getAllUsers().subscribe(x =>{
       this.userList = x;
     });
+  }
+
+  getStringValue(passedValue:string, separatorString: string){
+    const indexOf = passedValue.indexOf(separatorString);
+    return +(passedValue.substring(0, indexOf));
   }
 
   ngOnDestroy(): void {

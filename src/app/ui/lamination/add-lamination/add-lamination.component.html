@@ -15,7 +15,7 @@
                     </mat-form-field>                  
                     <mat-form-field>
                         <mat-label>Reference Number</mat-label>
-                        <input matInput formControlName="laminationReferenceNumber" value="2">
+                        <input matInput formControlName="laminationReferenceNumber">
                     </mat-form-field>                  
                     <mat-form-field class="laminationSubmittedBy">
                         <mat-label>Submitted By</mat-label>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="add-extruder-crossply-buttons">
                     <button type="button" mat-raised-button color="accent" (click)="addExtruder()">Add Extruder (max of
-                        3)</button>
+                        5)</button>
                     <button type="button" mat-raised-button color="warn" (click)="removeExtruder()">Remove
                         Extruder</button>
                     <button type="button" mat-raised-button color="primary" (click)="addCrossply()">Add Crossply</button>
@@ -64,9 +64,9 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
-                                    <mat-label>Length</mat-label>
+                                    <mat-label>Length used</mat-label>
                                     <input formControlName="extruderLength" type="number" min="0" max="999999" matInput
-                                        placeholder="Length" required>
+                                        placeholder="Length used" required>
                                    
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
@@ -115,9 +115,9 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
-                                    <mat-label>Length</mat-label>
+                                    <mat-label>Length used</mat-label>
                                     <input formControlName="crossplyLength" type="number" min="0" max="999999" matInput
-                                        placeholder="Length" required>
+                                        placeholder="Length used" required>
                                     
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
