@@ -33,7 +33,8 @@
                     </mat-form-field>
                     <mat-form-field class="extruder-form" appearance="fill">
                         <mat-label>Enter Length</mat-label>
-                        <input formControlName="length" type="number" min="0" max="999999" matInput placeholder="Length"
+                        <input formControlName="length" type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength = "5" min="0" max="999999" matInput placeholder="Length"
                             required>
                         <mat-hint>Length in number ex: 322</mat-hint>
                     </mat-form-field>
@@ -92,7 +93,9 @@
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
                                     <mat-label>Length used</mat-label>
-                                    <input formControlName="extruderLength" type="number" min="0" max="999999" matInput
+                                    <input formControlName="extruderLength" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                     maxlength = "5"
+                                     type="number" min="0" max="999999" matInput
                                         placeholder="Length used" required>
 
                                 </mat-form-field>
@@ -136,7 +139,8 @@
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
                                     <mat-label>Length used</mat-label>
-                                    <input formControlName="crossplyLength" type="number" min="0" max="999999" matInput
+                                    <input formControlName="crossplyLength"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength = "5" type="number" min="0" max="999999" matInput
                                         placeholder="Length used" required>
 
                                 </mat-form-field>

@@ -38,6 +38,8 @@
                     <mat-form-field class="extruder-form" appearance="fill">
                         <mat-label>Enter Length</mat-label>
                         <input formControlName="length" type="number" min="0" max="999999" matInput
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength = "5"
                             placeholder="Length" required>
                         <mat-hint>Length in number ex: 322</mat-hint>
                     </mat-form-field>

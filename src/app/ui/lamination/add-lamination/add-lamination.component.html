@@ -65,7 +65,8 @@
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
                                     <mat-label>Length used</mat-label>
-                                    <input formControlName="extruderLength" type="number" min="0" max="999999" matInput
+                                    <input formControlName="extruderLength" type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength = "5" min="0" max="999999" matInput
                                         placeholder="Length used" required>
                                    
                                 </mat-form-field>
@@ -116,7 +117,8 @@
                                 </mat-form-field>
                                 <mat-form-field class="small-control smaller-control" appearance="fill">
                                     <mat-label>Length used</mat-label>
-                                    <input formControlName="crossplyLength" type="number" min="0" max="999999" matInput
+                                    <input formControlName="crossplyLength" type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength = "5" min="0" max="999999" matInput
                                         placeholder="Length used" required>
                                     
                                 </mat-form-field>
