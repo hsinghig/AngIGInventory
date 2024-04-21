@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SummaryComponent } from './summary/summary.component';
 import { HomeComponent } from './home/home.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ShiftsummaryComponent } from './shift/shiftsummary/shiftsummary.component';
+import { BaseComponent } from './base/base.component';
 
 const routes: Routes = [{
   path: '',
-  component:HomeComponent, 
+  component:BaseComponent, 
   children: [
     {
       path:'reports',
@@ -14,7 +15,14 @@ const routes: Routes = [{
     },
     {
       path:'summary',
-      component:SummaryComponent
+      component:ShiftsummaryComponent
+    },
+    {
+      path: 'home',
+      component: HomeComponent
+    },
+    {
+      path: '', redirectTo: 'home', pathMatch: 'full' 
     }
   ]
 }];

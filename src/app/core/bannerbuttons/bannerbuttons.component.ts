@@ -46,6 +46,9 @@ export class BannerbuttonsComponent implements OnDestroy{
       case 'lamination':
         this.router.navigateByUrl('/lamination/add')
         break;
+      case 'dashboard':
+        this.router.navigateByUrl('/dashboard/add')
+        break;
     }
   }
 
@@ -60,9 +63,15 @@ export class BannerbuttonsComponent implements OnDestroy{
       case 'lamination':
         this.downloadLaminationFile();
         break;
+      case 'dashboard':
+        this.downloadShiftSummaryFile();
+        break;
     }
   }
 
+  downloadShiftSummaryFile() {
+    
+  }
   downloadExtruderFile(){
     this.subExtruder$ = this.extruderService.getExtruderData().subscribe(data => {
       var dataToPass:ExtruderDownloadModel[] = this.convertDataToExtruderDownloadModel(data);

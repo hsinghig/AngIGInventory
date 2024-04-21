@@ -61,12 +61,47 @@ export class AddExtruderComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDropdowns();
+    this.formValueChangeListeners();
+  }
+
+  formValueChangeListeners(){
+    this.addExtruderFormGroup.controls['colorId'].valueChanges.pipe().subscribe(
+      data => {
+        this.reCalculateWeight()
+      }
+    );
+    this.addExtruderFormGroup.controls['widthId'].valueChanges.pipe().subscribe(
+      data => {
+        this.reCalculateWeight()
+      }
+    );
+
+    this.addExtruderFormGroup.controls['length'].valueChanges.pipe().subscribe(
+      data => {
+        this.reCalculateWeight()
+      }
+    );
+
+  }
+
+  reCalculateWeight(){
+    const colorIdValue = this.addExtruderFormGroup.controls['colorId'].value;
+    const widthIdValue = this.addExtruderFormGroup.controls['widthId'].value;
+    const lengthValue = this.addExtruderFormGroup.controls['length'].value;
+
+    if (colorIdValue == null || widthIdValue == null || lengthValue == null){
+      this.addExtruderFormGroup.controls['weight'].setValue(0);
+    } else {
+      var value = this.calculateWeight(String(colorIdValue), lengthValue, widthIdValue);
+      this.addExtruderFormGroup.controls['weight'].setValue(value);
+    }
   }
 
   clearFormValues() {      
     this.showError = false;
     this.addExtruderFormGroup.reset();
   }
+
   calculateWeight(colorId?:string, length?:number, widthId?:number){
     var returnValue = 1;
     if (colorId == null || length == null){

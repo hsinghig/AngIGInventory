@@ -5,7 +5,7 @@
     <mat-menu #dashboardMenu="matMenu" xPosition="before">
         <button (click)="OnMenuClick($event, 'dashboard', '')"  mat-menu-item><mat-icon>home</mat-icon>Home</button>
         <button (click)="OnMenuClick($event, 'dashboard', 'reports')"  mat-menu-item><mat-icon>summarize</mat-icon>Reports</button>    
-        <button (click)="OnMenuClick($event, 'dashboard', 'summary')"  mat-menu-item><mat-icon>space_dashboard</mat-icon>Summary</button>
+        <button (click)="OnMenuClick($event, 'dashboard', 'summary')"  mat-menu-item><mat-icon>space_dashboard</mat-icon>Shift Summary</button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="extruderMenu">Extruder</button>
     <mat-menu #extruderMenu="matMenu" xPosition="before">
