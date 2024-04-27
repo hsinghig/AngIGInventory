@@ -8,6 +8,8 @@ import { LoaderService } from './shared/service/loader.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent { 
+  showBroadcast:boolean = false;
+  broadcastMessage: string = ', This is the broadcast messageThis is the broadcast messageThis is the broadcast messageThis is the broadcast messageThis is the broadcast message';
   errorMessage = '';
   showLoader$ = this.loaderService.loadingAction$;  
   constructor(private loaderService:LoaderService) {  } 

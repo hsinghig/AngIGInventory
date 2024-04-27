@@ -1,0 +1,20 @@
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    border: 1px solid red;
+  }
+
+  .headerColor{
+    background-color: aliceblue;
+}
+.extruder-col-headerStyle{
+    padding-top:1rem;
+    font-size: x-large;
+  }  
+
+.mdc-data-table__header-cell {
+    padding: 0 16px 0 16px;
+    padding-top: 1rem;
+}
+

@@ -1,4 +1,53 @@
-<p>addshiftsummary works!</p>
 <div class="add-shiftsummary-container">
-    
+    <div class="header">
+        <h1 class="headerStyle">Add Shift Summary</h1>
+    </div>
+    <div class="shiftsummary-body">
+        <form (ngSubmit)="onSubmit()" autocomplete="off" [formGroup]="addShiftSummaryFormGroup">
+            <div class="first-col">
+
+                <mat-checkbox formControlName="downtimeExceedHour">Downtime Exceeds One Hour</mat-checkbox>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Reason</mat-label>
+                    <textarea #reason formControlName="reason" matInput placeholder="..."></textarea>
+                    <mat-hint align="end">{{reason.value.length}}/200</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Remedy/Fix</mat-label>
+                    <textarea #remedy formControlName="remedy" matInput placeholder="..."></textarea>
+                    <mat-hint align="end">{{remedy.value.length}}/500</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="second-col">
+                <mat-form-field class="extruder-form" appearance="fill">
+                    <mat-label>Total Production Length</mat-label>
+                    <input formControlName="totalProductionLength" type="number"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength="5" min="0" max="999999" matInput placeholder="Total Length">
+                    <mat-hint>Length in number ex: 322</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="extruder-form" appearance="fill">
+                    <mat-label>Total Scrap Length</mat-label>
+                    <input formControlName="totalScrapLength" type="number"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength="5" min="0" max="999999" matInput placeholder="Scrap Length">
+                    <mat-hint>Length in number ex: 322</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Submitted By</mat-label>
+                    <mat-select formControlName="createdBy" required>
+                        <mat-option *ngFor="let user of userList" value={{user.id}}>{{user.email}} -
+                            {{user.firstname}} {{user.lastname}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="button-container">
+                    <!-- <p>{{this.addShiftSummaryFormGroup.value |json}}</p> -->
+                    <button type="reset" mat-raised-button (click)="clearForm()">Clear Form</button>
+                    <button type="submit" class="submitButton" color="warn" [disabled]="!addShiftSummaryFormGroup.valid"
+                        mat-raised-button>Save Shift Summary</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
