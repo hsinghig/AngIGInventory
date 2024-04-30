@@ -2,6 +2,9 @@ export const ROOT: string = 'https://apiiginventory.azurewebsites.net/api/'
 
 export const INCHES_TO_FEET_MULTIPLIER = 0.083;
 
+export const ROLL_MIN_LENGTH_FILTER = 500;
+export const ROLL_MIN_WEIGHT_FILTER = 300;
+
 export const GENERIC_CONSTANTS = [
     { 'url_name': 'URL_GET_ALL_COLORS', 'url_value':'https://apiiginventory.azurewebsites.net/api/Colors/allcolors' },
     { 'url_name': 'URL_GET_ALL_WIDTHS', 'url_value':'https://apiiginventory.azurewebsites.net/api/widths' },    

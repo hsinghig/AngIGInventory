@@ -2,6 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ROLL_MIN_LENGTH_FILTER, ROLL_MIN_WEIGHT_FILTER } from 'src/app/app.contants';
 import { extruderRollNumberModel, extruderRollNumberRequestModel } from 'src/app/shared/model/extruderRollNumberModel';
 import { CrossplyService } from 'src/app/shared/service/crossplyService';
 
@@ -25,7 +26,8 @@ export class RollNumberSelectDialogComponent implements OnInit{
   ngOnInit(): void {
     this.crossplyService.getExtruderRollNumber(this.dataPassedFromParent.colorId, this.dataPassedFromParent.widthId).subscribe(response => {
       console.log('data returned crossplyService getExtruderRollNumber : ', response);
-      this.dataSource = new MatTableDataSource(response);     
+      var mydata = response.filter(x => x.length>=ROLL_MIN_LENGTH_FILTER && x.weight >=ROLL_MIN_WEIGHT_FILTER);
+      this.dataSource = new MatTableDataSource(mydata);     
     });    
   }
 

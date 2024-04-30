@@ -456,9 +456,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     var createdBy = this.getUserId();   
     var detailList:laminationDetailInsertModel[] = [];
     extruderList.forEach(x => {
-      if (x.extruderWeight == null || x.extruderWeight <=0){
-        x.extruderWeight = this.calculateWeight(true, x.extruderColorId, x.extruderLength, x.extruderWidthId);
-      }
+        x.extruderWeight = this.calculateWeight(true, x.extruderColorId, x.extruderLength, x.extruderWidthId);      
       var detail:laminationDetailInsertModel = {
         id: 0,
         laminationId: 0,
@@ -481,9 +479,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
    
     var detailList:laminationDetailInsertModel[] = [];
     crossplyList.forEach(x => {
-      if (x.crossplyWeight == null || x.crossplyWeight <=0){
+     
         x.crossplyWeight = this.calculateWeight(false, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
-      }
+      
       var detail:laminationDetailInsertModel = {
         id: 0,
         laminationId: 0,

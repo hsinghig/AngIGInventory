@@ -490,9 +490,9 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     var isColorNinety:boolean = false;
     isColorZero = true;
     extruderList.forEach(x => {
-      if (x.extruderWeight == null || x.extruderWeight <=0){
+     
         x.extruderWeight = this.calculateWeight(true, x.extruderColorId, x.extruderLength, x.extruderWidthId);
-      }
+      
       var detail:crossplyDetailInsertModel = {
         id: 0,
         crossplyId:0,
@@ -520,9 +520,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
    
     isColorNinety = true;
     extruderList.forEach(x => {
-      if (x.crossplyWeight == null || x.crossplyWeight <=0){
+   
         x.crossplyWeight = this.calculateWeight(false, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
-      }
 
       var detail:crossplyDetailInsertModel = {
         id: 0,
