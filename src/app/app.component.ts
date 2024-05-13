@@ -9,7 +9,7 @@ import { LoaderService } from './shared/service/loader.service';
 })
 export class AppComponent { 
   showBroadcast:boolean = false;
-  broadcastMessage: string = ', This is the broadcast messageThis is the broadcast messageThis is the broadcast messageThis is the broadcast messageThis is the broadcast message';
+  broadcastMessage: string = 'This is the broadcast message. Can be long but needs to wrap and check the whole length how it will look for the size of data it captures';
   errorMessage = '';
   showLoader$ = this.loaderService.loadingAction$;  
   constructor(private loaderService:LoaderService) {  } 

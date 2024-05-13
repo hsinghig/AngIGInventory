@@ -28,6 +28,7 @@ export interface laminationDetailModel {
     laminationDetailId: number;
     isExtruder: boolean;
     isCrossply: boolean;
+    isMiscellaneous: boolean;
     rollNumberId: number;
     laminationDetailLength: number;
     laminationDetailWeight: number;

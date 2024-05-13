@@ -50,7 +50,8 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     laminationComment: new FormControl(''),
     extruderList: new FormArray([
     ]),
-    crossplyList: new FormArray([])
+    crossplyList: new FormArray([]),
+    miscList: new FormArray([])
   });
 
 
@@ -131,12 +132,27 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     return crossplyFormGroup;
   }
 
+  getMiscFormGroup(){
+    const miscFormGroup = this.fb.group({
+      miscTypeId: new FormControl("", [Validators.required]),
+      miscColorId: new FormControl("", [Validators.required]),
+      miscWidthId: new FormControl("", [Validators.required]),    
+      miscLength: new FormControl('', [Validators.required]),
+      miscWeight: new FormControl(''),
+      miscWinderNumber: new FormControl('', [Validators.required])
+    });
+    return miscFormGroup;
+  }
   get extruderList() {
     return this.addLaminationFormGroup.get('extruderList') as FormArray;   //(<FormArray>this.addLaminationFormGroup.get('extruderList')).controls;
   }
 
   get crossplyList() {
     return this.addLaminationFormGroup.get('crossplyList') as FormArray;
+  }
+
+  get miscList(){
+    return this.addLaminationFormGroup.get('miscList') as FormArray;
   }
 
   fetchExtruderRollNumber(index: number) {    
@@ -279,6 +295,12 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     }
   }
 
+  addMisc(){
+    if (this.miscList.length < 5){
+      this.miscList.push(this.getMiscFormGroup());
+    }
+  }
+
   removeExtruder() {
     console.log('remove extruder', 0);
     this.extruderList.removeAt(this.extruderList.length -1);
@@ -287,6 +309,11 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   removeCrossply() {
     console.log('remove crossply', 0);
     this.crossplyList.removeAt(this.crossplyList.length - 1);  
+  }
+
+  removeMisc() {
+    console.log('remove Misc', 0);
+    this.miscList.removeAt(this.miscList.length - 1);
   }
 
   //#endregion "Add Button Actions"
@@ -326,7 +353,8 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
 
     var detailExtruderList = this.mapExtruderTolaminationDetailInsertModel(item.extruderList);
     var detailCrossplyList = this.mapCrossplyTolaminationDetailInsertModel(item.crossplyList);
-    var detailList:laminationDetailInsertModel[] = [...detailExtruderList, ...detailCrossplyList];
+    var detailMiscList = this.mapMiscToLaminationDetailInsertModel(item.miscList);
+    var detailList:laminationDetailInsertModel[] = [...detailExtruderList, ...detailCrossplyList, ...detailMiscList];
 
     var request:laminationInsertModel = {
       locationId: +item.laminationLocationId,
@@ -343,9 +371,9 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     if (this.formHasErrors == false){
       try{
         console.log('Form sent to service', request);
-         this.laminationService.insertLamination(request).subscribe(data =>{
-           this.launchDialog(false);
-         });  
+        this.laminationService.insertLamination(request).subscribe(data =>{
+            this.launchDialog(false);
+          });  
       }catch(error){
         this.launchDialog(true);
         this.formHasErrors =true;
@@ -498,6 +526,38 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
     });
     return detailList;
 
+  }
+
+  mapMiscToLaminationDetailInsertModel(miscList:any[]){
+    var createdBy = this.getUserId();
+   
+    var detailList:laminationDetailInsertModel[] = [];
+    miscList.forEach(x => {
+        var isCrossply:boolean = true;      
+        if (x.miscTypeId == "EXT"){
+          isCrossply = true;
+        }
+
+        if (x.miscTypeId == "XPLY"){
+          isCrossply = false;
+        }
+        x.miscWeight = this.calculateWeight(isCrossply, x.miscColorId, x.miscLength, x.miscWidthId);
+     
+      var detail:laminationDetailInsertModel = {
+        id: 0,
+        laminationId: 0,
+        isExtruder: x.miscTypeId == "EXT"? true: false,
+        isCrossply: x.miscTypeId == "XPLY" ? true: false,
+        rollNumberId: this.getStringValue(x.crossplyRollNumber, this.SEPERATOR_STRING),
+        length: x.miscLength,
+        weight: x.miscWeight,
+        colorId: x.miscColorId,
+        widthId: x.miscWidthId,
+        createdById: createdBy
+      }
+      detailList.push(detail);     
+    });
+    return detailList;
   }
 
   getStringValue(passedValue:string, separatorString: string){

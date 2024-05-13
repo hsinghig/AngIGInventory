@@ -3,9 +3,11 @@
     color: yellow;
     padding: 1rem;
     margin: 1rem;
+    font-size: xx-large;
 }
 ::ng-deep .mat-mdc-snack-bar-container.blue-snackbar {
     --mdc-snackbar-container-color: orange;
     --mat-mdc-snack-bar-button-color: #fff;
     --mdc-snackbar-supporting-text-color: #fff;
+    font-size: xx-large;
   }

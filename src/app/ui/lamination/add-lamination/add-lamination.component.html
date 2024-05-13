@@ -41,6 +41,9 @@
                     <button type="button" mat-raised-button color="primary" (click)="addCrossply()">Add Crossply</button>
                     <button type="button" mat-raised-button color="warn" (click)="removeCrossply()">Remove
                         Crossply</button>
+                    <button type="button" mat-raised-button color="accent" (click)="addMisc()">Add Misc</button>
+                    <button type="button" mat-raised-button color="warn" (click)="removeMisc()">Remove
+                            Misc</button>
                 </div>
                 <div class="child-container-extruder child-container-extruder-color">
                     <ng-container formArrayName="extruderList">
@@ -142,6 +145,52 @@
                                 <mat-form-field class="smallest-control">
                                     <mat-label>Roll Number</mat-label>
                                     <input matInput formControlName="crossplyRollNumber" value="2" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="child-container-extruder child-container-misc-color">
+                    <ng-container formArrayName="miscList">
+                        <div class="child-item child-item-crossply" *ngFor="let item of miscList.controls; let i=index"
+                            [formGroupName]="i">
+                            <h2 class="extruderDetail mat-elevation-z2">Misc Detail - {{i}}</h2>                     
+                          
+                            <div class="child-container-detail">
+                                <mat-form-field class="small-control">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select formControlName="miscTypeId" required>
+                                        <mat-option value="EXT">Extruder</mat-option>
+                                        <mat-option value="XPLY">Crossply</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="small-control">
+                                    <mat-label>Color</mat-label>
+                                    <mat-select formControlName="miscColorId" required>
+                                        <mat-option *ngFor="let color of crossplyColorList"
+                                            value="{{color.id}}">{{color.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="small-control">
+                                    <mat-label>Width</mat-label>
+                                    <mat-select formControlName="miscWidthId" required>
+                                        <mat-option *ngFor="let width of widthList"
+                                            value="{{width.id}}">{{width.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="small-control smaller-control" appearance="fill">
+                                    <mat-label>Length used</mat-label>
+                                    <input formControlName="miscLength" type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    maxlength = "5" min="0" max="999999" matInput
+                                        placeholder="Length used" required>                                    
+                                </mat-form-field>
+                               
+                                <mat-form-field class="small-control" appearance="fill">
+                                    <mat-label>Winder No.</mat-label>
+                                    <mat-select formControlName="miscWinderNumber" required>
+                                        <mat-option *ngFor="let number of  winderNumberList"
+                                            value="{{number}}">{{number}}</mat-option>
+                                    </mat-select>                                   
                                 </mat-form-field>
                             </div>
                         </div>

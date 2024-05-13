@@ -15,7 +15,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class BroadcastComponent {
   @Input() broadcastMessage: string = 'This is my broadcast message to show in the page';
-  durationInSeconds: number = 30;
+  durationInSeconds: number = 5;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 

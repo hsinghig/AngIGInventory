@@ -43,7 +43,10 @@
         <td class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.referenceNumber}} </td>
       </ng-container>
     
-     
+      <ng-container matColumnDef="isMiscellaneous">
+        <th  class="extruder-detail-headerStyle" mat-header-cell *matHeaderCellDef> Misc </th>
+        <td class="extruder-detail-rowStyle" mat-cell *matCellDef="let element"> {{element.isMiscellaneous}} </td>
+      </ng-container>
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

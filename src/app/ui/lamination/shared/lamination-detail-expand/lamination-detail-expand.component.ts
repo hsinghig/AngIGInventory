@@ -11,5 +11,5 @@ export class LaminationDetailExpandComponent {
 displayedColumns: string[] = ['laminationDetailId', 
 'isExtruder', 'isCrossply', 'laminationDetailColor', 
 'laminationDetailWidth', 'laminationDetailLength',
-'laminationDetailWeight', 'referenceNumber'];
+'laminationDetailWeight', 'referenceNumber', 'isMiscellaneous'];
 }
