@@ -199,7 +199,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   
   setRollNumberCrossply(formValues: RollNumberFormValuesModel, controlName: string){
     if (controlName == 'crossply'){
-      this.getExtruderRollNumberSubscription = this.crossplyService.getExtruderRollNumber(
+      this.getExtruderRollNumberSubscription = this.crossplyService.getCrossplyRollNumber(
         formValues.colorId, formValues.widthId
      ).subscribe(data => {
       const hasData: boolean = data.length > 0? true: false;       
