@@ -296,7 +296,7 @@ export class AddLaminationComponent implements OnInit, OnDestroy {
   }
 
   addMisc(){
-    if (this.miscList.length < 5){
+    if (this.miscList.length < 11){
       this.miscList.push(this.getMiscFormGroup());
     }
   }
