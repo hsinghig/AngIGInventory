@@ -283,8 +283,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   }
 
   addColorNinetyExtruder() {
-    if (this.extruderList.length < 5) {
-      this.extruderList.push(this.getExtruderFormGroup());
+    if (this.crossplyList.length < 5) {
+      this.crossplyList.push(this.getCrossplyFormGroup());
     }
   }
 
@@ -295,8 +295,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   }
 
   removeColorNinetyExtruder() {   
-    if (this.extruderList.length > 1){
-    this.extruderList.removeAt(this.extruderList.length - 1);  
+    if (this.crossplyList.length > 1){
+    this.crossplyList.removeAt(this.crossplyList.length - 1);  
     }
   }
 
@@ -521,7 +521,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
     isColorNinety = true;
     extruderList.forEach(x => {
    
-        x.crossplyWeight = this.calculateWeight(false, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
+        x.crossplyWeight = this.calculateWeight(true, x.crossplyColorId, x.crossplyLength, x.crossplyWidthId);
 
       var detail:crossplyDetailInsertModel = {
         id: 0,
