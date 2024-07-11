@@ -295,8 +295,8 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   }
 
   removeColorNinetyExtruder() {   
-    if (this.crossplyList.length > 1){
-    this.crossplyList.removeAt(this.crossplyList.length - 1);  
+    if (this.extruderList.length > 1){
+    this.extruderList.removeAt(this.extruderList.length - 1);  
     }
   }
 
