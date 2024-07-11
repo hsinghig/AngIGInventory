@@ -305,7 +305,7 @@ export class NewcrossplyaddComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.resetErrors();
     var item:any = this.addCrossplyFormGroup.getRawValue();
-    console.log('form raw value', item);
+    console.log('form raw value as captured : ', item);
 
     var detailExtruderList = this.mapExtruderTocrossplyDetailInsertModel(item.extruderList);
     var detailCrossplyList = this.mapCrossplyTocrossplyDetailInsertModel(item.crossplyList);
