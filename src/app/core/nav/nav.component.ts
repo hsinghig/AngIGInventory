@@ -8,7 +8,7 @@ import { NAVIGATION_CONSTANTS } from 'src/app/shared/model/navigationConstants';
   styleUrl: './nav.component.scss'
 })
 export class NavComponent {
-  applicationTitle: string = 'IG Inventory System';
+  applicationTitle: string = 'IG Inventory System (Do Not Use)';
   ADD = NAVIGATION_CONSTANTS.ADD;
 
 
